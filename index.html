@@ -133,7 +133,7 @@ footer { padding: 36px 20px; border-top: 0.5px solid #d6cfc0; text-align: center
   .kontakt-section { padding: 70px 56px; }
   .kontakt-inner { max-width: 680px; }
   .kontakt-title { font-size: 34px; }
-  .kontakt-cards { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .kontakt-cards { grid-template-columns: repeat(3, 1fr); gap: 16px; }
 
   /* Om strip */
   .om-strip { padding: 70px 56px; }
@@ -290,15 +290,6 @@ footer { padding: 36px 20px; border-top: 0.5px solid #d6cfc0; text-align: center
         </div>
       </div>
 
-      <div class="kcard">
-        <div class="kcard-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        </div>
-        <div>
-          <div class="kcard-label">Organisasjonsnummer</div>
-          <div class="kcard-value">935 951 682</div>
-        </div>
-      </div>
 
     </div>
   </div>
@@ -340,7 +331,6 @@ footer { padding: 36px 20px; border-top: 0.5px solid #d6cfc0; text-align: center
     <a href="#om-oss">Om oss</a>
     <a href="#">Kontakt</a>
     <a href="#">Retur</a>
-    <a href="#">Org.nr 935 951 682</a>
   </div>
   <div class="footer-copy">© 2025 Sherwani Gull og Sølv AS</div>
 </footer>
@@ -350,7 +340,6 @@ const b64 = "iVBORw0KGgoAAAANSUhEUgAABAAAAAQACAYAAAB/HSuDAAEAAElEQVR4nOz9x5PsWZb
 const src = "data:image/png;base64," + b64;
 // logo-img removed from nav
 document.getElementById("hero-img").src = src;
-document.getElementById("strip-img").src = src;
 document.getElementById("footer-img").src = src;
 </script>
 </body>
