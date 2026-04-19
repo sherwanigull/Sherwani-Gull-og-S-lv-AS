@@ -600,15 +600,15 @@ document.getElementById("footer-img").src = src;
     }
   }
 
-  // Hvert kilde-objekt returnerer allerede priser i NOK
+  // Hvert kilde-objekt returnerer priser i NOK
   const SOURCES = [
 
-    // Kilde 1: gold-api.com (CORS-støtte, ingen API-nøkkel) + frankfurter for NOK
+    // Kilde 1: gold-api.com (live) + open.er-api.com (NOK-kurs, CORS ok)
     async () => {
       const [xau, xag, fx] = await Promise.all([
         timedFetch('https://api.gold-api.com/price/XAU'),
         timedFetch('https://api.gold-api.com/price/XAG'),
-        timedFetch('https://api.frankfurter.app/latest?from=USD&to=NOK')
+        timedFetch('https://open.er-api.com/v6/latest/USD')
       ]);
       const goldUsd   = xau?.price;
       const silverUsd = xag?.price;
@@ -617,7 +617,7 @@ document.getElementById("footer-img").src = src;
       return { goldNok: goldUsd * nokRate, silverNok: silverUsd * nokRate };
     },
 
-    // Kilde 2: jsDelivr CDN — ett kall gir XAU, XAG og NOK samtidig
+    // Kilde 2: jsDelivr CDN — XAU, XAG og NOK i ett kall
     async () => {
       const d = await timedFetch(
         'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json'
@@ -627,19 +627,6 @@ document.getElementById("footer-img").src = src;
       const nok = d?.usd?.nok;
       if (!xau || !xag || !nok) throw new Error('Mangler felt');
       return { goldNok: (1 / xau) * nok, silverNok: (1 / xag) * nok };
-    },
-
-    // Kilde 3: goldprice.org + frankfurter
-    async () => {
-      const [metals, fx] = await Promise.all([
-        timedFetch('https://data-asg.goldprice.org/dbXRates/USD'),
-        timedFetch('https://api.frankfurter.app/latest?from=USD&to=NOK')
-      ]);
-      const g = metals.items?.[0]?.xauPrice;
-      const s = metals.items?.[0]?.xagPrice;
-      const r = fx?.rates?.NOK;
-      if (!g || !s || !r) throw new Error('Mangler data');
-      return { goldNok: g * r, silverNok: s * r };
     }
 
   ];
