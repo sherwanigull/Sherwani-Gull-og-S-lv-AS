@@ -461,10 +461,10 @@ document.getElementById("footer-img").src = src;
 
 <script>
 (function () {
-  const REFRESH_MS = 5 * 60 * 1000;
-  const CACHE_KEY  = 'sg_prices';
-  const METALS_URL = 'https://metals.live/api/spot';
-  const PROXY_URL  = 'https://corsproxy.io/?' + encodeURIComponent(METALS_URL);
+  const REFRESH_MS  = 5 * 60 * 1000;
+  const CACHE_KEY   = 'sg_prices_v2';
+  const CACHE_TTL   = 24 * 60 * 60 * 1000; // 24 timer
+  const TIMEOUT_MS  = 8000;
 
   function fmt(val) {
     return val.toLocaleString('nb-NO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -486,30 +486,77 @@ document.getElementById("footer-img").src = src;
     setStatus(fromCache ? 'Bufret' : '', !fromCache);
   }
 
-  async function getMetals(url) {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(res.status);
-    const data = await res.json();
-    const gold   = data.find(m => m.symbol === 'XAU')?.price;
-    const silver = data.find(m => m.symbol === 'XAG')?.price;
-    if (!gold || !silver) throw new Error('Mangler data');
-    return { gold, silver };
+  // Fetch med automatisk timeout
+  async function timedFetch(url) {
+    const ctrl = new AbortController();
+    const tid  = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
+    try {
+      const res = await fetch(url, { signal: ctrl.signal });
+      if (!res.ok) throw new Error(res.status);
+      return await res.json();
+    } finally {
+      clearTimeout(tid);
+    }
+  }
+
+  // 3 uavhengige API-kilder prøves i rekkefølge
+  const SOURCES = [
+    // Kilde 1: metals.live direkte
+    async () => {
+      const d = await timedFetch('https://metals.live/api/spot');
+      const g = d.find(m => m.symbol === 'XAU')?.price;
+      const s = d.find(m => m.symbol === 'XAG')?.price;
+      if (!g || !s) throw new Error('tom respons');
+      return { gold: g, silver: s };
+    },
+    // Kilde 2: metals.live via corsproxy.io
+    async () => {
+      const url = 'https://corsproxy.io/?' + encodeURIComponent('https://metals.live/api/spot');
+      const d = await timedFetch(url);
+      const g = d.find(m => m.symbol === 'XAU')?.price;
+      const s = d.find(m => m.symbol === 'XAG')?.price;
+      if (!g || !s) throw new Error('tom respons');
+      return { gold: g, silver: s };
+    },
+    // Kilde 3: goldprice.org sitt eget frontend-API
+    async () => {
+      const d = await timedFetch('https://data-asg.goldprice.org/dbXRates/USD');
+      const g = d.items?.[0]?.xauPrice;
+      const s = d.items?.[0]?.xagPrice;
+      if (!g || !s) throw new Error('tom respons');
+      return { gold: g, silver: s };
+    }
+  ];
+
+  function saveCache(gold, silver) {
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ gold, silver, ts: Date.now() }));
+    } catch (_) {}
+  }
+
+  function loadCache() {
+    try {
+      const c = JSON.parse(localStorage.getItem(CACHE_KEY));
+      if (c?.gold && c?.silver && (Date.now() - c.ts) < CACHE_TTL) return c;
+    } catch (_) {}
+    return null;
   }
 
   async function fetchPrices() {
-    try {
-      // Prøv direkte først, deretter via CORS-proxy
-      let prices;
-      try        { prices = await getMetals(METALS_URL); }
-      catch (_)  { prices = await getMetals(PROXY_URL);  }
-
-      render(prices.gold, prices.silver, false);
-      localStorage.setItem(CACHE_KEY, JSON.stringify(prices));
-    } catch (e) {
+    for (const source of SOURCES) {
       try {
-        const c = JSON.parse(localStorage.getItem(CACHE_KEY));
-        if (c?.gold && c?.silver) { render(c.gold, c.silver, true); return; }
+        const { gold, silver } = await source();
+        render(gold, silver, false);
+        saveCache(gold, silver);
+        return; // Første som fungerer vinner
       } catch (_) {}
+    }
+
+    // Alle live-kilder feilet — vis cache (opptil 24 timer gammel)
+    const cached = loadCache();
+    if (cached) {
+      render(cached.gold, cached.silver, true);
+    } else {
       setStatus('Ikke tilgjengelig', false);
     }
   }
