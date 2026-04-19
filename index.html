@@ -246,12 +246,12 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <div class="price-item">
       <span class="price-metal">Gull (Au)</span>
       <span class="price-value" id="gold-val">···</span>
-      <span class="price-unit">USD/oz</span>
+      <span class="price-unit">kr/oz</span>
     </div>
     <div class="price-item">
       <span class="price-metal">Sølv (Ag)</span>
       <span class="price-value" id="silver-val">···</span>
-      <span class="price-unit">USD/oz</span>
+      <span class="price-unit">kr/oz</span>
     </div>
     <div class="price-meta">
       <span class="price-live" id="price-live">● Henter priser</span>
@@ -486,6 +486,13 @@ document.getElementById("footer-img").src = src;
     setStatus(fromCache ? 'Bufret' : '', !fromCache);
   }
 
+  async function getNokRate() {
+    const d = await timedFetch('https://api.frankfurter.app/latest?from=USD&to=NOK');
+    const rate = d?.rates?.NOK;
+    if (!rate) throw new Error('Ingen NOK-kurs');
+    return rate;
+  }
+
   async function timedFetch(url, opts) {
     const ctrl = new AbortController();
     const tid  = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
@@ -567,12 +574,18 @@ document.getElementById("footer-img").src = src;
   if (instant) render(instant.gold, instant.silver, true);
 
   async function fetchPrices() {
+    // Hent NOK-kurs parallelt — faller tilbake til 1 (USD) hvis det feiler
+    let nok = 1;
+    try { nok = await getNokRate(); } catch (_) {}
+
     for (let i = 0; i < SOURCES.length; i++) {
       try {
         const { gold, silver } = await SOURCES[i]();
-        console.log('[Pris] Kilde', i + 1, 'OK — Au:', gold.toFixed(2), 'Ag:', silver.toFixed(2));
-        render(gold, silver, false);
-        saveCache(gold, silver);
+        const goldNok   = gold   * nok;
+        const silverNok = silver * nok;
+        console.log('[Pris] Kilde', i + 1, 'OK — Au:', goldNok.toFixed(2), 'NOK');
+        render(goldNok, silverNok, false);
+        saveCache(goldNok, silverNok);
         return;
       } catch (err) {
         console.warn('[Pris] Kilde', i + 1, 'feilet:', err.message);
