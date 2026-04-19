@@ -26,6 +26,12 @@ nav {
 }
 .nav-drawer.open { display: flex; }
 .nav-drawer a { font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: #1c1c1a; text-decoration: none; }
+.nav-drawer a.drawer-cta {
+  border: 1px solid #c4a96e;
+  padding: 14px 22px;
+  background: #fffaf0;
+  color: #1c1c1a;
+}
 .nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; font-size: 26px; color: #1c1c1a; cursor: pointer; padding: 8px; }
 .cart-icon { padding: 10px; display: flex; align-items: center; }
 .cart-icon svg { width: 24px; height: 24px; stroke: #1c1c1a; fill: none; stroke-width: 1.2; }
@@ -52,6 +58,17 @@ nav {
   min-height: 50px; display: inline-flex; align-items: center;
 }
 .btn:active { background: #1c1c1a; color: #faf8f4; }
+.btn-submit {
+  justify-content: center;
+  width: 100%;
+  border-color: #c4a96e;
+  background: #fffaf0;
+  box-shadow: 0 10px 24px rgba(196, 169, 110, 0.18);
+}
+.btn-submit:hover {
+  background: #f7efd9;
+  color: #1c1c1a;
+}
 
 /* ── SECTION SHARED ── */
 .section { padding: 52px 24px; }
@@ -223,6 +240,16 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
     color: #1c1c1a; text-decoration: none; transition: color 0.2s;
   }
+  .nav-desktop-right a.nav-cta {
+    border: 1px solid #c4a96e;
+    padding: 10px 14px;
+    background: #fffaf0;
+    color: #1c1c1a;
+  }
+  .nav-desktop-right a.nav-cta:hover {
+    background: #f7efd9;
+    color: #1c1c1a;
+  }
   .nav-desktop-left a:hover, .nav-desktop-right a:hover { color: #c4a96e; }
 
   /* Hero: text left, image right */
@@ -285,7 +312,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <span class="sub">Gull &amp; Sølv</span>
   </a>
   <div class="nav-desktop-right">
-    <a href="#skjema">Send forespørsel</a>
+    <a href="#skjema" class="nav-cta">Send forespørsel</a>
     <a href="mailto:post@sherwanigull.no">post@sherwanigull.no</a>
   </div>
   <a href="mailto:post@sherwanigull.no" class="cart-icon" aria-label="Send e-post">
@@ -320,7 +347,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   <a href="#om-oss" onclick="document.getElementById('drawer').classList.remove('open')">Om oss</a>
   <a href="#tilbud" onclick="document.getElementById('drawer').classList.remove('open')">Veiledning</a>
   <a href="#priser" onclick="document.getElementById('drawer').classList.remove('open')">Priser i dag</a>
-  <a href="#skjema" onclick="document.getElementById('drawer').classList.remove('open')">Send forespørsel</a>
+  <a href="#skjema" class="drawer-cta" onclick="document.getElementById('drawer').classList.remove('open')">Send forespørsel</a>
   <a href="mailto:post@sherwanigull.no" onclick="document.getElementById('drawer').classList.remove('open')">Send e-post</a>
 </div>
 
@@ -341,7 +368,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <div class="hero-eyebrow">Kjøp · Salg · Gratis veiledning</div>
     <h1 class="hero-title">Kjøp og salg<br>av gull og sølv</h1>
     <p class="hero-desc">Vi kjøper gjerne sølv og gull fra deg, og har også varer tilgjengelig for salg. Du får rolig, ærlig og uforpliktende veiledning om verdi, renhet og dagens markedspris.</p>
-    <a href="mailto:post@sherwanigull.no" class="btn">Selg eller kjøp</a>
+    <a href="#kontakt" class="btn">Selg eller kjøp</a>
   </div>
 </div>
 
@@ -480,7 +507,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
       </div>
 
       <p class="form-note">Tips: Har du bilder av smykker, mynter eller sølv, kan du legge dem ved i e-posten før du sender.</p>
-      <button class="btn" type="submit">Send forespørsel</button>
+      <button class="btn btn-submit" type="submit">Send forespørsel</button>
     </form>
   </div>
 </div>
