@@ -110,9 +110,10 @@ footer { padding: 36px 20px; border-top: 0.5px solid #d6cfc0; text-align: center
 
 /* ── PRISBAR ── */
 .price-bar {
-  background: #1c1c1a;
-  padding: 9px 20px;
-  border-bottom: 0.5px solid #2e2e2c;
+  background: linear-gradient(135deg, #1a1600 0%, #2a2000 50%, #1a1600 100%);
+  padding: 13px 20px;
+  border-top: 1px solid #c4a96e44;
+  border-bottom: 1px solid #c4a96e44;
   overflow: hidden;
 }
 .price-bar-inner {
@@ -120,35 +121,36 @@ footer { padding: 36px 20px; border-top: 0.5px solid #d6cfc0; text-align: center
   gap: 0; flex-wrap: nowrap; white-space: nowrap;
 }
 .price-item {
-  display: inline-flex; align-items: center; gap: 9px;
-  padding: 0 20px;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 0 28px;
 }
 .price-item + .price-item {
-  border-left: 0.5px solid #2e2e2c;
+  border-left: 1px solid #c4a96e33;
 }
 .price-metal {
-  font-size: 8px; letter-spacing: 3px; text-transform: uppercase;
-  color: #6a6258;
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: #a89060;
 }
 .price-value {
-  font-size: 13px; color: #c4a96e;
+  font-size: 18px; color: #e8c97a;
   font-family: 'Georgia', serif; letter-spacing: 0.5px;
+  text-shadow: 0 0 18px #c4a96e66;
 }
 .price-unit {
-  font-size: 8px; letter-spacing: 1.5px; color: #4a4840;
+  font-size: 9px; letter-spacing: 2px; color: #806840;
   text-transform: uppercase;
 }
 .price-dot {
-  width: 4px; height: 4px; background: #2e2e2c;
-  transform: rotate(45deg); flex-shrink: 0; margin: 0 12px;
+  width: 5px; height: 5px; background: #c4a96e55;
+  transform: rotate(45deg); flex-shrink: 0; margin: 0 16px;
 }
 .price-live {
-  font-size: 7px; letter-spacing: 2px; text-transform: uppercase;
-  color: #3a3830; margin-left: 16px;
+  font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
+  color: #605040; margin-left: 20px;
 }
-.price-live.ready { color: #6a8a5a; }
+.price-live.ready { color: #7ab870; }
 .price-updated {
-  font-size: 7px; letter-spacing: 1px; color: #3a3830;
+  font-size: 8px; letter-spacing: 1px; color: #605040;
   margin-left: 4px;
 }
 
