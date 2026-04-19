@@ -596,8 +596,7 @@ document.getElementById("footer-img").src = src;
     const ctrl = new AbortController();
     const tid  = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
     try {
-      const freshUrl = url + (url.includes('?') ? '&' : '?') + 'ts=' + Date.now();
-      const res = await fetch(freshUrl, { signal: ctrl.signal, cache: 'no-store' });
+      const res = await fetch(url, { signal: ctrl.signal, cache: 'no-store' });
       if (!res.ok) throw new Error(res.status);
       return await res.json();
     } finally {
