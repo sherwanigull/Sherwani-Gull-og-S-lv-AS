@@ -246,12 +246,12 @@ footer { padding: 36px 20px; border-top: 0.5px solid #d6cfc0; text-align: center
     <div class="price-item">
       <span class="price-metal">Gull (Au)</span>
       <span class="price-value" id="gold-val">—</span>
-      <span class="price-unit">kr/g</span>
+      <span class="price-unit">kr/oz</span>
     </div>
     <div class="price-item">
       <span class="price-metal">Sølv (Ag)</span>
       <span class="price-value" id="silver-val">—</span>
-      <span class="price-unit">kr/g</span>
+      <span class="price-unit">kr/oz</span>
     </div>
     <div class="price-meta">
       <span class="price-live" id="price-live">● Henter priser</span>
@@ -513,8 +513,8 @@ document.getElementById("footer-img").src = src;
 
       if (!goldUsd || !silverUsd || !nokPerUsd) throw new Error('Mangler felt i respons');
 
-      const goldNok   = (goldUsd   * nokPerUsd) / TROY_OZ_TO_GRAM;
-      const silverNok = (silverUsd * nokPerUsd) / TROY_OZ_TO_GRAM;
+      const goldNok   = goldUsd   * nokPerUsd;
+      const silverNok = silverUsd * nokPerUsd;
 
       renderPrices(goldNok, silverNok, false);
       localStorage.setItem(CACHE_KEY, JSON.stringify({ goldNok, silverNok }));
