@@ -466,24 +466,17 @@ document.getElementById("footer-img").src = src;
 
   async function fetchPrices() {
     try {
-      const [metalsRes, fxRes] = await Promise.all([
-        fetch('https://metals.live/api/spot'),
-        fetch('https://api.frankfurter.app/latest?from=USD&to=NOK')
-      ]);
+      // open.er-api.com: gratis, ingen nøkkel, CORS-støtte, inkluderer XAU+XAG+NOK
+      const res = await fetch('https://open.er-api.com/v6/latest/USD');
+      if (!res.ok) throw new Error('API-feil');
+      const data = await res.json();
 
-      if (!metalsRes.ok || !fxRes.ok) throw new Error('API-feil');
+      const r = data.rates;
+      if (!r.XAU || !r.XAG || !r.NOK) throw new Error('Mangler data');
 
-      const metals = await metalsRes.json();
-      const fx = await fxRes.json();
-
-      const nokPerUsd = fx.rates.NOK;
-      const goldUsd  = metals.find(m => m.symbol === 'XAU')?.price;
-      const silverUsd = metals.find(m => m.symbol === 'XAG')?.price;
-
-      if (!goldUsd || !silverUsd || !nokPerUsd) throw new Error('Mangler data');
-
-      const goldNok   = (goldUsd   * nokPerUsd) / TROY_OZ_TO_GRAM;
-      const silverNok = (silverUsd * nokPerUsd) / TROY_OZ_TO_GRAM;
+      // XAU/XAG er troy oz per 1 USD, så 1/rate = USD per troy oz
+      const goldNok   = (r.NOK / r.XAU) / TROY_OZ_TO_GRAM;
+      const silverNok = (r.NOK / r.XAG) / TROY_OZ_TO_GRAM;
 
       document.getElementById('gold-val').textContent   = fmtNok(goldNok);
       document.getElementById('silver-val').textContent = fmtNok(silverNok);
