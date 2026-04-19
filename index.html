@@ -111,47 +111,51 @@ footer { padding: 36px 20px; border-top: 0.5px solid #d6cfc0; text-align: center
 /* ── PRISBAR ── */
 .price-bar {
   background: linear-gradient(135deg, #1a1600 0%, #2a2000 50%, #1a1600 100%);
-  padding: 13px 20px;
+  padding: 12px 16px;
   border-top: 1px solid #c4a96e44;
   border-bottom: 1px solid #c4a96e44;
   overflow: hidden;
 }
 .price-bar-inner {
   display: flex; align-items: center; justify-content: center;
-  gap: 0; flex-wrap: nowrap; white-space: nowrap;
+  flex-wrap: wrap; gap: 0;
 }
 .price-item {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 0 28px;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 16px;
+  flex: 1; justify-content: center; min-width: 140px;
 }
 .price-item + .price-item {
   border-left: 1px solid #c4a96e33;
 }
 .price-metal {
-  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-  color: #a89060;
+  font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: #a89060; white-space: nowrap;
 }
 .price-value {
-  font-size: 18px; color: #e8c97a;
+  font-size: 17px; color: #e8c97a;
   font-family: 'Georgia', serif; letter-spacing: 0.5px;
-  text-shadow: 0 0 18px #c4a96e66;
+  text-shadow: 0 0 18px #c4a96e66; white-space: nowrap;
 }
 .price-unit {
-  font-size: 9px; letter-spacing: 2px; color: #806840;
-  text-transform: uppercase;
+  font-size: 9px; letter-spacing: 1.5px; color: #806840;
+  text-transform: uppercase; white-space: nowrap;
 }
 .price-dot {
-  width: 5px; height: 5px; background: #c4a96e55;
-  transform: rotate(45deg); flex-shrink: 0; margin: 0 16px;
+  display: none;
+}
+.price-meta {
+  width: 100%; text-align: center;
+  padding: 4px 0 2px; border-top: 0.5px solid #c4a96e1a;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
 }
 .price-live {
   font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
-  color: #605040; margin-left: 20px;
+  color: #605040;
 }
 .price-live.ready { color: #7ab870; }
 .price-updated {
   font-size: 8px; letter-spacing: 1px; color: #605040;
-  margin-left: 4px;
 }
 
 /* ── NAV: hide desktop links on mobile ── */
@@ -161,6 +165,12 @@ footer { padding: 36px 20px; border-top: 0.5px solid #d6cfc0; text-align: center
 @media (min-width: 768px) {
   nav { padding: 22px 56px; }
   .hamburger, .cart-icon { display: none; }
+
+  /* Prisbar desktop */
+  .price-bar { padding: 11px 48px; }
+  .price-bar-inner { flex-wrap: nowrap; }
+  .price-item { padding: 0 28px; flex: none; }
+  .price-meta { width: auto; border-top: none; padding: 0; margin-left: 20px; }
 
   /* Show desktop nav links */
   .nav-desktop-left, .nav-desktop-right {
@@ -238,14 +248,15 @@ footer { padding: 36px 20px; border-top: 0.5px solid #d6cfc0; text-align: center
       <span class="price-value" id="gold-val">—</span>
       <span class="price-unit">kr/g</span>
     </div>
-    <div class="price-dot"></div>
     <div class="price-item">
       <span class="price-metal">Sølv (Ag)</span>
       <span class="price-value" id="silver-val">—</span>
       <span class="price-unit">kr/g</span>
     </div>
-    <span class="price-live" id="price-live">● Henter priser</span>
-    <span class="price-updated" id="price-updated"></span>
+    <div class="price-meta">
+      <span class="price-live" id="price-live">● Henter priser</span>
+      <span class="price-updated" id="price-updated"></span>
+    </div>
   </div>
 </div>
 
