@@ -246,12 +246,12 @@ footer { padding: 36px 20px; border-top: 0.5px solid #d6cfc0; text-align: center
     <div class="price-item">
       <span class="price-metal">Gull (Au)</span>
       <span class="price-value" id="gold-val">—</span>
-      <span class="price-unit">kr/oz</span>
+      <span class="price-unit">USD/oz</span>
     </div>
     <div class="price-item">
       <span class="price-metal">Sølv (Ag)</span>
       <span class="price-value" id="silver-val">—</span>
-      <span class="price-unit">kr/oz</span>
+      <span class="price-unit">USD/oz</span>
     </div>
     <div class="price-meta">
       <span class="price-live" id="price-live">● Henter priser</span>
@@ -461,11 +461,12 @@ document.getElementById("footer-img").src = src;
 
 <script>
 (function () {
-  const TROY_OZ_TO_GRAM = 31.1035;
-  const REFRESH_MS      = 5 * 60 * 1000;
-  const CACHE_KEY       = 'sg_metal_prices';
+  const REFRESH_MS = 5 * 60 * 1000;
+  const CACHE_KEY  = 'sg_prices';
+  const METALS_URL = 'https://metals.live/api/spot';
+  const PROXY_URL  = 'https://corsproxy.io/?' + encodeURIComponent(METALS_URL);
 
-  function fmtNok(val) {
+  function fmt(val) {
     return val.toLocaleString('nb-NO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
@@ -476,56 +477,40 @@ document.getElementById("footer-img").src = src;
     el.className   = 'price-live' + (live ? ' ready' : '');
   }
 
-  function renderPrices(goldNok, silverNok, fromCache) {
-    document.getElementById('gold-val').textContent   = fmtNok(goldNok);
-    document.getElementById('silver-val').textContent = fmtNok(silverNok);
+  function render(gold, silver, fromCache) {
+    document.getElementById('gold-val').textContent   = fmt(gold);
+    document.getElementById('silver-val').textContent = fmt(silver);
     const hm = new Date().toLocaleTimeString('nb-NO', { hour: '2-digit', minute: '2-digit' });
-    const upd = document.getElementById('price-updated');
-    if (upd) upd.textContent = '· ' + hm;
+    const el = document.getElementById('price-updated');
+    if (el) el.textContent = '· ' + hm;
     setStatus(fromCache ? 'Bufret' : '', !fromCache);
   }
 
-  function readCache() {
-    try {
-      const c = JSON.parse(localStorage.getItem(CACHE_KEY));
-      if (c && c.goldNok && c.silverNok) return c;
-    } catch (_) {}
-    return null;
+  async function getMetals(url) {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(res.status);
+    const data = await res.json();
+    const gold   = data.find(m => m.symbol === 'XAU')?.price;
+    const silver = data.find(m => m.symbol === 'XAG')?.price;
+    if (!gold || !silver) throw new Error('Mangler data');
+    return { gold, silver };
   }
 
   async function fetchPrices() {
     try {
-      /* metals.live: dedikert metall-API, CORS-aktivert, ingen nøkkel nødvendig.
-         Returnerer USD spot-priser per troy oz for XAU og XAG.
-         frankfurter.app: ECB-basert valuta-API, gratis og CORS-aktivert. */
-      const [metalsRes, fxRes] = await Promise.all([
-        fetch('https://metals.live/api/spot'),
-        fetch('https://api.frankfurter.app/latest?from=USD&to=NOK')
-      ]);
+      // Prøv direkte først, deretter via CORS-proxy
+      let prices;
+      try        { prices = await getMetals(METALS_URL); }
+      catch (_)  { prices = await getMetals(PROXY_URL);  }
 
-      if (!metalsRes.ok || !fxRes.ok) throw new Error('HTTP ' + (metalsRes.status || fxRes.status));
-
-      const metals    = await metalsRes.json();
-      const fx        = await fxRes.json();
-      const nokPerUsd = fx?.rates?.NOK;
-      const goldUsd   = metals.find(m => m.symbol === 'XAU')?.price;
-      const silverUsd = metals.find(m => m.symbol === 'XAG')?.price;
-
-      if (!goldUsd || !silverUsd || !nokPerUsd) throw new Error('Mangler felt i respons');
-
-      const goldNok   = goldUsd   * nokPerUsd;
-      const silverNok = silverUsd * nokPerUsd;
-
-      renderPrices(goldNok, silverNok, false);
-      localStorage.setItem(CACHE_KEY, JSON.stringify({ goldNok, silverNok }));
-
+      render(prices.gold, prices.silver, false);
+      localStorage.setItem(CACHE_KEY, JSON.stringify(prices));
     } catch (e) {
-      const cached = readCache();
-      if (cached) {
-        renderPrices(cached.goldNok, cached.silverNok, true);
-      } else {
-        setStatus('Ikke tilgjengelig', false);
-      }
+      try {
+        const c = JSON.parse(localStorage.getItem(CACHE_KEY));
+        if (c?.gold && c?.silver) { render(c.gold, c.silver, true); return; }
+      } catch (_) {}
+      setStatus('Ikke tilgjengelig', false);
     }
   }
 
