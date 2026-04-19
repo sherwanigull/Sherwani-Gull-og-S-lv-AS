@@ -245,12 +245,12 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   <div class="price-bar-inner">
     <div class="price-item">
       <span class="price-metal">Gull (Au)</span>
-      <span class="price-value" id="gold-val">—</span>
+      <span class="price-value" id="gold-val">···</span>
       <span class="price-unit">USD/oz</span>
     </div>
     <div class="price-item">
       <span class="price-metal">Sølv (Ag)</span>
-      <span class="price-value" id="silver-val">—</span>
+      <span class="price-value" id="silver-val">···</span>
       <span class="price-unit">USD/oz</span>
     </div>
     <div class="price-meta">
@@ -499,26 +499,43 @@ document.getElementById("footer-img").src = src;
     }
   }
 
-  // 3 uavhengige API-kilder prøves i rekkefølge
+  // 4 uavhengige API-kilder prøves i rekkefølge
   const SOURCES = [
-    // Kilde 1: metals.live direkte
+
+    // Kilde 1: jsDelivr CDN — 100% CORS, ingen blokkering mulig
+    // data.usd.xau = troy oz per 1 USD, så 1/verdi = USD per troy oz
+    async () => {
+      const d = await timedFetch(
+        'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json'
+      );
+      const g = d?.usd?.xau;
+      const s = d?.usd?.xag;
+      if (!g || !s) throw new Error('XAU/XAG ikke i respons');
+      return { gold: 1 / g, silver: 1 / s };
+    },
+
+    // Kilde 2: metals.live direkte
     async () => {
       const d = await timedFetch('https://metals.live/api/spot');
-      const g = d.find(m => m.symbol === 'XAU')?.price;
-      const s = d.find(m => m.symbol === 'XAG')?.price;
+      const arr = Array.isArray(d) ? d : Object.entries(d).map(([k,v]) => ({ symbol: k.toUpperCase(), price: v }));
+      const g = arr.find(m => m.symbol === 'XAU')?.price;
+      const s = arr.find(m => m.symbol === 'XAG')?.price;
       if (!g || !s) throw new Error('tom respons');
       return { gold: g, silver: s };
     },
-    // Kilde 2: metals.live via corsproxy.io
+
+    // Kilde 3: metals.live via corsproxy.io
     async () => {
       const url = 'https://corsproxy.io/?' + encodeURIComponent('https://metals.live/api/spot');
       const d = await timedFetch(url);
-      const g = d.find(m => m.symbol === 'XAU')?.price;
-      const s = d.find(m => m.symbol === 'XAG')?.price;
+      const arr = Array.isArray(d) ? d : Object.entries(d).map(([k,v]) => ({ symbol: k.toUpperCase(), price: v }));
+      const g = arr.find(m => m.symbol === 'XAU')?.price;
+      const s = arr.find(m => m.symbol === 'XAG')?.price;
       if (!g || !s) throw new Error('tom respons');
       return { gold: g, silver: s };
     },
-    // Kilde 3: goldprice.org sitt eget frontend-API
+
+    // Kilde 4: goldprice.org frontend-API
     async () => {
       const d = await timedFetch('https://data-asg.goldprice.org/dbXRates/USD');
       const g = d.items?.[0]?.xauPrice;
@@ -526,6 +543,7 @@ document.getElementById("footer-img").src = src;
       if (!g || !s) throw new Error('tom respons');
       return { gold: g, silver: s };
     }
+
   ];
 
   function saveCache(gold, silver) {
@@ -534,28 +552,34 @@ document.getElementById("footer-img").src = src;
     } catch (_) {}
   }
 
-  function loadCache() {
+  function loadCache(maxAge) {
     try {
       const c = JSON.parse(localStorage.getItem(CACHE_KEY));
-      if (c?.gold && c?.silver && (Date.now() - c.ts) < CACHE_TTL) return c;
+      if (c?.gold && c?.silver && (Date.now() - c.ts) < maxAge) return c;
     } catch (_) {}
     return null;
   }
 
+  // Vis cached pris UMIDDELBART ved sideåpning — ingen ventetid
+  const instant = loadCache(CACHE_TTL);
+  if (instant) render(instant.gold, instant.silver, true);
+
   async function fetchPrices() {
-    for (const source of SOURCES) {
+    for (let i = 0; i < SOURCES.length; i++) {
       try {
-        const { gold, silver } = await source();
+        const { gold, silver } = await SOURCES[i]();
+        console.log('[Pris] Kilde', i + 1, 'OK — Au:', gold.toFixed(2), 'Ag:', silver.toFixed(2));
         render(gold, silver, false);
         saveCache(gold, silver);
-        return; // Første som fungerer vinner
-      } catch (_) {}
+        return;
+      } catch (err) {
+        console.warn('[Pris] Kilde', i + 1, 'feilet:', err.message);
+      }
     }
-
-    // Alle live-kilder feilet — vis cache (opptil 24 timer gammel)
-    const cached = loadCache();
-    if (cached) {
-      render(cached.gold, cached.silver, true);
+    // Live feilet — behold allerede vist verdi eller prøv eldre cache
+    const old = loadCache(7 * 24 * 60 * 60 * 1000); // opptil 7 dager
+    if (old) {
+      render(old.gold, old.silver, true);
     } else {
       setStatus('Ikke tilgjengelig', false);
     }
