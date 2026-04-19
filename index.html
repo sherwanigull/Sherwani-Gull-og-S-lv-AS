@@ -377,7 +377,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
       <div class="pris-right"><span class="pris-val" id="pris-14k">···</span><span class="pris-enhet">kr/g</span></div>
     </div>
 
-    <div class="pris-kilde">Oppdateres hvert 3. minutt</div>
+    <div class="pris-kilde">Oppdateres automatisk</div>
   </div>
 </div>
 
@@ -553,9 +553,6 @@ document.getElementById("footer-img").src = src;
 <script>
 (function () {
   const REFRESH_MS = 60 * 1000;
-  const CACHE_KEY  = 'sg_prices_nok_v1'; // ny nøkkel — rydder bort gamle USD-cacher
-  const CACHE_TTL  = 10 * 60 * 1000;
-  const WEEK_MS    = 7 * 24 * 60 * 60 * 1000;
   const TIMEOUT_MS = 10000;
 
   function fmt(val) {
@@ -580,12 +577,19 @@ document.getElementById("footer-img").src = src;
       .forEach(({id,p}) => { const el = document.getElementById(id); if (el) el.textContent = fmt(goldPerGram * p); });
   }
 
-  function render(goldNok, silverNok, fromCache) {
+  function clearPrices() {
+    ['gold-val','silver-val','pris-24k','pris-22k','pris-21k','pris-18k','pris-14k'].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = '···';
+    });
+  }
+
+  function render(goldNok, silverNok) {
     renderPrices(goldNok, silverNok);
     const hm = new Date().toLocaleTimeString('nb-NO', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     const upd = document.getElementById('price-updated');
     if (upd) upd.textContent = '· ' + hm;
-    setStatus(fromCache ? 'Bufret' : '', !fromCache);
+    setStatus('', true);
   }
 
   async function timedFetch(url) {
@@ -601,7 +605,7 @@ document.getElementById("footer-img").src = src;
     }
   }
 
-  // Hvert kilde-objekt returnerer priser i NOK
+  // Live Gold API-priser regnes om fra USD til NOK
   const SOURCES = [
 
     // Kilde 1: gold-api.com (live) + open.er-api.com (NOK-kurs, CORS ok)
@@ -616,52 +620,21 @@ document.getElementById("footer-img").src = src;
       const nokRate   = fx?.rates?.NOK;
       if (!goldUsd || !silverUsd || !nokRate) throw new Error('Mangler data');
       return { goldNok: goldUsd * nokRate, silverNok: silverUsd * nokRate };
-    },
-
-    // Kilde 2: jsDelivr CDN — XAU, XAG og NOK i ett kall
-    async () => {
-      const d = await timedFetch(
-        'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json'
-      );
-      const xau = d?.usd?.xau;
-      const xag = d?.usd?.xag;
-      const nok = d?.usd?.nok;
-      if (!xau || !xag || !nok) throw new Error('Mangler felt');
-      return { goldNok: (1 / xau) * nok, silverNok: (1 / xag) * nok };
     }
 
   ];
-
-  function saveCache(goldNok, silverNok) {
-    try { localStorage.setItem(CACHE_KEY, JSON.stringify({ goldNok, silverNok, ts: Date.now() })); } catch (_) {}
-  }
-
-  function loadCache(maxAge) {
-    try {
-      const c = JSON.parse(localStorage.getItem(CACHE_KEY));
-      if (c?.goldNok && c?.silverNok && (Date.now() - c.ts) < maxAge) return c;
-    } catch (_) {}
-    return null;
-  }
-
-  // Vis cached NOK-pris umiddelbart ved sideåpning
-  const instant = loadCache(CACHE_TTL);
-  if (instant) render(instant.goldNok, instant.silverNok, true);
-
   async function fetchPrices() {
     for (let i = 0; i < SOURCES.length; i++) {
       try {
         const { goldNok, silverNok } = await SOURCES[i]();
-        render(goldNok, silverNok, false);
-        saveCache(goldNok, silverNok);
+        render(goldNok, silverNok);
         return;
       } catch (err) {
         console.warn('[Pris] Kilde', i + 1, 'feilet:', err.message);
       }
     }
-    const old = loadCache(WEEK_MS);
-    if (old) render(old.goldNok, old.silverNok, true);
-    else setStatus('Ikke tilgjengelig', false);
+    clearPrices();
+    setStatus('Oppdaterer pris', false);
   }
 
   fetchPrices();
