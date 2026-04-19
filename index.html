@@ -11,102 +11,102 @@ body { font-family: 'Georgia', serif; background: #faf8f4; color: #1c1c1a; overf
 /* ── NAV ── */
 nav {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 20px; border-bottom: 0.5px solid #d6cfc0;
+  padding: 22px 24px; border-bottom: 0.5px solid #d6cfc0;
   position: sticky; top: 0; background: #faf8f4; z-index: 100;
 }
 .logo { text-align: center; text-decoration: none; }
-.logo .main { font-size: 15px; letter-spacing: 5px; text-transform: uppercase; color: #1c1c1a; display: block; }
-.logo .sub { font-size: 8px; letter-spacing: 3px; color: #8a7e6e; text-transform: uppercase; display: block; margin-top: 2px; }
-.hamburger { background: none; border: none; cursor: pointer; padding: 8px; display: flex; flex-direction: column; gap: 5px; }
-.hamburger span { display: block; width: 22px; height: 0.5px; background: #1c1c1a; }
+.logo .main { font-size: 18px; letter-spacing: 6px; text-transform: uppercase; color: #1c1c1a; display: block; }
+.logo .sub { font-size: 10px; letter-spacing: 3px; color: #8a7e6e; text-transform: uppercase; display: block; margin-top: 4px; }
+.hamburger { background: none; border: none; cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+.hamburger span { display: block; width: 26px; height: 1px; background: #1c1c1a; }
 .nav-drawer {
   display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   background: #faf8f4; z-index: 200; flex-direction: column;
-  align-items: center; justify-content: center; gap: 32px;
+  align-items: center; justify-content: center; gap: 40px;
 }
 .nav-drawer.open { display: flex; }
-.nav-drawer a { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #1c1c1a; text-decoration: none; }
-.nav-close { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 22px; color: #1c1c1a; cursor: pointer; padding: 8px; }
-.cart-icon { padding: 8px; display: flex; align-items: center; }
-.cart-icon svg { width: 20px; height: 20px; stroke: #1c1c1a; fill: none; stroke-width: 1.2; }
+.nav-drawer a { font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: #1c1c1a; text-decoration: none; }
+.nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; font-size: 26px; color: #1c1c1a; cursor: pointer; padding: 8px; }
+.cart-icon { padding: 10px; display: flex; align-items: center; }
+.cart-icon svg { width: 24px; height: 24px; stroke: #1c1c1a; fill: none; stroke-width: 1.2; }
 
 /* ── MOTIF ── */
-.border-motif { display: flex; align-items: center; justify-content: center; gap: 4px; padding: 12px 20px; overflow: hidden; }
-.dot { width: 3px; height: 3px; border-radius: 50%; background: #c4a96e; flex-shrink: 0; }
-.dash { width: 14px; height: 0.5px; background: #d6cfc0; flex-shrink: 0; }
-.diamond { width: 5px; height: 5px; background: #c4a96e; transform: rotate(45deg); flex-shrink: 0; }
+.border-motif { display: flex; align-items: center; justify-content: center; gap: 5px; padding: 16px 20px; overflow: hidden; }
+.dot { width: 4px; height: 4px; border-radius: 50%; background: #c4a96e; flex-shrink: 0; }
+.dash { width: 16px; height: 1px; background: #d6cfc0; flex-shrink: 0; }
+.diamond { width: 6px; height: 6px; background: #c4a96e; transform: rotate(45deg); flex-shrink: 0; }
 
 /* ── HERO ── */
-.hero { padding: 48px 24px 40px; text-align: center; }
-.hero-eyebrow { font-size: 8px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 16px; }
-.hero-title { font-size: 30px; font-weight: 400; line-height: 1.35; color: #1c1c1a; margin-bottom: 14px; }
-.hero-desc { font-size: 13px; color: #7a7060; line-height: 1.9; margin-bottom: 28px; max-width: 320px; margin-left: auto; margin-right: auto; }
-.hero-img { margin: 0 auto 32px; width: 200px; height: 200px; display: flex; align-items: center; justify-content: center; }
+.hero { padding: 56px 28px 48px; text-align: center; }
+.hero-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 20px; }
+.hero-title { font-size: 36px; font-weight: 400; line-height: 1.35; color: #1c1c1a; margin-bottom: 18px; }
+.hero-desc { font-size: 15px; color: #7a7060; line-height: 1.9; margin-bottom: 32px; max-width: 360px; margin-left: auto; margin-right: auto; }
+.hero-img { margin: 0 auto 40px; width: 240px; height: 240px; display: flex; align-items: center; justify-content: center; }
 .hero-img img { width: 100%; height: 100%; object-fit: contain; }
 .btn {
-  display: inline-block; border: 0.5px solid #1c1c1a;
-  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-  padding: 14px 32px; cursor: pointer; background: transparent;
+  border: 1px solid #1c1c1a;
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  padding: 16px 38px; cursor: pointer; background: transparent;
   color: #1c1c1a; font-family: 'Georgia', serif; text-decoration: none;
-  min-height: 44px; display: inline-flex; align-items: center;
+  min-height: 50px; display: inline-flex; align-items: center;
 }
 .btn:active { background: #1c1c1a; color: #faf8f4; }
 
 /* ── SECTION SHARED ── */
-.section { padding: 44px 20px; }
-.section-label { font-size: 8px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 8px; }
-.section-rule { display: flex; align-items: center; gap: 8px; margin-bottom: 32px; }
+.section { padding: 52px 24px; }
+.section-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 10px; }
+.section-rule { display: flex; align-items: center; gap: 10px; margin-bottom: 36px; }
 .rule-line { flex: 1; height: 0.5px; background: #d6cfc0; }
-.rule-diamond { width: 5px; height: 5px; background: #c4a96e; transform: rotate(45deg); flex-shrink: 0; }
+.rule-diamond { width: 6px; height: 6px; background: #c4a96e; transform: rotate(45deg); flex-shrink: 0; }
 
 /* ── TILBUD GRID ── */
-.tilbud-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-.tilbud-card { background: #fff; border: 0.5px solid #e4ddd0; padding: 28px 24px; }
-.tilbud-icon { margin-bottom: 14px; }
-.tilbud-icon svg { width: 32px; height: 32px; stroke: #c4a96e; fill: none; stroke-width: 1.2; }
-.tilbud-title { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #1c1c1a; margin-bottom: 8px; }
-.tilbud-desc { font-size: 13px; color: #7a7060; line-height: 1.8; }
+.tilbud-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+.tilbud-card { background: #fff; border: 0.5px solid #e4ddd0; padding: 36px 28px; }
+.tilbud-icon { margin-bottom: 18px; }
+.tilbud-icon svg { width: 40px; height: 40px; stroke: #c4a96e; fill: none; stroke-width: 1.2; }
+.tilbud-title { font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; color: #1c1c1a; margin-bottom: 12px; }
+.tilbud-desc { font-size: 15px; color: #7a7060; line-height: 1.85; }
 
 /* ── KONTAKT SECTION ── */
-.kontakt-section { padding: 52px 20px; background: #f0ebe1; }
-.kontakt-inner { max-width: 480px; margin: 0 auto; text-align: center; }
-.kontakt-eyebrow { font-size: 8px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 12px; }
-.kontakt-title { font-size: 26px; font-weight: 400; color: #1c1c1a; margin-bottom: 14px; line-height: 1.35; }
-.kontakt-desc { font-size: 13px; color: #7a7060; line-height: 1.9; margin-bottom: 32px; }
-.kontakt-cards { display: grid; grid-template-columns: 1fr; gap: 12px; text-align: left; }
-.kcard { background: #fff; border: 0.5px solid #e4ddd0; padding: 20px 22px; display: flex; align-items: flex-start; gap: 16px; }
-.kcard-icon svg { width: 18px; height: 18px; stroke: #c4a96e; fill: none; stroke-width: 1.4; flex-shrink: 0; }
-.kcard-label { font-size: 8px; letter-spacing: 2.5px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 4px; }
-.kcard-value { font-size: 14px; color: #1c1c1a; font-family: 'Georgia', serif; }
+.kontakt-section { padding: 64px 24px; background: #f0ebe1; }
+.kontakt-inner { max-width: 520px; margin: 0 auto; text-align: center; }
+.kontakt-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 16px; }
+.kontakt-title { font-size: 30px; font-weight: 400; color: #1c1c1a; margin-bottom: 18px; line-height: 1.35; }
+.kontakt-desc { font-size: 15px; color: #7a7060; line-height: 1.9; margin-bottom: 36px; }
+.kontakt-cards { display: grid; grid-template-columns: 1fr; gap: 14px; text-align: left; }
+.kcard { background: #fff; border: 0.5px solid #e4ddd0; padding: 24px 26px; display: flex; align-items: flex-start; gap: 20px; }
+.kcard-icon svg { width: 22px; height: 22px; stroke: #c4a96e; fill: none; stroke-width: 1.4; flex-shrink: 0; }
+.kcard-label { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 6px; }
+.kcard-value { font-size: 17px; color: #1c1c1a; font-family: 'Georgia', serif; }
 .kcard-value a { color: #1c1c1a; text-decoration: none; }
 .kcard-value a:hover { color: #c4a96e; }
 
 /* ── SOSIALE MEDIER ── */
-.social-row { display: flex; gap: 12px; align-items: center; justify-content: center; margin-top: 32px; }
-.social-link { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 0.5px solid #d6cfc0; color: #9a8e7e; text-decoration: none; transition: border-color 0.25s, color 0.25s; }
+.social-row { display: flex; gap: 14px; align-items: center; justify-content: center; margin-top: 36px; }
+.social-link { display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; border: 1px solid #d6cfc0; color: #9a8e7e; text-decoration: none; transition: border-color 0.25s, color 0.25s; }
 .social-link:hover { border-color: #c4a96e; color: #c4a96e; }
-.social-link svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-.social-label { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: #b0a898; margin-bottom: 14px; }
+.social-link svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.social-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #b0a898; margin-bottom: 16px; }
 
-.footer-social { display: flex; gap: 8px; align-items: center; justify-content: center; margin-bottom: 16px; }
-.footer-social a { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border: 0.5px solid #d6cfc0; color: #b0a898; text-decoration: none; transition: border-color 0.25s, color 0.25s; }
+.footer-social { display: flex; gap: 10px; align-items: center; justify-content: center; margin-bottom: 20px; }
+.footer-social a { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border: 0.5px solid #d6cfc0; color: #b0a898; text-decoration: none; transition: border-color 0.25s, color 0.25s; }
 .footer-social a:hover { border-color: #c4a96e; color: #c4a96e; }
-.footer-social svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.footer-social svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ── OM OSS STRIP ── */
-.om-strip { background: #1c1c1a; padding: 52px 24px; text-align: center; }
-.om-eyebrow { font-size: 8px; letter-spacing: 4px; text-transform: uppercase; color: #c4a96e; margin-bottom: 14px; }
-.om-title { font-size: 22px; font-weight: 400; color: #f0ebe1; line-height: 1.4; margin-bottom: 14px; }
-.om-desc { font-size: 13px; color: #8a8070; line-height: 1.8; margin-bottom: 0; max-width: 300px; margin-left: auto; margin-right: auto; }
+.om-strip { background: #1c1c1a; padding: 64px 28px; text-align: center; }
+.om-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #c4a96e; margin-bottom: 18px; }
+.om-title { font-size: 26px; font-weight: 400; color: #f0ebe1; line-height: 1.4; margin-bottom: 18px; }
+.om-desc { font-size: 15px; color: #8a8070; line-height: 1.85; margin-bottom: 0; max-width: 360px; margin-left: auto; margin-right: auto; }
 
 /* ── FOOTER ── */
-footer { padding: 36px 20px; border-top: 0.5px solid #d6cfc0; text-align: center; }
-.footer-logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 20px; }
-.footer-logo img { width: 28px; height: 28px; object-fit: contain; }
-.footer-logo span { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #1c1c1a; }
-.footer-links { display: flex; flex-wrap: wrap; gap: 16px 20px; justify-content: center; margin-bottom: 20px; }
-.footer-links a { font-size: 9px; letter-spacing: 1.5px; color: #8a7e6e; text-decoration: none; text-transform: uppercase; }
-.footer-copy { font-size: 9px; color: #b0a898; letter-spacing: 1px; }
+footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center; }
+.footer-logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; margin-bottom: 24px; }
+.footer-logo img { width: 34px; height: 34px; object-fit: contain; }
+.footer-logo span { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #1c1c1a; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 16px 24px; justify-content: center; margin-bottom: 24px; }
+.footer-links a { font-size: 11px; letter-spacing: 1.5px; color: #8a7e6e; text-decoration: none; text-transform: uppercase; }
+.footer-copy { font-size: 11px; color: #b0a898; letter-spacing: 1px; }
 
 /* ── PRISBAR ── */
 .price-bar {
@@ -177,7 +177,7 @@ footer { padding: 36px 20px; border-top: 0.5px solid #d6cfc0; text-align: center
     display: flex; gap: 32px; align-items: center;
   }
   .nav-desktop-left a, .nav-desktop-right a {
-    font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+    font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
     color: #1c1c1a; text-decoration: none; transition: color 0.2s;
   }
   .nav-desktop-left a:hover, .nav-desktop-right a:hover { color: #c4a96e; }
@@ -186,32 +186,32 @@ footer { padding: 36px 20px; border-top: 0.5px solid #d6cfc0; text-align: center
   .hero {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 80px; align-items: center; text-align: left;
-    padding: 80px 56px; max-width: 1200px; margin: 0 auto;
+    padding: 96px 64px; max-width: 1200px; margin: 0 auto;
   }
-  .hero-img { order: 2; width: 100%; max-width: 380px; height: auto; aspect-ratio: 1/1; margin: 0 auto; }
+  .hero-img { order: 2; width: 100%; max-width: 460px; height: auto; aspect-ratio: 1/1; margin: 0 auto; }
   .hero > div:last-child { order: 1; }
-  .hero-title { font-size: 42px; }
-  .hero-desc { margin-left: 0; max-width: 440px; }
+  .hero-title { font-size: 52px; }
+  .hero-desc { margin-left: 0; max-width: 480px; font-size: 16px; }
 
   /* Tilbud */
-  .section { padding: 64px 56px; max-width: 1100px; margin: 0 auto; }
-  .tilbud-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .section { padding: 72px 64px; max-width: 1100px; margin: 0 auto; }
+  .tilbud-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; }
 
   /* Kontakt */
-  .kontakt-section { padding: 70px 56px; }
-  .kontakt-inner { max-width: 680px; }
-  .kontakt-title { font-size: 34px; }
-  .kontakt-cards { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .kontakt-section { padding: 80px 64px; }
+  .kontakt-inner { max-width: 760px; }
+  .kontakt-title { font-size: 40px; }
+  .kontakt-cards { grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
   /* Om strip */
-  .om-strip { padding: 70px 56px; }
-  .om-title { font-size: 28px; }
-  .om-desc { max-width: 460px; }
+  .om-strip { padding: 80px 64px; }
+  .om-title { font-size: 34px; }
+  .om-desc { max-width: 520px; font-size: 16px; }
 
   /* Footer */
-  footer { display: flex; align-items: center; justify-content: space-between; padding: 40px 56px; text-align: left; }
+  footer { display: flex; align-items: center; justify-content: space-between; padding: 48px 64px; text-align: left; }
   .footer-logo { margin-bottom: 0; }
-  .footer-links { margin-bottom: 0; gap: 12px 28px; }
+  .footer-links { margin-bottom: 0; gap: 14px 32px; }
   .footer-social { margin-bottom: 0; }
 }
 </style>
