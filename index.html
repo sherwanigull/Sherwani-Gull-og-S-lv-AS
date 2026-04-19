@@ -80,6 +80,28 @@ nav {
 .tilbud-title { font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; color: #1c1c1a; margin-bottom: 12px; }
 .tilbud-desc { font-size: 15px; color: #7a7060; line-height: 1.85; }
 
+/* ── SKJEMA ── */
+.skjema-section { padding: 56px 24px; background: #fff; }
+.skjema-inner { max-width: 640px; margin: 0 auto; }
+.skjema-title { font-size: 30px; font-weight: 400; color: #1c1c1a; line-height: 1.35; margin-bottom: 14px; }
+.skjema-desc { font-size: 15px; color: #7a7060; line-height: 1.85; margin-bottom: 28px; }
+.kontakt-form { display: grid; gap: 16px; }
+.form-row { display: grid; gap: 16px; }
+.form-field { display: flex; flex-direction: column; gap: 8px; }
+.form-field label { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: #8a7e6e; }
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%; border: 0.5px solid #d6cfc0; background: #faf8f4;
+  padding: 14px 14px; color: #1c1c1a; font-family: 'Georgia', serif;
+  font-size: 15px; border-radius: 0;
+}
+.form-field textarea { min-height: 130px; resize: vertical; line-height: 1.6; }
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus { outline: 1px solid #c4a96e; border-color: #c4a96e; }
+.form-note { font-size: 13px; color: #8a7e6e; line-height: 1.7; }
+
 /* ── PRISTABELL ── */
 .pris-section { padding: 56px 24px; background: #faf8f4; }
 .pris-inner { max-width: 560px; margin: 0 auto; }
@@ -245,6 +267,11 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .section { padding: 72px 64px; max-width: 1100px; margin: 0 auto; }
   .tilbud-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; }
 
+  /* Skjema */
+  .skjema-section { padding: 72px 64px; }
+  .skjema-title { font-size: 38px; }
+  .form-row { grid-template-columns: repeat(2, 1fr); }
+
   /* Kontakt */
   .kontakt-section { padding: 80px 64px; }
   .kontakt-inner { max-width: 760px; }
@@ -281,6 +308,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <span class="sub">Gull &amp; Sølv</span>
   </a>
   <div class="nav-desktop-right">
+    <a href="#skjema">Send forespørsel</a>
     <a href="#kontakt">Kontakt</a>
     <a href="mailto:post@sherwanigull.no">post@sherwanigull.no</a>
   </div>
@@ -315,6 +343,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   <a href="#om-oss" onclick="document.getElementById('drawer').classList.remove('open')">Om oss</a>
   <a href="#tilbud" onclick="document.getElementById('drawer').classList.remove('open')">Veiledning</a>
   <a href="#priser" onclick="document.getElementById('drawer').classList.remove('open')">Priser i dag</a>
+  <a href="#skjema" onclick="document.getElementById('drawer').classList.remove('open')">Send forespørsel</a>
   <a href="#kontakt" onclick="document.getElementById('drawer').classList.remove('open')">Kontakt</a>
   <a href="mailto:post@sherwanigull.no" onclick="document.getElementById('drawer').classList.remove('open')">Send e-post</a>
 </div>
@@ -430,6 +459,63 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   <div class="dash"></div><div class="dot"></div><div class="dash"></div>
 </div>
 
+<!-- KONTAKTSKJEMA -->
+<div class="skjema-section" id="skjema">
+  <div class="skjema-inner">
+    <div class="section-label">Send en forespørsel</div>
+    <div class="section-rule">
+      <div class="rule-line"></div><div class="rule-diamond"></div><div class="rule-line"></div>
+    </div>
+    <h2 class="skjema-title">Ønsker du å selge eller kjøpe?</h2>
+    <p class="skjema-desc">Send oss noen detaljer, så tar vi kontakt med en uforpliktende vurdering. Har du bilder, kan du legge dem ved i e-posten som åpnes.</p>
+
+    <form class="kontakt-form" id="kontakt-form">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="form-navn">Navn</label>
+          <input id="form-navn" name="navn" type="text" autocomplete="name" required>
+        </div>
+        <div class="form-field">
+          <label for="form-telefon">Telefon</label>
+          <input id="form-telefon" name="telefon" type="tel" autocomplete="tel" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="form-epost">E-post</label>
+          <input id="form-epost" name="epost" type="email" autocomplete="email">
+        </div>
+        <div class="form-field">
+          <label for="form-type">Hva gjelder det?</label>
+          <select id="form-type" name="type" required>
+            <option value="">Velg</option>
+            <option>Selge gull eller sølv</option>
+            <option>Kjøpe gull eller sølv</option>
+            <option>Gratis veiledning</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="form-melding">Hva har du, eller hva ser du etter?</label>
+        <textarea id="form-melding" name="melding" placeholder="Skriv gjerne type metall, ca. vekt, renhet/stempel eller hva du ønsker å kjøpe." required></textarea>
+      </div>
+
+      <p class="form-note">Tips: Har du bilder av smykker, mynter eller sølv, kan du legge dem ved i e-posten før du sender.</p>
+      <button class="btn" type="submit">Send forespørsel</button>
+    </form>
+  </div>
+</div>
+
+<!-- MOTIF -->
+<div class="border-motif">
+  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
+  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
+  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
+  <div class="dash"></div><div class="dot"></div><div class="dash"></div>
+</div>
+
 <!-- KONTAKT -->
 <div class="kontakt-section" id="kontakt">
   <div class="kontakt-inner">
@@ -519,6 +605,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   </a>
   <div class="footer-links">
     <a href="#tilbud">Veiledning</a>
+    <a href="#skjema">Send forespørsel</a>
     <a href="#kontakt">Kontakt</a>
     <a href="mailto:post@sherwanigull.no">post@sherwanigull.no</a>
     <a href="tel:+4747996251">47 99 62 51</a>
@@ -546,6 +633,39 @@ const src = "data:image/png;base64," + b64;
 // logo-img removed from nav
 document.getElementById("hero-img").src = src;
 document.getElementById("footer-img").src = src;
+</script>
+
+<script>
+(function () {
+  const form = document.getElementById('kontakt-form');
+  if (!form) return;
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const navn = document.getElementById('form-navn').value.trim();
+    const telefon = document.getElementById('form-telefon').value.trim();
+    const epost = document.getElementById('form-epost').value.trim();
+    const type = document.getElementById('form-type').value;
+    const melding = document.getElementById('form-melding').value.trim();
+
+    const subject = 'Forespørsel fra nettsiden';
+    const body = [
+      'Navn: ' + navn,
+      'Telefon: ' + telefon,
+      'E-post: ' + (epost || 'Ikke oppgitt'),
+      'Gjelder: ' + type,
+      '',
+      'Melding:',
+      melding,
+      '',
+      'Bilder/vedlegg kan legges ved i denne e-posten før sending.'
+    ].join('\n');
+
+    window.location.href = 'mailto:post@sherwanigull.no?subject=' +
+      encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  });
+})();
 </script>
 
 <script>
