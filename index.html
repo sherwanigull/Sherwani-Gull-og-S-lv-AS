@@ -108,6 +108,50 @@ footer { padding: 36px 20px; border-top: 0.5px solid #d6cfc0; text-align: center
 .footer-links a { font-size: 9px; letter-spacing: 1.5px; color: #8a7e6e; text-decoration: none; text-transform: uppercase; }
 .footer-copy { font-size: 9px; color: #b0a898; letter-spacing: 1px; }
 
+/* ── PRISBAR ── */
+.price-bar {
+  background: #1c1c1a;
+  padding: 9px 20px;
+  border-bottom: 0.5px solid #2e2e2c;
+  overflow: hidden;
+}
+.price-bar-inner {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; flex-wrap: nowrap; white-space: nowrap;
+}
+.price-item {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 0 20px;
+}
+.price-item + .price-item {
+  border-left: 0.5px solid #2e2e2c;
+}
+.price-metal {
+  font-size: 8px; letter-spacing: 3px; text-transform: uppercase;
+  color: #6a6258;
+}
+.price-value {
+  font-size: 13px; color: #c4a96e;
+  font-family: 'Georgia', serif; letter-spacing: 0.5px;
+}
+.price-unit {
+  font-size: 8px; letter-spacing: 1.5px; color: #4a4840;
+  text-transform: uppercase;
+}
+.price-dot {
+  width: 4px; height: 4px; background: #2e2e2c;
+  transform: rotate(45deg); flex-shrink: 0; margin: 0 12px;
+}
+.price-live {
+  font-size: 7px; letter-spacing: 2px; text-transform: uppercase;
+  color: #3a3830; margin-left: 16px;
+}
+.price-live.ready { color: #6a8a5a; }
+.price-updated {
+  font-size: 7px; letter-spacing: 1px; color: #3a3830;
+  margin-left: 4px;
+}
+
 /* ── NAV: hide desktop links on mobile ── */
 .nav-desktop-left, .nav-desktop-right { display: none; }
 
@@ -183,6 +227,25 @@ footer { padding: 36px 20px; border-top: 0.5px solid #d6cfc0; text-align: center
     <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
   </a>
 </nav>
+
+<!-- PRISBAR -->
+<div class="price-bar" id="price-bar">
+  <div class="price-bar-inner">
+    <div class="price-item">
+      <span class="price-metal">Gull (Au)</span>
+      <span class="price-value" id="gold-val">—</span>
+      <span class="price-unit">kr/g</span>
+    </div>
+    <div class="price-dot"></div>
+    <div class="price-item">
+      <span class="price-metal">Sølv (Ag)</span>
+      <span class="price-value" id="silver-val">—</span>
+      <span class="price-unit">kr/g</span>
+    </div>
+    <span class="price-live" id="price-live">● Henter priser</span>
+    <span class="price-updated" id="price-updated"></span>
+  </div>
+</div>
 
 <!-- DRAWER -->
 <div class="nav-drawer" id="drawer">
@@ -381,6 +444,61 @@ const src = "data:image/png;base64," + b64;
 // logo-img removed from nav
 document.getElementById("hero-img").src = src;
 document.getElementById("footer-img").src = src;
+</script>
+
+<script>
+(function () {
+  const TROY_OZ_TO_GRAM = 31.1035;
+  const REFRESH_MS = 5 * 60 * 1000; // 5 min
+
+  function fmtNok(val) {
+    return val.toLocaleString('nb-NO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function setStatus(msg, live) {
+    const el = document.getElementById('price-live');
+    if (!el) return;
+    el.textContent = live ? '● Live' : '● ' + msg;
+    el.className = 'price-live' + (live ? ' ready' : '');
+  }
+
+  async function fetchPrices() {
+    try {
+      const [metalsRes, fxRes] = await Promise.all([
+        fetch('https://metals.live/api/spot'),
+        fetch('https://api.frankfurter.app/latest?from=USD&to=NOK')
+      ]);
+
+      if (!metalsRes.ok || !fxRes.ok) throw new Error('API-feil');
+
+      const metals = await metalsRes.json();
+      const fx = await fxRes.json();
+
+      const nokPerUsd = fx.rates.NOK;
+      const goldUsd  = metals.find(m => m.symbol === 'XAU')?.price;
+      const silverUsd = metals.find(m => m.symbol === 'XAG')?.price;
+
+      if (!goldUsd || !silverUsd || !nokPerUsd) throw new Error('Mangler data');
+
+      const goldNok   = (goldUsd   * nokPerUsd) / TROY_OZ_TO_GRAM;
+      const silverNok = (silverUsd * nokPerUsd) / TROY_OZ_TO_GRAM;
+
+      document.getElementById('gold-val').textContent   = fmtNok(goldNok);
+      document.getElementById('silver-val').textContent = fmtNok(silverNok);
+
+      const now = new Date();
+      const hm  = now.toLocaleTimeString('nb-NO', { hour: '2-digit', minute: '2-digit' });
+      document.getElementById('price-updated').textContent = '· ' + hm;
+      setStatus('', true);
+
+    } catch (e) {
+      setStatus('Ikke tilgjengelig', false);
+    }
+  }
+
+  fetchPrices();
+  setInterval(fetchPrices, REFRESH_MS);
+})();
 </script>
 </body>
 </html>
