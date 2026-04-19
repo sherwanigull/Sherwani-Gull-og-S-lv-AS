@@ -327,8 +327,8 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   </div>
   <div>
     <div class="hero-eyebrow">Gratis veiledning · Alltid tilgjengelig</div>
-    <h1 class="hero-title">Lurer du på noe<br>om gull?</h1>
-    <p class="hero-desc">Vi tilbyr gratis og uforpliktende veiledning om gull. Har du spørsmål om kjøp, verdi, kvalitet eller gullsmykker? Bare spør — det koster ingenting.</p>
+    <h1 class="hero-title">Lurer du på noe<br>om gull eller sølv?</h1>
+    <p class="hero-desc">Vi tilbyr gratis og uforpliktende veiledning om gull og sølv. Har du spørsmål om kjøp, verdi, kvalitet eller smykker? Bare spør — det koster ingenting.</p>
     <a href="mailto:post@sherwanigull.no" class="btn">Ta kontakt</a>
   </div>
 </div>
@@ -393,15 +393,15 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
       </div>
       <div class="tilbud-title">Gratis veiledning</div>
-      <p class="tilbud-desc">Vi tilbyr gratis rådgivning om gull — enten du vil kjøpe, selge eller bare lære mer. Ingen forpliktelser, bare ærlig og personlig veiledning.</p>
+      <p class="tilbud-desc">Vi tilbyr gratis rådgivning om gull og sølv — enten du vil kjøpe, selge eller bare lære mer. Ingen forpliktelser, bare ærlig og personlig veiledning.</p>
     </div>
 
     <div class="tilbud-card">
       <div class="tilbud-icon">
         <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </div>
-      <div class="tilbud-title">Gull på lager</div>
-      <p class="tilbud-desc">Vi har gull tilgjengelig på lager. Ta kontakt for å høre hva som er tilgjengelig — vi hjelper deg gjerne med å finne det som passer deg.</p>
+      <div class="tilbud-title">Gull og sølv på lager</div>
+      <p class="tilbud-desc">Vi har både gull og sølv tilgjengelig på lager. Ta kontakt for å høre hva som er tilgjengelig — vi hjelper deg gjerne med å finne det som passer deg.</p>
     </div>
 
     <div class="tilbud-card">
@@ -409,7 +409,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
         <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       </div>
       <div class="tilbud-title">Bare spør</div>
-      <p class="tilbud-desc">Usikker på karatverdi, markedspris eller hva du bør se etter? Send oss en melding eller ring — vi svarer så fort vi kan.</p>
+      <p class="tilbud-desc">Usikker på karatverdi, sølvrenhet, markedspris eller hva du bør se etter? Send oss en melding eller ring — vi svarer så fort vi kan.</p>
     </div>
 
   </div>
@@ -593,30 +593,30 @@ document.getElementById("footer-img").src = src;
   // Hvert kilde-objekt returnerer allerede priser i NOK
   const SOURCES = [
 
-    // Kilde 1: jsDelivr CDN — ett kall gir XAU, XAG og NOK samtidig
+    // Kilde 1: gold-api.com (CORS-støtte, ingen API-nøkkel) + frankfurter for NOK
+    async () => {
+      const [xau, xag, fx] = await Promise.all([
+        timedFetch('https://api.gold-api.com/price/XAU'),
+        timedFetch('https://api.gold-api.com/price/XAG'),
+        timedFetch('https://api.frankfurter.app/latest?from=USD&to=NOK')
+      ]);
+      const goldUsd   = xau?.price;
+      const silverUsd = xag?.price;
+      const nokRate   = fx?.rates?.NOK;
+      if (!goldUsd || !silverUsd || !nokRate) throw new Error('Mangler data');
+      return { goldNok: goldUsd * nokRate, silverNok: silverUsd * nokRate };
+    },
+
+    // Kilde 2: jsDelivr CDN — ett kall gir XAU, XAG og NOK samtidig
     async () => {
       const d = await timedFetch(
         'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json'
       );
-      const xau = d?.usd?.xau;  // troy oz per 1 USD
+      const xau = d?.usd?.xau;
       const xag = d?.usd?.xag;
-      const nok = d?.usd?.nok;  // NOK per 1 USD
+      const nok = d?.usd?.nok;
       if (!xau || !xag || !nok) throw new Error('Mangler felt');
       return { goldNok: (1 / xau) * nok, silverNok: (1 / xag) * nok };
-    },
-
-    // Kilde 2: LBMA London Fix (Nasdaq) + frankfurter for NOK
-    async () => {
-      const [gd, sd, fx] = await Promise.all([
-        timedFetch('https://data.nasdaq.com/api/v3/datasets/LBMA/GOLD.json?rows=1&api_key=DEMO'),
-        timedFetch('https://data.nasdaq.com/api/v3/datasets/LBMA/SILVER.json?rows=1&api_key=DEMO'),
-        timedFetch('https://api.frankfurter.app/latest?from=USD&to=NOK')
-      ]);
-      const goldUsd   = gd?.dataset?.data?.[0]?.[2];
-      const silverUsd = sd?.dataset?.data?.[0]?.[1];
-      const nokRate   = fx?.rates?.NOK;
-      if (!goldUsd || !silverUsd || !nokRate) throw new Error('Mangler data');
-      return { goldNok: goldUsd * nokRate, silverNok: silverUsd * nokRate };
     },
 
     // Kilde 3: goldprice.org + frankfurter
