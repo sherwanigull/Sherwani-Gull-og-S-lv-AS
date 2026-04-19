@@ -582,7 +582,7 @@ document.getElementById("footer-img").src = src;
 
   function render(goldNok, silverNok, fromCache) {
     renderPrices(goldNok, silverNok);
-    const hm = new Date().toLocaleTimeString('nb-NO', { hour: '2-digit', minute: '2-digit' });
+    const hm = new Date().toLocaleTimeString('nb-NO', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     const upd = document.getElementById('price-updated');
     if (upd) upd.textContent = '· ' + hm;
     setStatus(fromCache ? 'Bufret' : '', !fromCache);
