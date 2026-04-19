@@ -43,6 +43,19 @@ nav {
 .hero-desc { font-size: 15px; color: #7a7060; line-height: 1.9; margin-bottom: 32px; max-width: 360px; margin-left: auto; margin-right: auto; }
 .hero-img { margin: 0 auto 40px; width: 240px; height: 240px; display: flex; align-items: center; justify-content: center; }
 .hero-img img { width: 100%; height: 100%; object-fit: contain; }
+.hero-prices {
+  display: flex; gap: 0; margin-bottom: 32px;
+  border: 0.5px solid #e4ddd0; background: #fff;
+  overflow: hidden;
+}
+.hero-price-item {
+  flex: 1; padding: 16px 20px; display: flex; flex-direction: column; gap: 5px;
+}
+.hero-price-item + .hero-price-item { border-left: 0.5px solid #e4ddd0; }
+.hero-price-metal { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: #a89060; }
+.hero-price-val { font-size: 24px; font-weight: 400; color: #1c1c1a; font-family: 'Georgia', serif; line-height: 1; }
+.hero-price-unit { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #b0a898; }
+
 .btn {
   border: 1px solid #1c1c1a;
   font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
@@ -192,6 +205,8 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .hero > div:last-child { order: 1; }
   .hero-title { font-size: 52px; }
   .hero-desc { margin-left: 0; max-width: 480px; font-size: 16px; }
+  .hero-prices { max-width: 380px; }
+  .hero-price-val { font-size: 28px; }
 
   /* Tilbud */
   .section { padding: 72px 64px; max-width: 1100px; margin: 0 auto; }
@@ -286,6 +301,18 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <div class="hero-eyebrow">Gratis veiledning · Alltid tilgjengelig</div>
     <h1 class="hero-title">Lurer du på noe<br>om gull?</h1>
     <p class="hero-desc">Vi tilbyr gratis og uforpliktende veiledning om gull. Har du spørsmål om kjøp, verdi, kvalitet eller gullsmykker? Bare spør — det koster ingenting.</p>
+    <div class="hero-prices">
+      <div class="hero-price-item">
+        <span class="hero-price-metal">Gull (Au)</span>
+        <span class="hero-price-val" id="hero-gold-val">···</span>
+        <span class="hero-price-unit">kr / troy oz</span>
+      </div>
+      <div class="hero-price-item">
+        <span class="hero-price-metal">Sølv (Ag)</span>
+        <span class="hero-price-val" id="hero-silver-val">···</span>
+        <span class="hero-price-unit">kr / troy oz</span>
+      </div>
+    </div>
     <a href="mailto:post@sherwanigull.no" class="btn">Ta kontakt</a>
   </div>
 </div>
@@ -461,7 +488,7 @@ document.getElementById("footer-img").src = src;
 
 <script>
 (function () {
-  const REFRESH_MS  = 60 * 60 * 1000; // Oppdater hver time (London Fix er daglig)
+  const REFRESH_MS  = 3 * 60 * 1000; // Oppdater hvert 3. minutt
   const CACHE_KEY   = 'sg_prices_v3';
   const CACHE_TTL   = 24 * 60 * 60 * 1000;
   const TIMEOUT_MS  = 10000;
@@ -478,8 +505,17 @@ document.getElementById("footer-img").src = src;
   }
 
   function render(gold, silver, fromCache) {
-    document.getElementById('gold-val').textContent   = fmt(gold);
-    document.getElementById('silver-val').textContent = fmt(silver);
+    const gTxt = fmt(gold);
+    const sTxt = fmt(silver);
+    // Prisbar øverst
+    document.getElementById('gold-val').textContent   = gTxt;
+    document.getElementById('silver-val').textContent = sTxt;
+    // Hero-seksjon
+    const hg = document.getElementById('hero-gold-val');
+    const hs = document.getElementById('hero-silver-val');
+    if (hg) hg.textContent = gTxt;
+    if (hs) hs.textContent = sTxt;
+
     const hm = new Date().toLocaleTimeString('nb-NO', { hour: '2-digit', minute: '2-digit' });
     const el = document.getElementById('price-updated');
     if (el) el.textContent = '· ' + hm;
