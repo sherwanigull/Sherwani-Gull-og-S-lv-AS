@@ -116,6 +116,10 @@ nav {
 .pris-right { display: flex; align-items: baseline; gap: 6px; }
 .pris-val { font-size: 20px; color: #1c1c1a; font-family: 'Georgia', serif; }
 .pris-enhet { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #b0a898; }
+.pris-info {
+  font-size: 13px; color: #7a7060; line-height: 1.7;
+  margin: -16px 0 24px; text-align: center;
+}
 .pris-kilde {
   margin-top: 24px; padding-top: 16px; border-top: 0.5px solid #e4ddd0;
   font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
@@ -216,6 +220,10 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   color: #605040;
 }
 .price-live.ready { color: #7ab870; }
+.price-note {
+  font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: #806840;
+}
 .price-updated {
   font-size: 8px; letter-spacing: 1px; color: #605040;
 }
@@ -332,6 +340,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     </div>
     <div class="price-meta">
       <span class="price-live" id="price-live">● Henter priser</span>
+      <span class="price-note">· Markedspris</span>
       <span class="price-updated" id="price-updated"></span>
     </div>
   </div>
@@ -384,6 +393,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <div class="section-rule">
       <div class="rule-line"></div><div class="rule-diamond"></div><div class="rule-line"></div>
     </div>
+    <p class="pris-info">Prisene under er veiledende markedspriser hentet fra live markedsdata. De er ikke bindende kjøps- eller salgspriser fra Sherwani Gull &amp; Sølv AS.</p>
 
     <div class="pris-row">
       <div class="pris-left"><span class="pris-karat">24 karat</span><span class="pris-finhet">Finhet · 999</span></div>
