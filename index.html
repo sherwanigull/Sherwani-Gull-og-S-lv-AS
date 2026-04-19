@@ -99,6 +99,13 @@ nav {
   font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
   color: #c0b8a8; text-align: center;
 }
+.pris-gruppe-tittel {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: #8a7e6e; margin: 20px 0 8px; font-weight: 600;
+}
+.pris-skillelinje {
+  border: none; border-top: 0.5px solid #e4ddd0; margin: 20px 0;
+}
 
 /* ── KONTAKT SECTION ── */
 .kontakt-section { padding: 64px 24px; background: #f0ebe1; }
@@ -288,12 +295,12 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <div class="price-item">
       <span class="price-metal">Gull (Au)</span>
       <span class="price-value" id="gold-val">···</span>
-      <span class="price-unit">kr/oz</span>
+      <span class="price-unit">kr/g</span>
     </div>
     <div class="price-item">
       <span class="price-metal">Sølv (Ag)</span>
       <span class="price-value" id="silver-val">···</span>
-      <span class="price-unit">kr/oz</span>
+      <span class="price-unit">kr/g</span>
     </div>
     <div class="price-meta">
       <span class="price-live" id="price-live">● Henter priser</span>
@@ -344,10 +351,12 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 <!-- PRISER I DAG -->
 <div class="pris-section" id="priser">
   <div class="pris-inner">
-    <div class="section-label">Gullpriser i dag</div>
+    <div class="section-label">Priser i dag</div>
     <div class="section-rule">
       <div class="rule-line"></div><div class="rule-diamond"></div><div class="rule-line"></div>
     </div>
+
+    <div class="pris-gruppe-tittel">Gull (Au)</div>
     <div class="pris-row">
       <div class="pris-left"><span class="pris-karat">24 karat</span><span class="pris-finhet">Finhet · 999</span></div>
       <div class="pris-right"><span class="pris-val" id="pris-24k">···</span><span class="pris-enhet">kr/g</span></div>
@@ -368,7 +377,24 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
       <div class="pris-left"><span class="pris-karat">14 karat</span><span class="pris-finhet">Finhet · 585</span></div>
       <div class="pris-right"><span class="pris-val" id="pris-14k">···</span><span class="pris-enhet">kr/g</span></div>
     </div>
-    <div class="pris-kilde">Kilde: London Bullion Market Association (LBMA) · Oppdateres hvert 3. minutt</div>
+
+    <div class="pris-skillelinje"></div>
+
+    <div class="pris-gruppe-tittel">Sølv (Ag)</div>
+    <div class="pris-row">
+      <div class="pris-left"><span class="pris-karat">Fint sølv</span><span class="pris-finhet">Finhet · 999</span></div>
+      <div class="pris-right"><span class="pris-val" id="pris-solv-999">···</span><span class="pris-enhet">kr/g</span></div>
+    </div>
+    <div class="pris-row">
+      <div class="pris-left"><span class="pris-karat">Sterlingsølv</span><span class="pris-finhet">Finhet · 925</span></div>
+      <div class="pris-right"><span class="pris-val" id="pris-solv-925">···</span><span class="pris-enhet">kr/g</span></div>
+    </div>
+    <div class="pris-row">
+      <div class="pris-left"><span class="pris-karat">Sølv 830</span><span class="pris-finhet">Finhet · 830</span></div>
+      <div class="pris-right"><span class="pris-val" id="pris-solv-830">···</span><span class="pris-enhet">kr/g</span></div>
+    </div>
+
+    <div class="pris-kilde">Kilde: gold-api.com · Oppdateres hvert 3. minutt</div>
   </div>
 </div>
 
@@ -560,18 +586,25 @@ document.getElementById("footer-img").src = src;
     el.className   = 'price-live' + (live ? ' ready' : '');
   }
 
-  function renderKarats(goldNok) {
-    const perGram = goldNok / 31.1035;
+  function renderPrices(goldNok, silverNok) {
+    const goldPerGram   = goldNok   / 31.1035;
+    const silverPerGram = silverNok / 31.1035;
+
+    // Prisbar — kr/g
+    const elG = document.getElementById('gold-val');   if (elG)  elG.textContent  = fmt(goldPerGram);
+    const elS = document.getElementById('silver-val'); if (elS)  elS.textContent  = fmt(silverPerGram);
+
+    // Gull karat-tabell
     [{id:'pris-24k',p:0.999},{id:'pris-22k',p:0.916},{id:'pris-21k',p:0.875},{id:'pris-18k',p:0.750},{id:'pris-14k',p:0.585}]
-      .forEach(({id,p}) => { const el = document.getElementById(id); if (el) el.textContent = fmt(perGram * p); });
+      .forEach(({id,p}) => { const el = document.getElementById(id); if (el) el.textContent = fmt(goldPerGram * p); });
+
+    // Sølv finhet-tabell
+    [{id:'pris-solv-999',p:0.999},{id:'pris-solv-925',p:0.925},{id:'pris-solv-830',p:0.830}]
+      .forEach(({id,p}) => { const el = document.getElementById(id); if (el) el.textContent = fmt(silverPerGram * p); });
   }
 
   function render(goldNok, silverNok, fromCache) {
-    const g = fmt(goldNok);
-    const s = fmt(silverNok);
-    ['gold-val',       'hero-gold-val'  ].forEach(id => { const el = document.getElementById(id);   if (el) el.textContent = g; });
-    ['silver-val',     'hero-silver-val'].forEach(id => { const el = document.getElementById(id);   if (el) el.textContent = s; });
-    renderKarats(goldNok);
+    renderPrices(goldNok, silverNok);
     const hm = new Date().toLocaleTimeString('nb-NO', { hour: '2-digit', minute: '2-digit' });
     const upd = document.getElementById('price-updated');
     if (upd) upd.textContent = '· ' + hm;
