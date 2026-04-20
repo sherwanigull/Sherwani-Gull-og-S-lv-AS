@@ -177,15 +177,12 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 }
 .price-bar-inner {
   display: flex; align-items: center; justify-content: center;
-  flex-wrap: wrap; gap: 0;
+  flex-wrap: wrap; gap: 8px 18px;
 }
 .price-item {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 4px 16px;
+  padding: 4px 12px;
   flex: 1; justify-content: center; min-width: 140px;
-}
-.price-item + .price-item {
-  border-left: 1px solid #c4a96e33;
 }
 .price-metal {
   font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
@@ -228,8 +225,8 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 
   /* Prisbar desktop */
   .price-bar { padding: 11px 48px; }
-  .price-bar-inner { flex-wrap: nowrap; }
-  .price-item { padding: 0 28px; flex: none; }
+  .price-bar-inner { flex-wrap: nowrap; gap: 28px; }
+  .price-item { padding: 0 18px; flex: none; }
   .price-meta { width: auto; border-top: none; padding: 0; margin-left: 20px; }
 
   /* Show desktop nav links */
