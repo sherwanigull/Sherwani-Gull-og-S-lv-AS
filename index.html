@@ -90,6 +90,12 @@ nav {
 .tilbud-title { font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; color: #1c1c1a; margin-bottom: 12px; }
 .tilbud-desc { font-size: 15px; color: #7a7060; line-height: 1.85; }
 
+/* ── SALG TEASER ── */
+.salg-teaser { background: #fff; max-width: none; }
+.salg-teaser-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+.salg-title { font-size: 30px; font-weight: 400; color: #1c1c1a; line-height: 1.35; margin-bottom: 14px; }
+.salg-desc { font-size: 15px; color: #7a7060; line-height: 1.85; margin: 0 auto 28px; max-width: 560px; }
+
 /* ── SKJEMA ── */
 .skjema-section { padding: 56px 24px; background: #fff; scroll-margin-top: 110px; }
 .skjema-inner { max-width: 640px; margin: 0 auto; }
@@ -241,7 +247,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .hero { padding: 28px 20px 34px; }
   .hero-eyebrow, .section-label, .kontakt-eyebrow, .om-eyebrow { letter-spacing: 3px; }
   .hero-title { font-size: 32px; line-height: 1.28; }
-  .hero-desc, .tilbud-desc, .skjema-desc, .kontakt-desc, .om-desc { font-size: 15px; line-height: 1.75; }
+  .hero-desc, .tilbud-desc, .salg-desc, .skjema-desc, .kontakt-desc, .om-desc { font-size: 15px; line-height: 1.75; }
   .btn { width: 100%; padding: 16px 18px; }
 
   .section, .skjema-section, .pris-section, .kontakt-section { padding-left: 20px; padding-right: 20px; }
@@ -302,6 +308,8 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   /* Tilbud */
   .section { padding: 72px 64px; max-width: 1100px; margin: 0 auto; }
   .tilbud-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .salg-teaser { max-width: none; }
+  .salg-title { font-size: 38px; }
 
   /* Skjema */
   .skjema-section { padding: 72px 64px; }
@@ -332,6 +340,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 <!-- NAV -->
 <nav>
   <div class="nav-desktop-left">
+    <a href="varer.html">Til salgs</a>
     <a href="#om-oss">Om oss</a>
     <a href="#priser">Priser i dag</a>
   </div>
@@ -376,6 +385,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 <div class="nav-drawer" id="drawer">
   <button class="nav-close" onclick="document.getElementById('drawer').classList.remove('open')" aria-label="Lukk">✕</button>
   <a href="#om-oss" onclick="document.getElementById('drawer').classList.remove('open')">Om oss</a>
+  <a href="varer.html" onclick="document.getElementById('drawer').classList.remove('open')">Til salgs</a>
   <a href="#tilbud" onclick="document.getElementById('drawer').classList.remove('open')">Veiledning</a>
   <a href="#priser" onclick="document.getElementById('drawer').classList.remove('open')">Priser i dag</a>
   <a href="#skjema" class="drawer-cta" onclick="document.getElementById('drawer').classList.remove('open')">Send forespørsel</a>
@@ -483,6 +493,27 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
       <p class="tilbud-desc">Usikker på om du bør kjøpe, selge eller vente? Vi forklarer enkelt hva som påvirker prisen, hva du bør se etter, og hva som kan være riktig for deg.</p>
     </div>
 
+  </div>
+</div>
+
+<!-- MOTIF -->
+<div class="border-motif">
+  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
+  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
+  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
+  <div class="dash"></div><div class="dot"></div><div class="dash"></div>
+</div>
+
+<!-- TILGJENGELIG FOR SALG -->
+<div class="section salg-teaser">
+  <div class="section-label">Tilgjengelig for salg</div>
+  <div class="section-rule">
+    <div class="rule-line"></div><div class="rule-diamond"></div><div class="rule-line"></div>
+  </div>
+  <div class="salg-teaser-inner">
+    <h2 class="salg-title">Se varer som er tilgjengelige</h2>
+    <p class="salg-desc">Vi legger ut gull, sølv og utvalgte varer fortløpende. Ta kontakt hvis du ønsker mer informasjon, bilder eller en rolig vurdering før du bestemmer deg.</p>
+    <a href="varer.html" class="btn">Se tilgjengelige varer</a>
   </div>
 </div>
 
@@ -639,6 +670,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <span>Sherwani · Gull &amp; Sølv</span>
   </a>
   <div class="footer-links">
+    <a href="varer.html">Til salgs</a>
     <a href="#tilbud">Veiledning</a>
     <a href="#skjema">Send forespørsel</a>
     <a href="#kontakt">Kontakt</a>
