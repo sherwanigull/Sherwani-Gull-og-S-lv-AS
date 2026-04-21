@@ -99,7 +99,18 @@ nav {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='none' stroke='%23b89a62' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M24 18h72'/%3E%3Cpath d='M40 18c5-7 11-10 20-10 8 0 14 3 20 10'/%3E%3Cpath d='M60 5v4'/%3E%3C/svg%3E");
 }
 .spacer-halfsun {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='none' stroke='%23b88638' stroke-width='1.15' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M24 18h72'/%3E%3Cg transform='translate(60 18)'%3E%3Cpath d='M-10 0a10 10 0 0 1 20 0'/%3E%3Cpath d='M0-13.5v-4'/%3E%3Cpath d='M4.02-12.88 5.54-16.4'/%3E%3Cpath d='M7.64-11.05 10.33-13.93'/%3E%3Cpath d='M10.51-8.18 13.98-9.79'/%3E%3Cpath d='M12.32-4.57 16.08-5.33'/%3E%3Cpath d='M-4.02-12.88-5.54-16.4'/%3E%3Cpath d='M-7.64-11.05-10.33-13.93'/%3E%3Cpath d='M-10.51-8.18-13.98-9.79'/%3E%3Cpath d='M-12.32-4.57-16.08-5.33'/%3E%3Cpath d='M8.4-1.4 11.95-1.4'/%3E%3Cpath d='M-8.4-1.4-11.95-1.4'/%3E%3C/svg%3E");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.spacer-halfsun .sun-half-svg {
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  transform: translateX(-50%);
+  width: 92px;
+  height: 46px;
+  pointer-events: none;
 }
 .spacer-sun {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='none' stroke='%23b88638' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 18h76'/%3E%3Cg transform='translate(60 12)'%3E%3Ccircle r='3.6'/%3E%3Cpath d='M0-9V-5.7'/%3E%3Cpath d='M2.6-8.62 1.63-5.45'/%3E%3Cpath d='M4.98-7.5 3.2-4.72'/%3E%3Cpath d='M6.92-5.75 4.58-3.78'/%3E%3Cpath d='M8.28-3.49 5.48-2.28'/%3E%3Cpath d='M8.93-.91 5.92-.61'/%3E%3Cpath d='M8.82 1.73 5.84 1.15'/%3E%3Cpath d='M7.94 4.22 5.25 2.92'/%3E%3Cpath d='M6.39 6.42 4.23 4.33'/%3E%3Cpath d='M4.31 8.1 2.86 5.45'/%3E%3Cpath d='M1.83 8.84 1.21 5.87'/%3E%3Cpath d='M-.86 8.99-.58 5.96'/%3E%3Cpath d='M-3.48 8.33-2.33 5.5'/%3E%3Cpath d='M-5.82 6.95-4.02 4.48'/%3E%3Cpath d='M-7.61 4.83-5.17 3.06'/%3E%3Cpath d='M-8.67 2.28-5.79 1.5'/%3E%3Cpath d='M-8.96-.41-5.93-.22'/%3E%3Cpath d='M-8.43-3.04-5.57-2.06'/%3E%3Cpath d='M-7.16-5.42-4.72-3.64'/%3E%3Cpath d='M-5.23-7.36-3.41-4.93'/%3E%3Cpath d='M-2.83-8.57-1.86-5.55'/%3E%3C/svg%3E");
@@ -123,6 +134,20 @@ nav {
 }
 .spacer-valley {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='none' stroke='%23b89a62' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 18c8-8 16-12 24-12 7 0 12 4 18 12'/%3E%3Cpath d='M58 18c6-6 12-9 20-9 8 0 14 3 26 9'/%3E%3C/svg%3E");
+}
+.spacer-bonfire {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+}
+.spacer-bonfire .bonfire-svg {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 72px;
+  pointer-events: none;
 }
 .section-spacer-dark.spacer-night {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='none' stroke='%23786f61' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 18 36 8l12 10'/%3E%3Cpath d='M42 18 60 5l18 13'/%3E%3Cpath d='M74 18c6-4 12-4 18 0'/%3E%3Ccircle cx='92' cy='8' r='1.8' fill='%23786f61' stroke='none'/%3E%3C/svg%3E");
@@ -339,7 +364,10 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .section-spacer { background-size: 94px 20px; }
   .spacer-sun { background-size: 118px 26px; }
   .spacer-featured { height: 62px; }
+  .spacer-bonfire { height: 70px; }
+  .spacer-bonfire .bonfire-svg { width: 100px; height: 60px; }
   .hero-sun { width: 126px; height: 34px; margin-bottom: 14px; }
+  .spacer-halfsun .sun-half-svg { width: 78px; height: 39px; bottom: 8px; }
   .section-spacer-dark-simple .sun-svg { width: 60px; height: 28px; bottom: 10px; }
   .tilbud-card { padding: 30px 22px; }
   .pris-row { gap: 14px; }
@@ -498,7 +526,34 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </div>
 
 <!-- MOTIF -->
-<div class="section-spacer spacer-mountain" aria-hidden="true"></div>
+<div class="section-spacer spacer-halfsun" aria-hidden="true">
+  <svg class="sun-half-svg" viewBox="0 0 92 46" aria-hidden="true">
+    <g fill="none" stroke="#b88638" stroke-width="1.7" stroke-linecap="round">
+      <circle cx="46" cy="23" r="9.5"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(17.142857 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(34.285714 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(51.428571 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(68.571429 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(85.714286 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(102.857143 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(120 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(137.142857 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(154.285714 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(171.428571 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(188.571429 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(205.714286 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(222.857143 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(240 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(257.142857 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(274.285714 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(291.428571 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(308.571429 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(325.714286 46 23)"/>
+      <line x1="46" y1="8.5" x2="46" y2="3.5" transform="rotate(342.857143 46 23)"/>
+    </g>
+  </svg>
+</div>
 
 <!-- PRISER I DAG -->
 <div class="pris-section" id="priser">
@@ -530,7 +585,33 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </div>
 
 <!-- MOTIF -->
-<div class="section-spacer spacer-water" aria-hidden="true"></div>
+<div class="section-spacer spacer-bonfire" aria-hidden="true">
+  <svg class="bonfire-svg" viewBox="0 0 120 72" fill="none" stroke="#b88638" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <!-- Far-left flicker -->
+    <path d="M36 46 C33 38 33 30 37 22 C39 16 43 19 41 28"/>
+    <!-- Left flame tongue -->
+    <path d="M47 48 C42 37 41 26 45 16 C47 9 52 12 50 22 C52 12 57 10 55 20 C53 31 50 40 47 48"/>
+    <!-- Center main flame (tallest) -->
+    <path d="M60 50 C53 36 51 22 56 11 C59 3 65 7 62 18 C66 5 73 5 70 16 C67 28 63 40 60 50"/>
+    <!-- Right flame tongue -->
+    <path d="M73 48 C78 37 79 26 75 16 C73 9 68 12 70 22 C68 12 63 10 65 20 C67 31 70 40 73 48"/>
+    <!-- Far-right flicker -->
+    <path d="M84 46 C87 38 87 30 83 22 C81 16 77 19 79 28"/>
+    <!-- Back log -->
+    <path d="M24 54 Q60 61 96 55"/>
+    <circle cx="23" cy="54" r="4.5"/>
+    <circle cx="97" cy="55" r="4"/>
+    <!-- Front log (main, with cylinder detail) -->
+    <path d="M14 61 Q60 69 106 64"/>
+    <path d="M20 59 Q60 67 100 62"/>
+    <circle cx="13" cy="61" r="6"/>
+    <circle cx="107" cy="64" r="5.5"/>
+    <!-- Ember sparks -->
+    <path d="M52 49 L50 47"/>
+    <path d="M60 48 L60 46"/>
+    <path d="M68 49 L70 47"/>
+  </svg>
+</div>
 
 <!-- TILBUD / HVA VI TILBYR -->
 <div class="section" id="tilbud">
@@ -578,7 +659,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </div>
 
 <!-- MOTIF -->
-<div class="section-spacer spacer-halfsun" aria-hidden="true"></div>
+<div class="section-spacer spacer-mountain" aria-hidden="true"></div>
 
 <!-- KONTAKTSKJEMA -->
 <div class="skjema-section" id="skjema">
@@ -627,7 +708,33 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </div>
 
 <!-- MOTIF -->
-<div class="section-spacer spacer-water" aria-hidden="true"></div>
+<div class="section-spacer spacer-bonfire" aria-hidden="true">
+  <svg class="bonfire-svg" viewBox="0 0 120 72" fill="none" stroke="#b88638" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <!-- Far-left flicker -->
+    <path d="M36 46 C33 38 33 30 37 22 C39 16 43 19 41 28"/>
+    <!-- Left flame tongue -->
+    <path d="M47 48 C42 37 41 26 45 16 C47 9 52 12 50 22 C52 12 57 10 55 20 C53 31 50 40 47 48"/>
+    <!-- Center main flame (tallest) -->
+    <path d="M60 50 C53 36 51 22 56 11 C59 3 65 7 62 18 C66 5 73 5 70 16 C67 28 63 40 60 50"/>
+    <!-- Right flame tongue -->
+    <path d="M73 48 C78 37 79 26 75 16 C73 9 68 12 70 22 C68 12 63 10 65 20 C67 31 70 40 73 48"/>
+    <!-- Far-right flicker -->
+    <path d="M84 46 C87 38 87 30 83 22 C81 16 77 19 79 28"/>
+    <!-- Back log -->
+    <path d="M24 54 Q60 61 96 55"/>
+    <circle cx="23" cy="54" r="4.5"/>
+    <circle cx="97" cy="55" r="4"/>
+    <!-- Front log (main, with cylinder detail) -->
+    <path d="M14 61 Q60 69 106 64"/>
+    <path d="M20 59 Q60 67 100 62"/>
+    <circle cx="13" cy="61" r="6"/>
+    <circle cx="107" cy="64" r="5.5"/>
+    <!-- Ember sparks -->
+    <path d="M52 49 L50 47"/>
+    <path d="M60 48 L60 46"/>
+    <path d="M68 49 L70 47"/>
+  </svg>
+</div>
 
 <!-- KONTAKT -->
 <div class="kontakt-section" id="kontakt">
