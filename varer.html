@@ -41,6 +41,9 @@ nav {
   position: relative;
   height: 58px;
   background: #faf8f4;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 112px 24px;
 }
 .section-spacer::before,
 .section-spacer::after {
@@ -53,6 +56,12 @@ nav {
 }
 .section-spacer::before { left: 20px; }
 .section-spacer::after { right: 20px; }
+.spacer-mountain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='none' stroke='%23b89a62' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 18 34 7l11 11'/%3E%3Cpath d='M38 18 58 4l18 14'/%3E%3Cpath d='M68 18 82 9l11 9'/%3E%3C/svg%3E");
+}
+.spacer-water {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='none' stroke='%23b89a62' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M18 10c5 4 10 4 15 0s10-4 15 0 10 4 15 0 10-4 15 0'/%3E%3Cpath d='M24 16c5 4 10 4 15 0s10-4 15 0 10 4 15 0 10-4 15 0'/%3E%3C/svg%3E");
+}
 
 .page-hero { padding: 48px 24px 42px; text-align: center; }
 .page-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 18px; }
@@ -119,6 +128,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .section-spacer { height: 50px; }
   .section-spacer::before,
   .section-spacer::after { width: min(18vw, 72px); }
+  .section-spacer { background-size: 94px 20px; }
   .vare-top { display: grid; }
   .btn { width: 100%; }
   .footer-logo span { font-size: 11px; letter-spacing: 2px; }
@@ -180,7 +190,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   <a href="mailto:post@sherwanigull.no" onclick="document.getElementById('drawer').classList.remove('open')">Send e-post</a>
 </div>
 
-<div class="section-spacer" aria-hidden="true"></div>
+<div class="section-spacer spacer-mountain" aria-hidden="true"></div>
 
 <main>
   <section class="page-hero">
@@ -189,7 +199,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <p class="page-desc">Her legger vi ut varer som kan være tilgjengelige for salg. Utvalg og pris kan endre seg, så send gjerne en forespørsel hvis du ønsker mer informasjon eller en rolig vurdering.</p>
   </section>
 
-  <div class="section-spacer" aria-hidden="true"></div>
+  <div class="section-spacer spacer-water" aria-hidden="true"></div>
 
   <section class="section">
     <div class="section-label">Varer</div>
