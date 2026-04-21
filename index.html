@@ -6,12 +6,15 @@
 <title>Sherwani Gull & Sølv</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body { font-family: 'Georgia', serif; background: #faf8f4; color: #1c1c1a; overflow-x: hidden; }
+img, svg { max-width: 100%; }
+button, input, select, textarea { font: inherit; }
 
 /* ── NAV ── */
 nav {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 22px 24px; border-bottom: 0.5px solid #d6cfc0;
+  padding: 18px 20px; border-bottom: 0.5px solid #d6cfc0;
   position: sticky; top: 0; background: #faf8f4; z-index: 100;
 }
 .logo { text-align: center; text-decoration: none; }
@@ -20,9 +23,10 @@ nav {
 .hamburger { background: none; border: none; cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 6px; }
 .hamburger span { display: block; width: 26px; height: 1px; background: #1c1c1a; }
 .nav-drawer {
-  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  display: none; position: fixed; top: 0; left: 0; width: 100%; min-height: 100vh; min-height: 100dvh;
   background: #faf8f4; z-index: 200; flex-direction: column;
-  align-items: center; justify-content: center; gap: 40px;
+  align-items: center; justify-content: center; gap: 34px;
+  overflow-y: auto; padding: 88px 24px 44px;
 }
 .nav-drawer.open { display: flex; }
 .nav-drawer a { font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: #1c1c1a; text-decoration: none; }
@@ -43,11 +47,11 @@ nav {
 .diamond { width: 6px; height: 6px; background: #c4a96e; transform: rotate(45deg); flex-shrink: 0; }
 
 /* ── HERO ── */
-.hero { padding: 36px 28px 34px; text-align: center; }
+.hero { padding: 32px 24px 34px; text-align: center; scroll-margin-top: 110px; }
 .hero-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 20px; }
 .hero-title { font-size: 36px; font-weight: 400; line-height: 1.35; color: #1c1c1a; margin-bottom: 18px; }
 .hero-desc { font-size: 15px; color: #7a7060; line-height: 1.9; margin-bottom: 32px; max-width: 360px; margin-left: auto; margin-right: auto; }
-.hero-img { margin: 0 auto 20px; width: 260px; height: 260px; display: flex; align-items: center; justify-content: center; }
+.hero-img { margin: 0 auto 20px; width: min(260px, 76vw); height: auto; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; }
 .hero-img img { width: 100%; height: 100%; object-fit: contain; }
 
 .btn {
@@ -55,7 +59,8 @@ nav {
   font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
   padding: 16px 38px; cursor: pointer; background: transparent;
   color: #1c1c1a; font-family: 'Georgia', serif; text-decoration: none;
-  min-height: 50px; display: inline-flex; align-items: center;
+  min-height: 52px; display: inline-flex; align-items: center; justify-content: center;
+  text-align: center;
 }
 .btn:active { background: #1c1c1a; color: #faf8f4; }
 .btn-submit {
@@ -71,7 +76,7 @@ nav {
 }
 
 /* ── SECTION SHARED ── */
-.section { padding: 52px 24px; }
+.section { padding: 52px 24px; scroll-margin-top: 110px; }
 .section-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 10px; }
 .section-rule { display: flex; align-items: center; gap: 10px; margin-bottom: 36px; }
 .rule-line { flex: 1; height: 0.5px; background: #d6cfc0; }
@@ -86,7 +91,7 @@ nav {
 .tilbud-desc { font-size: 15px; color: #7a7060; line-height: 1.85; }
 
 /* ── SKJEMA ── */
-.skjema-section { padding: 56px 24px; background: #fff; }
+.skjema-section { padding: 56px 24px; background: #fff; scroll-margin-top: 110px; }
 .skjema-inner { max-width: 640px; margin: 0 auto; }
 .skjema-title { font-size: 30px; font-weight: 400; color: #1c1c1a; line-height: 1.35; margin-bottom: 14px; }
 .skjema-desc { font-size: 15px; color: #7a7060; line-height: 1.85; margin-bottom: 28px; }
@@ -98,8 +103,8 @@ nav {
 .form-field select,
 .form-field textarea {
   width: 100%; border: 0.5px solid #d6cfc0; background: #faf8f4;
-  padding: 14px 14px; color: #1c1c1a; font-family: 'Georgia', serif;
-  font-size: 15px; border-radius: 0;
+  padding: 15px 14px; color: #1c1c1a; font-family: 'Georgia', serif;
+  font-size: 16px; border-radius: 0;
 }
 .form-field textarea { min-height: 130px; resize: vertical; line-height: 1.6; }
 .form-field input:focus,
@@ -108,7 +113,7 @@ nav {
 .form-note { font-size: 13px; color: #8a7e6e; line-height: 1.7; }
 
 /* ── PRISTABELL ── */
-.pris-section { padding: 56px 24px; background: #faf8f4; }
+.pris-section { padding: 56px 24px; background: #faf8f4; scroll-margin-top: 110px; }
 .pris-inner { max-width: 560px; margin: 0 auto; }
 .pris-row {
   display: flex; align-items: center; justify-content: space-between;
@@ -127,7 +132,7 @@ nav {
 }
 
 /* ── KONTAKT SECTION ── */
-.kontakt-section { padding: 64px 24px; background: #f0ebe1; }
+.kontakt-section { padding: 64px 24px; background: #f0ebe1; scroll-margin-top: 110px; }
 .kontakt-inner { max-width: 520px; margin: 0 auto; text-align: center; }
 .kontakt-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 16px; }
 .kontakt-title { font-size: 30px; font-weight: 400; color: #1c1c1a; margin-bottom: 18px; line-height: 1.35; }
@@ -137,6 +142,7 @@ nav {
 .kcard-icon svg { width: 22px; height: 22px; stroke: #c4a96e; fill: none; stroke-width: 1.4; flex-shrink: 0; }
 .kcard-label { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 6px; }
 .kcard-value { font-size: 17px; color: #1c1c1a; font-family: 'Georgia', serif; }
+.kcard-value, .kcard-value a { overflow-wrap: anywhere; }
 .kcard-value a { color: #1c1c1a; text-decoration: none; }
 .kcard-value a:hover { color: #c4a96e; }
 
@@ -153,7 +159,7 @@ nav {
 .footer-social svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ── OM OSS STRIP ── */
-.om-strip { background: #1c1c1a; padding: 64px 28px; text-align: center; }
+.om-strip { background: #1c1c1a; padding: 64px 28px; text-align: center; scroll-margin-top: 110px; }
 .om-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #c4a96e; margin-bottom: 18px; }
 .om-title { font-size: 26px; font-weight: 400; color: #f0ebe1; line-height: 1.4; margin-bottom: 18px; }
 .om-desc { font-size: 15px; color: #8a8070; line-height: 1.85; margin-bottom: 0; max-width: 360px; margin-left: auto; margin-right: auto; }
@@ -164,7 +170,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 .footer-logo img { width: 34px; height: 34px; object-fit: contain; }
 .footer-logo span { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #1c1c1a; }
 .footer-links { display: flex; flex-wrap: wrap; gap: 16px 24px; justify-content: center; margin-bottom: 24px; }
-.footer-links a { font-size: 11px; letter-spacing: 1.5px; color: #8a7e6e; text-decoration: none; text-transform: uppercase; }
+.footer-links a { font-size: 11px; letter-spacing: 1.5px; color: #8a7e6e; text-decoration: none; text-transform: uppercase; overflow-wrap: anywhere; }
 .footer-copy { font-size: 11px; color: #b0a898; letter-spacing: 1px; }
 
 /* ── PRISBAR ── */
@@ -217,6 +223,34 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 
 /* ── NAV: hide desktop links on mobile ── */
 .nav-desktop-left, .nav-desktop-right { display: none; }
+
+/* ── SMALL MOBILE TUNING ── */
+@media (max-width: 430px) {
+  nav { padding: 16px 14px; }
+  .logo .main { font-size: 15px; letter-spacing: 4px; }
+  .logo .sub { font-size: 9px; letter-spacing: 2px; }
+  .hamburger, .cart-icon { padding: 8px; }
+
+  .price-bar { padding: 12px 10px; }
+  .price-bar-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; }
+  .price-item { min-width: 0; padding: 4px 0; gap: 5px; }
+  .price-metal, .price-unit { font-size: 8px; letter-spacing: 1px; }
+  .price-value { font-size: 15px; letter-spacing: 0; }
+  .price-meta { grid-column: 1 / -1; flex-wrap: wrap; }
+
+  .hero { padding: 28px 20px 34px; }
+  .hero-eyebrow, .section-label, .kontakt-eyebrow, .om-eyebrow { letter-spacing: 3px; }
+  .hero-title { font-size: 32px; line-height: 1.28; }
+  .hero-desc, .tilbud-desc, .skjema-desc, .kontakt-desc, .om-desc { font-size: 15px; line-height: 1.75; }
+  .btn { width: 100%; padding: 16px 18px; }
+
+  .section, .skjema-section, .pris-section, .kontakt-section { padding-left: 20px; padding-right: 20px; }
+  .tilbud-card { padding: 30px 22px; }
+  .pris-row { gap: 14px; }
+  .pris-val { font-size: 18px; }
+  .kcard { padding: 22px 20px; gap: 14px; }
+  .footer-logo span { font-size: 11px; letter-spacing: 2px; }
+}
 
 /* ── DESKTOP OVERRIDE (min 768px) ── */
 @media (min-width: 768px) {
