@@ -67,6 +67,25 @@ nav {
 .section-spacer-dark::after {
   background: #322e29;
 }
+.section-spacer-dark-simple::before,
+.section-spacer-dark-simple::after {
+  width: min(20vw, 96px);
+  background: #3a352d;
+}
+.section-spacer-dark-simple {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section-spacer-dark-simple .sun-svg {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  width: 68px;
+  height: 30px;
+  pointer-events: none;
+}
 .spacer-nature {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='none' stroke='%23b89a62' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 18c8-6 16-6 24 0'/%3E%3Cpath d='M40 18c10-9 20-9 30 0'/%3E%3Cpath d='M74 18c6-5 12-5 18 0'/%3E%3Ccircle cx='94' cy='8' r='2' fill='%23b89a62' stroke='none'/%3E%3C/svg%3E");
 }
@@ -78,6 +97,9 @@ nav {
 }
 .spacer-horizon {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='none' stroke='%23b89a62' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M24 18h72'/%3E%3Cpath d='M40 18c5-7 11-10 20-10 8 0 14 3 20 10'/%3E%3Cpath d='M60 5v4'/%3E%3C/svg%3E");
+}
+.spacer-halfsun {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='none' stroke='%23b88638' stroke-width='1.15' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M24 18h72'/%3E%3Cg transform='translate(60 18)'%3E%3Cpath d='M-10 0a10 10 0 0 1 20 0'/%3E%3Cpath d='M0-13.5v-4'/%3E%3Cpath d='M4.02-12.88 5.54-16.4'/%3E%3Cpath d='M7.64-11.05 10.33-13.93'/%3E%3Cpath d='M10.51-8.18 13.98-9.79'/%3E%3Cpath d='M12.32-4.57 16.08-5.33'/%3E%3Cpath d='M-4.02-12.88-5.54-16.4'/%3E%3Cpath d='M-7.64-11.05-10.33-13.93'/%3E%3Cpath d='M-10.51-8.18-13.98-9.79'/%3E%3Cpath d='M-12.32-4.57-16.08-5.33'/%3E%3Cpath d='M8.4-1.4 11.95-1.4'/%3E%3Cpath d='M-8.4-1.4-11.95-1.4'/%3E%3C/svg%3E");
 }
 .spacer-sun {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='none' stroke='%23b88638' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 18h76'/%3E%3Cg transform='translate(60 12)'%3E%3Ccircle r='3.6'/%3E%3Cpath d='M0-9V-5.7'/%3E%3Cpath d='M2.6-8.62 1.63-5.45'/%3E%3Cpath d='M4.98-7.5 3.2-4.72'/%3E%3Cpath d='M6.92-5.75 4.58-3.78'/%3E%3Cpath d='M8.28-3.49 5.48-2.28'/%3E%3Cpath d='M8.93-.91 5.92-.61'/%3E%3Cpath d='M8.82 1.73 5.84 1.15'/%3E%3Cpath d='M7.94 4.22 5.25 2.92'/%3E%3Cpath d='M6.39 6.42 4.23 4.33'/%3E%3Cpath d='M4.31 8.1 2.86 5.45'/%3E%3Cpath d='M1.83 8.84 1.21 5.87'/%3E%3Cpath d='M-.86 8.99-.58 5.96'/%3E%3Cpath d='M-3.48 8.33-2.33 5.5'/%3E%3Cpath d='M-5.82 6.95-4.02 4.48'/%3E%3Cpath d='M-7.61 4.83-5.17 3.06'/%3E%3Cpath d='M-8.67 2.28-5.79 1.5'/%3E%3Cpath d='M-8.96-.41-5.93-.22'/%3E%3Cpath d='M-8.43-3.04-5.57-2.06'/%3E%3Cpath d='M-7.16-5.42-4.72-3.64'/%3E%3Cpath d='M-5.23-7.36-3.41-4.93'/%3E%3Cpath d='M-2.83-8.57-1.86-5.55'/%3E%3C/svg%3E");
@@ -318,6 +340,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .spacer-sun { background-size: 118px 26px; }
   .spacer-featured { height: 62px; }
   .hero-sun { width: 126px; height: 34px; margin-bottom: 14px; }
+  .section-spacer-dark-simple .sun-svg { width: 60px; height: 28px; bottom: 10px; }
   .tilbud-card { padding: 30px 22px; }
   .pris-row { gap: 14px; }
   .pris-val { font-size: 18px; }
@@ -555,7 +578,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </div>
 
 <!-- MOTIF -->
-<div class="section-spacer spacer-horizon" aria-hidden="true"></div>
+<div class="section-spacer spacer-halfsun" aria-hidden="true"></div>
 
 <!-- KONTAKTSKJEMA -->
 <div class="skjema-section" id="skjema">
@@ -676,7 +699,21 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </div>
 
 <!-- MOTIF -->
-<div class="section-spacer section-spacer-dark spacer-night" aria-hidden="true"></div>
+<div class="section-spacer section-spacer-dark section-spacer-dark-simple" aria-hidden="true">
+  <svg class="sun-svg" viewBox="0 0 76 38" aria-hidden="true">
+    <g fill="none" stroke="#c4a96e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="38" cy="18" r="8"/>
+      <path d="M38 3v6"/>
+      <path d="M38 27v6"/>
+      <path d="M23 18h6"/>
+      <path d="M47 18h6"/>
+      <path d="M27.4 7.4l4.2 4.2"/>
+      <path d="M44.4 24.4l4.2 4.2"/>
+      <path d="M48.6 7.4l-4.2 4.2"/>
+      <path d="M31.6 24.4l-4.2 4.2"/>
+    </g>
+  </svg>
+</div>
 
 <!-- FOOTER -->
 <footer>
