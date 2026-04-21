@@ -69,10 +69,10 @@ nav {
 .page-desc { font-size: 15px; color: #7a7060; line-height: 1.85; max-width: 620px; margin: 0 auto; }
 
 .section { padding: 52px 24px; }
-.section-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 10px; }
-.section-rule { display: flex; align-items: center; gap: 10px; margin-bottom: 36px; }
-.rule-line { flex: 1; height: 0.5px; background: #d6cfc0; }
-.rule-diamond { width: 6px; height: 6px; background: #c4a96e; transform: rotate(45deg); flex-shrink: 0; }
+.section-label {
+  font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e;
+  margin-bottom: 28px; text-align: center;
+}
 
 .varer-toolbar {
   max-width: 1100px; margin: 0 auto 22px;
@@ -203,9 +203,6 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 
   <section class="section">
     <div class="section-label">Varer</div>
-    <div class="section-rule">
-      <div class="rule-line"></div><div class="rule-diamond"></div><div class="rule-line"></div>
-    </div>
     <div class="varer-toolbar">
       <p class="varer-status" id="varer-status">Henter tilgjengelige varer...</p>
     </div>
