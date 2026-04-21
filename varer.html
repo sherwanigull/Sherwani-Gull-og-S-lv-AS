@@ -37,10 +37,22 @@ nav {
 .cart-icon { padding: 10px; display: flex; align-items: center; }
 .cart-icon svg { width: 24px; height: 24px; stroke: #1c1c1a; fill: none; stroke-width: 1.2; }
 
-.border-motif { display: flex; align-items: center; justify-content: center; gap: 5px; padding: 16px 20px; overflow: hidden; }
-.dot { width: 4px; height: 4px; border-radius: 50%; background: #c4a96e; flex-shrink: 0; }
-.dash { width: 16px; height: 1px; background: #d6cfc0; flex-shrink: 0; }
-.diamond { width: 6px; height: 6px; background: #c4a96e; transform: rotate(45deg); flex-shrink: 0; }
+.section-spacer {
+  position: relative;
+  height: 58px;
+  background: #faf8f4;
+}
+.section-spacer::before,
+.section-spacer::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: min(22vw, 120px);
+  height: 1px;
+  background: #ddd4c6;
+}
+.section-spacer::before { left: 20px; }
+.section-spacer::after { right: 20px; }
 
 .page-hero { padding: 48px 24px 42px; text-align: center; }
 .page-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 18px; }
@@ -104,6 +116,9 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .page-title { font-size: 32px; }
   .page-desc, .vare-desc, .empty-desc { font-size: 15px; line-height: 1.75; }
   .section { padding-left: 20px; padding-right: 20px; }
+  .section-spacer { height: 50px; }
+  .section-spacer::before,
+  .section-spacer::after { width: min(18vw, 72px); }
   .vare-top { display: grid; }
   .btn { width: 100%; }
   .footer-logo span { font-size: 11px; letter-spacing: 2px; }
@@ -165,11 +180,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   <a href="mailto:post@sherwanigull.no" onclick="document.getElementById('drawer').classList.remove('open')">Send e-post</a>
 </div>
 
-<div class="border-motif">
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div>
-</div>
+<div class="section-spacer" aria-hidden="true"></div>
 
 <main>
   <section class="page-hero">
@@ -178,11 +189,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <p class="page-desc">Her legger vi ut varer som kan være tilgjengelige for salg. Utvalg og pris kan endre seg, så send gjerne en forespørsel hvis du ønsker mer informasjon eller en rolig vurdering.</p>
   </section>
 
-  <div class="border-motif">
-    <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-    <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-    <div class="dash"></div><div class="dot"></div><div class="dash"></div>
-  </div>
+  <div class="section-spacer" aria-hidden="true"></div>
 
   <section class="section">
     <div class="section-label">Varer</div>

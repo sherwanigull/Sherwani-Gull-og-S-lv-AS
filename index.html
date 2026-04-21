@@ -40,11 +40,30 @@ nav {
 .cart-icon { padding: 10px; display: flex; align-items: center; }
 .cart-icon svg { width: 24px; height: 24px; stroke: #1c1c1a; fill: none; stroke-width: 1.2; }
 
-/* ── MOTIF ── */
-.border-motif { display: flex; align-items: center; justify-content: center; gap: 5px; padding: 16px 20px; overflow: hidden; }
-.dot { width: 4px; height: 4px; border-radius: 50%; background: #c4a96e; flex-shrink: 0; }
-.dash { width: 16px; height: 1px; background: #d6cfc0; flex-shrink: 0; }
-.diamond { width: 6px; height: 6px; background: #c4a96e; transform: rotate(45deg); flex-shrink: 0; }
+/* ── SECTION SPACER ── */
+.section-spacer {
+  position: relative;
+  height: 58px;
+  background: #faf8f4;
+}
+.section-spacer::before,
+.section-spacer::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: min(22vw, 120px);
+  height: 1px;
+  background: #ddd4c6;
+}
+.section-spacer::before { left: 20px; }
+.section-spacer::after { right: 20px; }
+.section-spacer-dark {
+  background: #1c1c1a;
+}
+.section-spacer-dark::before,
+.section-spacer-dark::after {
+  background: #322e29;
+}
 
 /* ── HERO ── */
 .hero { padding: 32px 24px 34px; text-align: center; scroll-margin-top: 110px; }
@@ -251,6 +270,9 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .btn { width: 100%; padding: 16px 18px; }
 
   .section, .skjema-section, .pris-section, .kontakt-section { padding-left: 20px; padding-right: 20px; }
+  .section-spacer { height: 50px; }
+  .section-spacer::before,
+  .section-spacer::after { width: min(18vw, 72px); }
   .tilbud-card { padding: 30px 22px; }
   .pris-row { gap: 14px; }
   .pris-val { font-size: 18px; }
@@ -393,12 +415,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </div>
 
 <!-- MOTIF -->
-<div class="border-motif">
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div>
-</div>
+<div class="section-spacer" aria-hidden="true"></div>
 
 <!-- HERO -->
 <div class="hero">
@@ -414,12 +431,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </div>
 
 <!-- MOTIF -->
-<div class="border-motif">
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div>
-</div>
+<div class="section-spacer" aria-hidden="true"></div>
 
 <!-- PRISER I DAG -->
 <div class="pris-section" id="priser">
@@ -454,12 +466,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </div>
 
 <!-- MOTIF -->
-<div class="border-motif">
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div>
-</div>
+<div class="section-spacer" aria-hidden="true"></div>
 
 <!-- TILBUD / HVA VI TILBYR -->
 <div class="section" id="tilbud">
@@ -497,12 +504,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </div>
 
 <!-- MOTIF -->
-<div class="border-motif">
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div>
-</div>
+<div class="section-spacer" aria-hidden="true"></div>
 
 <!-- TILGJENGELIG FOR SALG -->
 <div class="section salg-teaser">
@@ -518,12 +520,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </div>
 
 <!-- MOTIF -->
-<div class="border-motif">
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div>
-</div>
+<div class="section-spacer" aria-hidden="true"></div>
 
 <!-- KONTAKTSKJEMA -->
 <div class="skjema-section" id="skjema">
@@ -575,12 +572,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </div>
 
 <!-- MOTIF -->
-<div class="border-motif">
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div>
-</div>
+<div class="section-spacer" aria-hidden="true"></div>
 
 <!-- KONTAKT -->
 <div class="kontakt-section" id="kontakt">
@@ -626,12 +618,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </div>
 
 <!-- MOTIF -->
-<div class="border-motif">
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div><div class="diamond"></div>
-  <div class="dash"></div><div class="dot"></div><div class="dash"></div>
-</div>
+<div class="section-spacer" aria-hidden="true"></div>
 
 <!-- SOSIALE MEDIER -->
 <div style="padding: 40px 20px 36px; text-align: center; background: #faf8f4;">
@@ -657,11 +644,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </div>
 
 <!-- MOTIF -->
-<div class="border-motif" style="background:#1c1c1a;">
-  <div class="dash" style="background:#2a2a28;"></div><div class="dot"></div><div class="dash" style="background:#2a2a28;"></div><div class="diamond"></div>
-  <div class="dash" style="background:#2a2a28;"></div><div class="dot"></div><div class="dash" style="background:#2a2a28;"></div><div class="diamond"></div>
-  <div class="dash" style="background:#2a2a28;"></div><div class="dot"></div><div class="dash" style="background:#2a2a28;"></div>
-</div>
+<div class="section-spacer section-spacer-dark" aria-hidden="true"></div>
 
 <!-- FOOTER -->
 <footer>
