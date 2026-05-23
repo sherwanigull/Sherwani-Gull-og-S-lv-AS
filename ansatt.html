@@ -169,7 +169,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   <section class="section" aria-label="Sikkerhet">
     <div class="notice">
       <strong>Ikke legg inn eller lagre personopplysninger på denne nettsiden.</strong>
-      Utfylte skjemaer skal lagres lokalt på ekstern kryptert harddisk i henhold til interne rutiner.
+      Registerdelen er foreløpig en lokal prototype for arbeidsflyt og kontantoversikt. Reelle kundedata skal først brukes når tilgang og lagring er sikret.
     </div>
     <div class="security-note">Denne siden er kun en intern portal. Den må passordbeskyttes via hosting/server før publisering.</div>
   </section>
@@ -177,6 +177,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   <section class="quick-actions" aria-label="Hurtigknapper">
     <div class="quick-inner">
       <a class="btn btn-soft" href="#kjopsrutine">Kjøpsrutine</a>
+      <a class="btn btn-soft" href="register/index.html">Åpne kunderegister</a>
       <a class="btn" href="maler/kjop-fra-privatperson.pdf">Last ned kjøpsskjema</a>
       <a class="btn" href="maler/id-kontroll-sjekkliste.pdf">ID-sjekkliste</a>
       <a class="btn" href="maler/avvik-mistenkelig-handel.pdf">Avviksskjema</a>
@@ -216,6 +217,25 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
             </div>
             <div class="copy-status" id="copy-status"></div>
           </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="register">
+    <div class="section-inner">
+      <div class="section-label">Internt kunderegister</div>
+      <div class="cards">
+        <article class="card card-wide">
+          <h2>Kontantbetaling og kundehistorikk</h2>
+          <p>En samlet arbeidsflate for å opprette kunder, registrere handler og filtrere kontantbetalinger. Registeret kan utvikles videre når du har bestemt hvordan det skal brukes i praksis.</p>
+          <ul class="checklist">
+            <li>Se oversikt over kunder, betalinger og kontante handler.</li>
+            <li>Registrer kjøp fra kunde eller salg til kunde med betalingsmetode.</li>
+            <li>Eksporter eller importer lokal arbeidsdata fra innstillinger.</li>
+            <li>Ikke bruk faktiske personopplysninger før sikker lagring og tilgangskontroll er på plass.</li>
+          </ul>
+          <p style="margin-top:22px;margin-bottom:0"><a class="btn btn-soft" href="register/index.html">Gå til registeret</a></p>
         </article>
       </div>
     </div>
@@ -300,6 +320,7 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <a href="index.html">Nettside</a>
     <a href="varer.html">Til salgs</a>
     <a href="#kjopsrutine">Kjøpsrutine</a>
+    <a href="#register">Register</a>
     <a href="#maler">Maler</a>
     <a href="#personvern">Personvern</a>
   </div>

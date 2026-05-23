@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Betalinger | Sherwani Gull &amp; Sølv</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <div class="logo-icon">♦</div>
+      <div>
+        <div class="logo-text">Sherwani</div>
+        <div class="logo-subtitle">Internt register</div>
+      </div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <span class="nav-section-label">Oversikt</span>
+    <a href="index.html" class="nav-link">
+      <span class="nav-icon">▦</span> Oversikt
+    </a>
+    <span class="nav-section-label">Administrasjon</span>
+    <a href="customers.html" class="nav-link">
+      <span class="nav-icon">👤</span> Kunder
+    </a>
+    <a href="transactions.html" class="nav-link active">
+      <span class="nav-icon">⇅</span> Transaksjoner
+    </a>
+    <span class="nav-section-label">System</span>
+    <a href="settings.html" class="nav-link">
+      <span class="nav-icon">⚙</span> Innstillinger
+    </a>
+  </nav>
+  <div class="sidebar-footer">Sherwani Gull &amp; Sølv</div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div>
+      <div class="page-title">Betalinger og handler</div>
+      <div class="page-subtitle" id="sub-info"></div>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn btn-primary" onclick="openModal('modal-add-tx')">+ Registrer betaling</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- SUMMARY CARDS -->
+    <div class="stats-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:24px" id="summary-cards"></div>
+
+    <div class="card">
+      <!-- FILTER BAR -->
+      <div class="filter-bar">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" placeholder="Søk på beskrivelse eller kundenavn…" oninput="renderTable()">
+        </div>
+
+        <!-- Payment checkboxes -->
+        <div style="display:flex;align-items:center;gap:6px;background:var(--bg-primary);border:1px solid var(--border);border-radius:var(--radius);padding:8px 14px">
+          <label class="cb-label"><input type="checkbox" id="f-kontant" checked onchange="renderTable()"> 💵 Kontant</label>
+          <label class="cb-label" style="margin-left:12px"><input type="checkbox" id="f-kort" checked onchange="renderTable()"> 💳 Kort</label>
+          <label class="cb-label" style="margin-left:12px"><input type="checkbox" id="f-bank" checked onchange="renderTable()"> 🏦 Bank</label>
+        </div>
+
+        <!-- Date range -->
+        <input type="date" id="f-from" onchange="renderTable()" style="width:auto;color:var(--text-muted)" title="Fra dato">
+        <span style="color:var(--text-muted);font-size:13px">—</span>
+        <input type="date" id="f-to" onchange="renderTable()" style="width:auto;color:var(--text-muted)" title="Til dato">
+
+        <!-- Sort -->
+        <select id="f-sort" onchange="renderTable()" style="width:auto">
+          <option value="date-desc">Nyeste først</option>
+          <option value="date-asc">Eldste først</option>
+          <option value="amount-desc">Høyest beløp</option>
+          <option value="amount-asc">Lavest beløp</option>
+        </select>
+
+        <button class="btn btn-secondary btn-sm" onclick="clearFilters()">Nullstill</button>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Dato</th>
+              <th>Kunde</th>
+              <th>Beskrivelse</th>
+              <th>Type</th>
+              <th>Betaling</th>
+              <th>Kommentar</th>
+              <th style="text-align:right">Beløp</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tx-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- FOOTER TOTAL -->
+      <div id="table-footer" style="display:flex;justify-content:flex-end;align-items:center;gap:16px;padding:14px 16px 0;border-top:1px solid var(--border);margin-top:8px">
+        <span style="font-size:13px;color:var(--text-muted)" id="footer-count"></span>
+        <span style="font-size:14px;font-weight:700;color:var(--gold)" id="footer-total"></span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- MODAL: Ny transaksjon -->
+<div class="modal-overlay" id="modal-add-tx">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Ny transaksjon</div>
+      <button class="modal-close" onclick="closeModal('modal-add-tx')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Kunde *</label>
+        <select id="tx-customer"></select>
+      </div>
+      <div class="form-group">
+        <label>Beskrivelse *</label>
+        <input type="text" id="tx-desc" placeholder="f.eks. Gullring 18k, 5.4g">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Beløp (kr) *</label>
+          <input type="number" id="tx-amount" placeholder="12500" min="0">
+        </div>
+        <div class="form-group">
+          <label>Dato</label>
+          <input type="date" id="tx-date">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Type transaksjon</label>
+        <div class="payment-options" id="tx-type-opts">
+          <div class="payment-option selected" data-val="sale" onclick="selectTxType(this)">
+            <div class="po-icon">+</div>
+            Salg til kunde
+          </div>
+          <div class="payment-option" data-val="purchase" onclick="selectTxType(this)">
+            <div class="po-icon">-</div>
+            Kjøpt fra kunde
+          </div>
+        </div>
+      </div>
+
+      <!-- PAYMENT METHOD -->
+      <div class="form-group">
+        <label>Betalingsmetode</label>
+        <div class="payment-options" id="payment-opts">
+          <div class="payment-option selected" data-val="kontant" onclick="selectPayment(this)">
+            <div class="po-icon">💵</div>
+            Kontant
+          </div>
+          <div class="payment-option" data-val="kort" onclick="selectPayment(this)">
+            <div class="po-icon">💳</div>
+            Kort
+          </div>
+          <div class="payment-option" data-val="bank" onclick="selectPayment(this)">
+            <div class="po-icon">🏦</div>
+            Bank
+          </div>
+        </div>
+      </div>
+
+      <!-- COMMENT -->
+      <div class="form-group">
+        <label>Kommentar</label>
+        <textarea id="tx-comment" placeholder="Valgfri kommentar — tilstand, spesifikasjoner, avtaler, referanser…"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-add-tx')">Avbryt</button>
+      <button class="btn btn-primary"   onclick="addTransaction()">Legg til</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Rediger transaksjon -->
+<div class="modal-overlay" id="modal-edit-tx">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Rediger transaksjon</div>
+      <button class="modal-close" onclick="closeModal('modal-edit-tx')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="et-id">
+      <div class="form-group">
+        <label>Kunde</label>
+        <select id="et-customer"></select>
+      </div>
+      <div class="form-group">
+        <label>Beskrivelse *</label>
+        <input type="text" id="et-desc">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Beløp (kr) *</label>
+          <input type="number" id="et-amount" min="0">
+        </div>
+        <div class="form-group">
+          <label>Dato</label>
+          <input type="date" id="et-date">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Type transaksjon</label>
+        <div class="payment-options" id="edit-tx-type-opts">
+          <div class="payment-option" data-val="sale" onclick="selectEditTxType(this)">
+            <div class="po-icon">+</div> Salg til kunde
+          </div>
+          <div class="payment-option" data-val="purchase" onclick="selectEditTxType(this)">
+            <div class="po-icon">-</div> Kjøpt fra kunde
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Betalingsmetode</label>
+        <div class="payment-options" id="edit-payment-opts">
+          <div class="payment-option" data-val="kontant" onclick="selectEditPayment(this)">
+            <div class="po-icon">💵</div> Kontant
+          </div>
+          <div class="payment-option" data-val="kort" onclick="selectEditPayment(this)">
+            <div class="po-icon">💳</div> Kort
+          </div>
+          <div class="payment-option" data-val="bank" onclick="selectEditPayment(this)">
+            <div class="po-icon">🏦</div> Bank
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Kommentar</label>
+        <textarea id="et-comment"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger"    onclick="deleteTx()">Slett</button>
+      <button class="btn btn-secondary" onclick="closeModal('modal-edit-tx')">Avbryt</button>
+      <button class="btn btn-primary"   onclick="saveTx()">Lagre</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+  // ── PAYMENT SELECTOR ──────────────────────────────────────
+  function selectPayment(el) {
+    document.querySelectorAll('#payment-opts .payment-option').forEach(x => x.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function selectEditPayment(el) {
+    document.querySelectorAll('#edit-payment-opts .payment-option').forEach(x => x.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function selectTxType(el) {
+    document.querySelectorAll('#tx-type-opts .payment-option').forEach(x => x.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function selectEditTxType(el) {
+    document.querySelectorAll('#edit-tx-type-opts .payment-option').forEach(x => x.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function selectedPayment(containerId) {
+    const sel = document.querySelector('#' + containerId + ' .payment-option.selected');
+    return sel ? sel.dataset.val : 'kontant';
+  }
+
+  function selectedTxType(containerId) {
+    const sel = document.querySelector('#' + containerId + ' .payment-option.selected');
+    return sel ? sel.dataset.val : 'sale';
+  }
+
+  // ── CUSTOMER SELECT ───────────────────────────────────────
+  function populateCustomerSelect(elId, selectedId) {
+    const el = document.getElementById(elId);
+    el.innerHTML = getCustomers().map(c =>
+      `<option value="${Number(c.id)}" ${Number(c.id)===Number(selectedId)?'selected':''}>${escapeHtml(c.name)}</option>`
+    ).join('');
+  }
+
+  // ── FILTER + RENDER ───────────────────────────────────────
+  function getFiltered() {
+    const q       = document.getElementById('search-input').value.toLowerCase().trim();
+    const fKon    = document.getElementById('f-kontant').checked;
+    const fKort   = document.getElementById('f-kort').checked;
+    const fBank   = document.getElementById('f-bank').checked;
+    const from    = document.getElementById('f-from').value;
+    const to      = document.getElementById('f-to').value;
+    const sort    = document.getElementById('f-sort').value;
+
+    return getTransactions().filter(t => {
+      const c = getCustomerById(t.customerId);
+      if (q && !(t.description || '').toLowerCase().includes(q) && !(c?.name.toLowerCase().includes(q))) return false;
+      if (t.payment === 'kontant' && !fKon) return false;
+      if (t.payment === 'kort'    && !fKort) return false;
+      if (t.payment === 'bank'    && !fBank) return false;
+      if (from && t.date < from) return false;
+      if (to   && t.date > to)   return false;
+      return true;
+    }).sort((a, b) => {
+      if (sort === 'date-desc')   return new Date(b.date) - new Date(a.date);
+      if (sort === 'date-asc')    return new Date(a.date) - new Date(b.date);
+      if (sort === 'amount-desc') return transactionAmount(b) - transactionAmount(a);
+      if (sort === 'amount-asc')  return transactionAmount(a) - transactionAmount(b);
+      return 0;
+    });
+  }
+
+  function renderTable() {
+    const rows = getFiltered();
+    const totalAmt = rows.reduce((s,t) => s+transactionAmount(t), 0);
+
+    const allTx = getTransactions();
+    const grandTotal = allTx.reduce((s,t) => s+transactionAmount(t), 0);
+
+    document.getElementById('sub-info').textContent = allTx.length + ' transaksjoner totalt · ' + formatAmount(grandTotal);
+
+    // Summary cards
+    const byKontant = allTx.filter(t=>t.payment==='kontant').reduce((s,t)=>s+transactionAmount(t),0);
+    const byKort    = allTx.filter(t=>t.payment==='kort').reduce((s,t)=>s+transactionAmount(t),0);
+    const byBank    = allTx.filter(t=>t.payment==='bank').reduce((s,t)=>s+transactionAmount(t),0);
+
+    document.getElementById('summary-cards').innerHTML = `
+      <div class="stat-card">
+        <div class="stat-label">Totalt</div>
+        <div class="stat-value gold">${formatAmount(grandTotal)}</div>
+        <div class="stat-sub">${allTx.length} handler</div>
+        <div class="stat-icon">💰</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Kontant</div>
+        <div class="stat-value">${formatAmount(byKontant)}</div>
+        <div class="stat-sub">${allTx.filter(t=>t.payment==='kontant').length} handler</div>
+        <div class="stat-icon">💵</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Kortbetaling</div>
+        <div class="stat-value">${formatAmount(byKort)}</div>
+        <div class="stat-sub">${allTx.filter(t=>t.payment==='kort').length} handler</div>
+        <div class="stat-icon">💳</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Bankoverføring</div>
+        <div class="stat-value">${formatAmount(byBank)}</div>
+        <div class="stat-sub">${allTx.filter(t=>t.payment==='bank').length} handler</div>
+        <div class="stat-icon">🏦</div>
+      </div>
+    `;
+
+    document.getElementById('tx-tbody').innerHTML = rows.map(t => {
+      const c = getCustomerById(t.customerId);
+      const signedAmount = transactionAmount(t);
+      return `<tr>
+        <td style="color:var(--text-muted);white-space:nowrap">${formatDate(t.date)}</td>
+        <td>
+          <a href="customer-profile.html?id=${Number(t.customerId)}" style="color:var(--text-primary);text-decoration:none;font-weight:600;border-bottom:1px solid transparent;transition:.15s" onmouseenter="this.style.borderColor='var(--gold)'" onmouseleave="this.style.borderColor='transparent'">
+            ${c ? escapeHtml(c.name) : '–'}
+          </a>
+        </td>
+        <td>${escapeHtml(t.description)}</td>
+        <td>${transactionTypeBadge(t.type)}</td>
+        <td>${paymentBadge(t.payment)}</td>
+        <td style="color:var(--text-muted);font-style:${t.comment?'normal':'italic'};max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escapeHtml(t.comment || '')}">${escapeHtml(t.comment || '–')}</td>
+        <td style="text-align:right" class="${signedAmount < 0 ? 'amount-negative' : 'amount-gold'}">${formatAmount(signedAmount)}</td>
+        <td style="text-align:right">
+          <button class="btn btn-secondary btn-sm" onclick="openEditTx(${Number(t.id)})">Rediger</button>
+        </td>
+      </tr>`;
+    }).join('') || `<tr><td colspan="8"><div class="empty-state"><div class="empty-state-icon">⇅</div><p>Ingen transaksjoner matcher filteret</p></div></td></tr>`;
+
+    document.getElementById('footer-count').textContent = rows.length + ' viste transaksjoner';
+    document.getElementById('footer-total').textContent = 'Delsum: ' + formatAmount(totalAmt);
+  }
+
+  function clearFilters() {
+    document.getElementById('search-input').value = '';
+    document.getElementById('f-kontant').checked  = true;
+    document.getElementById('f-kort').checked     = true;
+    document.getElementById('f-bank').checked     = true;
+    document.getElementById('f-from').value       = '';
+    document.getElementById('f-to').value         = '';
+    document.getElementById('f-sort').value       = 'date-desc';
+    renderTable();
+  }
+
+  // ── ADD TRANSACTION ───────────────────────────────────────
+  document.getElementById('tx-date').value = new Date().toISOString().slice(0,10);
+
+  function openAddModal() {
+    populateCustomerSelect('tx-customer');
+    openModal('modal-add-tx');
+  }
+
+  function addTransaction() {
+    const customerId = Number(document.getElementById('tx-customer').value);
+    const desc       = document.getElementById('tx-desc').value.trim();
+    const amount     = Number(document.getElementById('tx-amount').value);
+    const date       = document.getElementById('tx-date').value;
+    if (!desc)   { showToast('Beskrivelse er påkrevd', '⚠'); return; }
+    if (!amount) { showToast('Beløp er påkrevd', '⚠'); return; }
+    if (!customerId){ showToast('Velg en kunde', '⚠'); return; }
+
+    const payment = selectedPayment('payment-opts');
+    const type = selectedTxType('tx-type-opts');
+    const comment = document.getElementById('tx-comment').value.trim();
+    if (payment === 'kontant' && getSettings().requireComment && !comment) {
+      showToast('Kommentar er påkrevd ved kontantbetaling', '⚠');
+      return;
+    }
+
+    const transactions = getTransactions();
+    transactions.push({
+      id: nextId(transactions),
+      customerId,
+      date: date || new Date().toISOString().slice(0,10),
+      description: desc,
+      amount,
+      type,
+      payment,
+      comment
+    });
+    setTransactions(transactions);
+
+    // Reset form
+    document.getElementById('tx-desc').value    = '';
+    document.getElementById('tx-amount').value  = '';
+    document.getElementById('tx-comment').value = '';
+    document.getElementById('tx-date').value    = new Date().toISOString().slice(0,10);
+    document.querySelectorAll('#tx-type-opts .payment-option').forEach(x => x.classList.remove('selected'));
+    document.querySelector('#tx-type-opts [data-val="sale"]').classList.add('selected');
+    document.querySelectorAll('#payment-opts .payment-option').forEach(x => x.classList.remove('selected'));
+    document.querySelector('#payment-opts [data-val="kontant"]').classList.add('selected');
+
+    closeModal('modal-add-tx');
+    renderTable();
+    showToast('Transaksjon lagt til');
+  }
+
+  // ── EDIT / DELETE ─────────────────────────────────────────
+  function openEditTx(id) {
+    const t = getTransactions().find(x => x.id === id);
+    if (!t) return;
+    populateCustomerSelect('et-customer', t.customerId);
+    document.getElementById('et-id').value      = t.id;
+    document.getElementById('et-desc').value    = t.description;
+    document.getElementById('et-amount').value  = t.amount;
+    document.getElementById('et-date').value    = t.date;
+    document.getElementById('et-comment').value = t.comment;
+    document.querySelectorAll('#edit-tx-type-opts .payment-option').forEach(x => {
+      x.classList.toggle('selected', x.dataset.val === (t.type || 'sale'));
+    });
+    document.querySelectorAll('#edit-payment-opts .payment-option').forEach(x => {
+      x.classList.toggle('selected', x.dataset.val === t.payment);
+    });
+    openModal('modal-edit-tx');
+  }
+
+  function saveTx() {
+    const id         = Number(document.getElementById('et-id').value);
+    const customerId = Number(document.getElementById('et-customer').value);
+    const desc       = document.getElementById('et-desc').value.trim();
+    const amount     = Number(document.getElementById('et-amount').value);
+    if (!desc || !amount) { showToast('Fyll ut alle obligatoriske felt', '⚠'); return; }
+
+    const payment = selectedPayment('edit-payment-opts');
+    const type = selectedTxType('edit-tx-type-opts');
+    const comment = document.getElementById('et-comment').value.trim();
+    if (payment === 'kontant' && getSettings().requireComment && !comment) {
+      showToast('Kommentar er påkrevd ved kontantbetaling', '⚠');
+      return;
+    }
+    const updated = getTransactions().map(t => t.id !== id ? t : {
+      ...t, customerId, description: desc, amount,
+      date:    document.getElementById('et-date').value,
+      type, payment, comment
+    });
+    setTransactions(updated);
+    closeModal('modal-edit-tx');
+    renderTable();
+    showToast('Transaksjon oppdatert');
+  }
+
+  function deleteTx() {
+    const id = Number(document.getElementById('et-id').value);
+    if (getSettings().confirmDelete !== false && !confirm('Slett denne transaksjonen?')) return;
+    setTransactions(getTransactions().filter(t => t.id !== id));
+    closeModal('modal-edit-tx');
+    renderTable();
+    showToast('Transaksjon slettet', '🗑');
+  }
+
+  // ── OVERRIDE OPEN BUTTON ──────────────────────────────────
+  document.querySelector('.btn-primary[onclick="openModal(\'modal-add-tx\')"]')
+    .setAttribute('onclick', 'openAddModal()');
+
+  renderTable();
+</script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Innstillinger | Sherwani Gull &amp; Sølv</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <div class="logo-icon">♦</div>
+      <div>
+        <div class="logo-text">Sherwani</div>
+        <div class="logo-subtitle">Internt register</div>
+      </div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <span class="nav-section-label">Oversikt</span>
+    <a href="index.html" class="nav-link">
+      <span class="nav-icon">▦</span> Oversikt
+    </a>
+    <span class="nav-section-label">Administrasjon</span>
+    <a href="customers.html" class="nav-link">
+      <span class="nav-icon">👤</span> Kunder
+    </a>
+    <a href="transactions.html" class="nav-link">
+      <span class="nav-icon">⇅</span> Transaksjoner
+    </a>
+    <span class="nav-section-label">System</span>
+    <a href="settings.html" class="nav-link active">
+      <span class="nav-icon">⚙</span> Innstillinger
+    </a>
+  </nav>
+  <div class="sidebar-footer">Sherwani Gull &amp; Sølv</div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div>
+      <div class="page-title">Innstillinger</div>
+      <div class="page-subtitle">Konfigurer systemet og bedriftsinformasjon</div>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn btn-primary" onclick="saveSettings()">Lagre endringer</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <div style="max-width:760px">
+
+      <!-- COMPANY INFO -->
+      <div class="card settings-section">
+        <div class="settings-section-title">🏢 Bedriftsinformasjon</div>
+        <div class="form-row" style="margin-bottom:16px">
+          <div class="form-group">
+            <label>Bedriftsnavn</label>
+            <input type="text" id="s-companyName" placeholder="Sherwani Gull &amp; Sølv AS">
+          </div>
+          <div class="form-group">
+            <label>Organisasjonsnummer</label>
+            <input type="text" id="s-orgNr" placeholder="912 345 678">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Adresse</label>
+          <input type="text" id="s-address" placeholder="Kongens gate 5, 0153 Oslo">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Telefon</label>
+            <input type="tel" id="s-phone" placeholder="22 33 44 55">
+          </div>
+          <div class="form-group">
+            <label>E-post</label>
+            <input type="email" id="s-email" placeholder="post@gullas.no">
+          </div>
+        </div>
+      </div>
+
+      <!-- FINANCIAL SETTINGS -->
+      <div class="card settings-section">
+        <div class="settings-section-title">💰 Økonomiinnstillinger</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Valuta</label>
+            <select id="s-currency">
+              <option value="NOK">NOK — Norske kroner</option>
+              <option value="EUR">EUR — Euro</option>
+              <option value="USD">USD — US Dollar</option>
+              <option value="SEK">SEK — Svenske kroner</option>
+              <option value="DKK">DKK — Danske kroner</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>MVA-sats (%)</label>
+            <input type="number" id="s-vatRate" placeholder="25" min="0" max="100">
+          </div>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <div class="s-label">Vis MVA på transaksjoner</div>
+            <div class="s-desc">Beregner og viser MVA-beløp automatisk</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="t-showVat">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <div class="s-label">Krev kommentar ved kontantbetaling</div>
+            <div class="s-desc">Gjør kommentarfeltet obligatorisk for kontanttransaksjoner</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="t-requireComment">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- NOTIFICATION SETTINGS -->
+      <div class="card settings-section">
+        <div class="settings-section-title">🔔 Varsler og visning</div>
+
+        <div class="settings-row">
+          <div>
+            <div class="s-label">Vis suksessvarsel ved lagring</div>
+            <div class="s-desc">Toast-melding nederst ved lagrede endringer</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="t-toasts" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <div class="s-label">Bekreft ved sletting</div>
+            <div class="s-desc">Vis bekreftelsesdialog før kunder eller transaksjoner slettes</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="t-confirmDelete" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <div class="s-label">Kompakt tabellvisning</div>
+            <div class="s-desc">Redusert cellehøyde i tabeller for mer innhold synlig</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="t-compact">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- DATA MANAGEMENT -->
+      <div class="card settings-section">
+        <div class="settings-section-title">🗄 Datahåndtering</div>
+
+        <div class="settings-row">
+          <div>
+            <div class="s-label">Eksporter data</div>
+            <div class="s-desc">Last ned alle kunder og transaksjoner som JSON</div>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="exportData()">Eksporter JSON</button>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <div class="s-label">Importer data</div>
+            <div class="s-desc">Last opp en tidligere eksportert JSON-fil</div>
+          </div>
+          <label class="btn btn-secondary btn-sm" style="cursor:pointer">
+            Importer fil
+            <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(this)">
+          </label>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <div class="s-label" style="color:var(--danger)">Tilbakestill alle data</div>
+            <div class="s-desc">Sletter alle kunder og transaksjoner — kan ikke angres</div>
+          </div>
+          <button class="btn btn-danger btn-sm" onclick="resetData()">Tilbakestill</button>
+        </div>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="card">
+        <div class="settings-section-title">ℹ Om systemet</div>
+        <div class="detail-row">
+          <span class="detail-label">Versjon</span>
+          <span class="detail-value">1.0.0</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Type</span>
+          <span class="detail-value">Lokal prototype — statisk HTML/CSS/JS</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Lagring</span>
+          <span class="detail-value">localStorage (lokalt i nettleseren, ikke godkjent for persondata)</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Kunder registrert</span>
+          <span class="detail-value" id="info-customers">–</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Transaksjoner registrert</span>
+          <span class="detail-value" id="info-tx">–</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Total omsetning</span>
+          <span class="detail-value" id="info-total" style="color:var(--gold)">–</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<script src="script.js"></script>
+<script>
+  function loadSettings() {
+    const s = getSettings();
+    document.getElementById('s-companyName').value = s.companyName || '';
+    document.getElementById('s-orgNr').value       = s.orgNr || '';
+    document.getElementById('s-address').value     = s.address || '';
+    document.getElementById('s-phone').value       = s.phone || '';
+    document.getElementById('s-email').value       = s.email || '';
+    document.getElementById('s-currency').value    = s.currency || 'NOK';
+    document.getElementById('s-vatRate').value     = s.vatRate || '25';
+    document.getElementById('t-showVat').checked         = !!s.showVat;
+    document.getElementById('t-requireComment').checked  = !!s.requireComment;
+    document.getElementById('t-toasts').checked          = s.toasts !== false;
+    document.getElementById('t-confirmDelete').checked   = s.confirmDelete !== false;
+    document.getElementById('t-compact').checked         = !!s.compact;
+  }
+
+  function saveSettings() {
+    const s = {
+      companyName:    document.getElementById('s-companyName').value.trim(),
+      orgNr:          document.getElementById('s-orgNr').value.trim(),
+      address:        document.getElementById('s-address').value.trim(),
+      phone:          document.getElementById('s-phone').value.trim(),
+      email:          document.getElementById('s-email').value.trim(),
+      currency:       document.getElementById('s-currency').value,
+      vatRate:        document.getElementById('s-vatRate').value,
+      showVat:        document.getElementById('t-showVat').checked,
+      requireComment: document.getElementById('t-requireComment').checked,
+      toasts:         document.getElementById('t-toasts').checked,
+      confirmDelete:  document.getElementById('t-confirmDelete').checked,
+      compact:        document.getElementById('t-compact').checked,
+    };
+    setSettings(s);
+    document.body.classList.toggle('compact', s.compact);
+    showToast('Innstillinger lagret');
+  }
+
+  function exportData() {
+    const data = {
+      exportedAt: new Date().toISOString(),
+      settings:   getSettings(),
+      customers:  getCustomers(),
+      transactions: getTransactions(),
+      customerDocuments: getCustomerDocuments()
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = 'sherwani-register-' + new Date().toISOString().slice(0,10) + '.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Data eksportert');
+  }
+
+  function importData(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      try {
+        const data = JSON.parse(e.target.result);
+        if (!Array.isArray(data.customers) || !Array.isArray(data.transactions)) throw new Error('Ugyldig format');
+        const customers = data.customers.map((c, index) => ({
+          id: Number(c.id) || index + 1,
+          name: String(c.name || '').trim(),
+          email: String(c.email || '').trim(),
+          phone: String(c.phone || '').trim(),
+          address: String(c.address || '').trim(),
+          idType: String(c.idType || '').trim(),
+          idNumber: String(c.idNumber || '').trim(),
+          notes: String(c.notes || '').trim(),
+          createdAt: String(c.createdAt || new Date().toISOString().slice(0, 10))
+        })).filter(c => c.name);
+        const customerIds = new Set(customers.map(c => c.id));
+        const transactions = data.transactions.map((t, index) => ({
+          id: Number(t.id) || index + 1,
+          customerId: Number(t.customerId),
+          date: String(t.date || new Date().toISOString().slice(0, 10)),
+          description: String(t.description || '').trim(),
+          amount: Math.abs(Number(t.amount) || 0),
+          type: t.type === 'purchase' ? 'purchase' : 'sale',
+          payment: ['kontant', 'kort', 'bank'].includes(t.payment) ? t.payment : 'bank',
+          comment: String(t.comment || '').trim()
+        })).filter(t => customerIds.has(t.customerId) && t.description && t.amount);
+        if (!confirm(`Importer ${customers.length} kunder og ${transactions.length} transaksjoner?\nDette vil overskrive eksisterende data.`)) return;
+        setCustomers(customers);
+        setTransactions(transactions);
+        setCustomerDocuments(data.customerDocuments && typeof data.customerDocuments === 'object' ? data.customerDocuments : {});
+        if (data.settings) setSettings(data.settings);
+        loadSettings();
+        updateStats();
+        showToast(`Importert ${customers.length} kunder og ${transactions.length} transaksjoner`);
+      } catch(err) {
+        showToast('Ugyldig fil: ' + err.message, '⚠');
+      }
+    };
+    reader.readAsText(file);
+    input.value = '';
+  }
+
+  function resetData() {
+    if (!confirm('ADVARSEL: Dette sletter alle kunder og transaksjoner.\nData kan ikke gjenopprettes.\n\nEr du helt sikker?')) return;
+    if (!confirm('Siste sjanse — slett alt nå?')) return;
+    localStorage.removeItem(STORAGE_PREFIX + 'customers');
+    localStorage.removeItem(STORAGE_PREFIX + 'transactions');
+    localStorage.removeItem(STORAGE_PREFIX + 'customerDocuments');
+    initData();
+    updateStats();
+    showToast('Data tilbakestilt til standardverdier', '🗑');
+  }
+
+  function updateStats() {
+    const customers    = getCustomers();
+    const transactions = getTransactions();
+    document.getElementById('info-customers').textContent = customers.length;
+    document.getElementById('info-tx').textContent        = transactions.length;
+    document.getElementById('info-total').textContent     = formatAmount(transactions.reduce((s,t)=>s+transactionAmount(t),0));
+  }
+
+  loadSettings();
+  updateStats();
+</script>
+</body>
+</html>
