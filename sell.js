@@ -59,9 +59,9 @@ const SELL_PAGE_CONFIG = {
     heroDesc: 'Har du gullsmykker, ringer, kjeder eller arvegull? Få en enkel og uforpliktende vurdering hos Sherwani Gull & Sølv.',
     primaryCta: 'Beregn pris',
     secondaryCta: 'Send forespørsel',
-    note: 'Vi kjøper både gull og sølv. Du trenger ikke vite nøyaktig vekt eller type - vi hjelper deg videre.',
-    panelTitle: 'Velg gull eller sølv',
-    panelText: 'Enten du har gullsmykker, arvegull, sølvbestikk eller sølvtøy, hjelper vi deg med en trygg vurdering.',
+    note: 'Du trenger ikke vite nøyaktig vekt eller type. Velg gull eller sølv, så hjelper vi deg videre.',
+    panelTitle: 'Slik kommer du i gang',
+    panelText: 'Se cirka-pris, send kort forespørsel eller ring oss direkte. Enkelt og uforpliktende.',
     trust: [
       'Uforpliktende vurdering',
       'Vi kjøper gull og sølv',
@@ -69,12 +69,12 @@ const SELL_PAGE_CONFIG = {
       'Du bestemmer selv'
     ],
     itemsTitle: 'Hva slags gull kan du selge?',
-    itemsDesc: 'Tilstand er vanligvis ikke avgjørende. Vi hjelper deg med en rolig vurdering, også når du er usikker på karat eller vekt.',
-    items: ['Ringer', 'Kjedesmykker', 'Armbånd', 'Øredobber', 'Ødelagte smykker', 'Arvegull', 'Gullmynter', 'Gull uten sertifikat', '8k, 14k, 18k, 21k, 22k og 24k gull'],
+    itemsDesc: 'Du kan sende forespørsel selv om du er usikker på karat, vekt eller tilstand.',
+    items: ['Ringer', 'Kjeder', 'Armbånd', 'Øredobber', 'Ødelagte smykker', 'Arvegull', 'Gullmynter', 'Gull uten sertifikat'],
     process: [
-      ['Send forespørsel', 'Send inn navn, telefon og hva du ønsker å selge.'],
-      ['Få en rolig vurdering', 'Vi tar kontakt og hjelper deg med vekt, type og neste steg.'],
-      ['Avtal levering eller henting', 'Du kan avtale trygg levering, møte eller gratis henting der dette passer.']
+      ['Send inn kort skjema', 'Navn, telefon og hva du ønsker å selge er nok.'],
+      ['Vi tar kontakt', 'Vi hjelper deg med vekt, type og videre vurdering.'],
+      ['Du bestemmer selv', 'Du får rolig forklaring og velger selv om du vil selge.']
     ],
     pickupTitle: 'Gratis henting i Oslo, Akershus og Østfold',
     pickupText: 'Vi kan etter avtale tilby gratis henting i Oslo, Akershus og Østfold. Dette passer godt hvis du har flere gjenstander, sølvbestikk, arvegull eller ønsker en enklere prosess hjemmefra.',
@@ -88,9 +88,9 @@ const SELL_PAGE_CONFIG = {
     heroDesc: 'Har du sølvbestikk, sølvtøy, sølvmynter eller sølvsmykker? Få en enkel og uforpliktende vurdering hos Sherwani Gull & Sølv.',
     primaryCta: 'Beregn pris',
     secondaryCta: 'Send forespørsel',
-    note: 'Vi kjøper både gull og sølv. Du trenger ikke vite nøyaktig vekt eller type - vi hjelper deg videre.',
-    panelTitle: 'Velg gull eller sølv',
-    panelText: 'Velg gull eller sølv og få en enkel veiledende pris. Du kan også sende forespørsel uten å bruke kalkulatoren.',
+    note: 'Du trenger ikke vite nøyaktig vekt eller type. Velg gull eller sølv, så hjelper vi deg videre.',
+    panelTitle: 'Slik kommer du i gang',
+    panelText: 'Se cirka-pris, send kort forespørsel eller ring oss direkte. Enkelt og uforpliktende.',
     trust: [
       'Uforpliktende vurdering',
       'Vi kjøper gull og sølv',
@@ -98,12 +98,12 @@ const SELL_PAGE_CONFIG = {
       'Du bestemmer selv'
     ],
     itemsTitle: 'Hva slags sølv kan du selge?',
-    itemsDesc: 'Det gjør ingenting om sølvet er brukt, oksidert, gravert eller ufullstendig. Vi hjelper deg videre selv om du er usikker på type eller vekt.',
-    items: ['Sølvbestikk', 'Sølvtøy', 'Sølvfat', 'Lysestaker', 'Smykker', 'Sølvmynter', 'Arvesølv', '830S, 925S og 999 sølv', 'Sølv med gravering', 'Ufullstendige bestikksett'],
+    itemsDesc: 'Du kan sende forespørsel selv om sølvet er brukt, gravert, ufullstendig eller upusset.',
+    items: ['Sølvbestikk', 'Sølvtøy', 'Sølvfat', 'Lysestaker', 'Smykker', 'Sølvmynter', 'Arvesølv', 'Ufullstendige sett'],
     process: [
-      ['Send forespørsel', 'Send inn navn, telefon og hva du ønsker å selge.'],
-      ['Få en rolig vurdering', 'Vi tar kontakt og hjelper deg med vekt, sølvtype og neste steg.'],
-      ['Avtal levering eller henting', 'Ved behov kan du avtale levering, møte eller gratis henting der dette passer.']
+      ['Send inn kort skjema', 'Navn, telefon og hva du ønsker å selge er nok.'],
+      ['Vi tar kontakt', 'Vi hjelper deg med vekt, type og videre vurdering.'],
+      ['Du bestemmer selv', 'Du får rolig forklaring og velger selv om du vil selge.']
     ],
     pickupTitle: 'Gratis henting i Oslo, Akershus og Østfold',
     pickupText: 'Har du større mengder sølvbestikk, sølvtøy eller arvesølv, kan gratis henting være en enkel løsning. Vi kan etter avtale hente i Oslo, Akershus og Østfold.',
@@ -116,7 +116,6 @@ const PRICE_CONFIG = {
 };
 
 const calculatorState = {
-  step: 1,
   metal: 'gold',
   typeLabel: '',
   fineness: null,
@@ -158,14 +157,6 @@ function scrollToCalculator() {
 
 function isSmallScreen() {
   return window.matchMedia('(max-width: 640px)').matches;
-}
-
-function moveToStep(step, shouldScroll = false) {
-  calculatorState.step = Math.max(1, Math.min(4, step));
-  renderCalculatorStep();
-  if (shouldScroll && isSmallScreen()) {
-    document.querySelector('[data-calculator]')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
 }
 
 function SellHero(config) {
@@ -256,11 +247,10 @@ function MetalCalculator(config) {
     <section class="section" id="kalkulator">
       <div class="section-inner">
         <div class="section-label">Beregn pris</div>
-        <h2 class="section-title">Velg gull eller sølv</h2>
-        <p class="section-desc">Få en enkel veiledende pris. Du kan også sende forespørsel hvis du ikke vet vekt eller type.</p>
+        <h2 class="section-title">Se cirka-pris raskt</h2>
+        <p class="section-desc">Velg gull eller sølv. Vet du ikke vekt eller type, hopper du bare rett til forespørsel.</p>
         <div class="calculator" data-calculator>
-          <div class="calc-progress" data-calc-progress>Steg 1 av 4</div>
-          <div data-calc-step></div>
+          <div data-calc-content></div>
         </div>
       </div>
     </section>
@@ -279,35 +269,27 @@ function optionButton({ label, text = '', selected = false, metal = '', value = 
   `;
 }
 
-function renderCalculatorStep() {
-  const stepHost = document.querySelector('[data-calc-step]');
-  const progress = document.querySelector('[data-calc-progress]');
-  if (!stepHost || !progress) return;
+function renderCalculator() {
+  const host = document.querySelector('[data-calc-content]');
+  if (!host) return;
 
   const metal = activeMetal();
-  progress.textContent = `Steg ${calculatorState.step} av 4`;
+  const estimate = calculateEstimatedPrice();
+  const canShowPrice = estimate !== null;
+  const unknownType = calculatorState.typeLabel === 'Jeg er usikker';
+  const needsHelp = calculatorState.unknownWeight || unknownType || !calculatorState.typeLabel;
 
-  if (calculatorState.step === 1) {
-    stepHost.innerHTML = `
-      <div class="calc-step">
-        <h3>Hva vil du selge?</h3>
-        <p>Du kan bytte mellom gull og sølv når som helst.</p>
+  host.innerHTML = `
+    <div class="calc-simple">
+      <div class="calc-block">
+        <div class="calc-mini-label">1. Hva vil du selge?</div>
         <div class="choice-grid">
           ${optionButton({ label: 'Gull', text: METAL_OPTIONS.gold.shortText, selected: calculatorState.metal === 'gold', metal: 'gold', value: 'gold', action: 'metal' })}
           ${optionButton({ label: 'Sølv', text: METAL_OPTIONS.silver.shortText, selected: calculatorState.metal === 'silver', metal: 'silver', value: 'silver', action: 'metal' })}
         </div>
-        <div class="calc-actions">
-          <button class="btn btn-dark" type="button" data-action="next">Neste</button>
-        </div>
       </div>
-    `;
-  }
-
-  if (calculatorState.step === 2) {
-    stepHost.innerHTML = `
-      <div class="calc-step">
-        <h3>${esc(metal.typeLabel)}</h3>
-        <p>Velg det nærmeste. Er du usikker, velg “Jeg er usikker”.</p>
+      <div class="calc-block">
+        <div class="calc-mini-label">2. Velg type</div>
         <div class="type-grid">
           ${metal.types.map(([label, value]) => optionButton({
             label,
@@ -317,65 +299,40 @@ function renderCalculatorStep() {
             action: 'type'
           })).join('')}
         </div>
-        ${calculatorState.typeLabel === 'Jeg er usikker' ? `<p class="calc-help">${esc(metal.uncertainText)}</p>` : ''}
-        <div class="calc-actions split">
-          <button class="btn" type="button" data-action="back">Tilbake</button>
-          <button class="btn btn-dark" type="button" data-action="next">Neste</button>
-        </div>
+        ${unknownType ? `<p class="calc-help">${esc(metal.uncertainText)}</p>` : ''}
       </div>
-    `;
-  }
-
-  if (calculatorState.step === 3) {
-    stepHost.innerHTML = `
-      <div class="calc-step">
-        <h3>Hvor mye veier det?</h3>
-        <p>${esc(metal.weightText)}</p>
+      <div class="calc-block">
+        <div class="calc-mini-label">3. Vekt</div>
         <div class="field">
           <label for="calc-weight">Skriv vekt i gram</label>
           <input id="calc-weight" data-calc-weight type="number" min="0" step="0.1" inputmode="decimal" placeholder="f.eks. 25" value="${esc(calculatorState.weight)}">
         </div>
+        <p class="calc-help">${esc(metal.weightText)}</p>
         <button class="text-button" type="button" data-action="unknown-weight">Jeg vet ikke vekten</button>
-        <p class="calc-error" data-calc-error></p>
-        <div class="calc-actions split">
-          <button class="btn" type="button" data-action="back">Tilbake</button>
-          <button class="btn btn-dark" type="button" data-action="next">Vis pris</button>
-        </div>
       </div>
-    `;
-  }
-
-  if (calculatorState.step === 4) {
-    const canShowPrice = calculateEstimatedPrice() !== null;
-    stepHost.innerHTML = `
-      <div class="calc-step">
-        <h3>Din estimerte pris</h3>
+      <div class="calc-result">
+        <div class="calc-label">${needsHelp ? 'Vi hjelper deg' : 'Din estimerte pris'}</div>
+        <div data-calc-result-live>
         ${canShowPrice ? `
-          <div class="calc-result">
-            <div class="calc-label">Din estimerte pris</div>
-            <div class="calc-value">Ca. ${kr(calculatorState.estimatedPrice)}</div>
-            <p class="calc-status">${esc(metal.resultText)}</p>
-          </div>
-          <button class="btn btn-dark" type="button" data-action="form">Send forespørsel</button>
+          <div class="calc-value">Ca. ${kr(calculatorState.estimatedPrice)}</div>
+          <p class="calc-status">${esc(metal.resultText)}</p>
         ` : `
-          <div class="calc-result">
-            <div class="calc-label">Vi hjelper deg</div>
-            <p class="calc-status">${esc(calculatorState.unknownWeight ? 'Ingen problem. Send forespørsel, så hjelper vi deg med vekt og type.' : metal.uncertainText)}</p>
-          </div>
-          <button class="btn btn-dark" type="button" data-action="form">Send forespørsel - vi hjelper deg</button>
+          <p class="calc-status">${esc(calculatorState.unknownWeight || unknownType ? 'Send forespørsel, så hjelper vi deg med type og vekt.' : 'Velg type og skriv cirka-vekt for å se pris, eller send forespørsel med en gang.')}</p>
         `}
-        <button class="text-button" type="button" data-action="form">Usikker på vekt eller type? Send forespørsel, så hjelper vi deg.</button>
-        <div class="calc-actions">
-          <button class="btn" type="button" data-action="back">Tilbake</button>
         </div>
+        <div class="calc-actions">
+          <button class="btn btn-dark" type="button" data-action="form">Send forespørsel</button>
+          <a class="btn btn-soft" href="tel:+4747996251">Ring oss</a>
+        </div>
+        <button class="text-button" type="button" data-action="form">Usikker? Send forespørsel, så hjelper vi deg.</button>
       </div>
-    `;
-  }
+    </div>
+  `;
 
-  bindCalculatorStep();
+  bindCalculator();
 }
 
-function bindCalculatorStep() {
+function bindCalculator() {
   document.querySelectorAll('[data-action]').forEach((el) => {
     el.addEventListener('click', () => {
       const action = el.dataset.action;
@@ -385,7 +342,7 @@ function bindCalculatorStep() {
         calculatorState.fineness = null;
         calculatorState.estimatedPrice = null;
         updateFormFromCalculator();
-        renderCalculatorStep();
+        renderCalculator();
         return;
       }
       if (action === 'type') {
@@ -395,7 +352,7 @@ function bindCalculatorStep() {
         calculatorState.fineness = item ? item[1] : null;
         calculatorState.estimatedPrice = null;
         updateFormFromCalculator();
-        moveToStep(3, true);
+        renderCalculator();
         return;
       }
       if (action === 'unknown-weight') {
@@ -403,15 +360,7 @@ function bindCalculatorStep() {
         calculatorState.weight = '';
         calculatorState.estimatedPrice = null;
         updateFormFromCalculator();
-        moveToStep(4, true);
-        return;
-      }
-      if (action === 'back') {
-        moveToStep(calculatorState.step - 1, true);
-        return;
-      }
-      if (action === 'next') {
-        handleNextStep();
+        renderCalculator();
         return;
       }
       if (action === 'form') {
@@ -426,37 +375,25 @@ function bindCalculatorStep() {
     weightInput.addEventListener('input', () => {
       calculatorState.weight = weightInput.value;
       calculatorState.unknownWeight = false;
+      calculateEstimatedPrice();
       updateFormFromCalculator();
+      updateCalculatorResult();
     });
   }
 }
 
-function handleNextStep() {
-  if (calculatorState.step === 1) {
-    moveToStep(2, true);
-    return;
-  }
-  if (calculatorState.step === 2) {
-    if (!calculatorState.typeLabel) {
-      const help = document.querySelector('.calc-step p');
-      if (help) help.textContent = 'Velg en type, eller velg “Jeg er usikker”.';
-      return;
-    }
-    moveToStep(3, true);
-    return;
-  }
-  if (calculatorState.step === 3) {
-    const weightInput = document.querySelector('[data-calc-weight]');
-    calculatorState.weight = weightInput ? weightInput.value : calculatorState.weight;
-    calculatorState.unknownWeight = false;
-    const grams = parseWeight();
-    if (!grams) {
-      const error = document.querySelector('[data-calc-error]');
-      if (error) error.textContent = 'Skriv cirka-vekt, eller trykk “Jeg vet ikke vekten”.';
-      return;
-    }
-    moveToStep(4, true);
-  }
+function updateCalculatorResult() {
+  const result = document.querySelector('[data-calc-result-live]');
+  const label = document.querySelector('.calc-result .calc-label');
+  if (!result || !label) return;
+  const metal = activeMetal();
+  const estimate = calculateEstimatedPrice();
+  const unknownType = calculatorState.typeLabel === 'Jeg er usikker';
+  const needsHelp = calculatorState.unknownWeight || unknownType || !calculatorState.typeLabel;
+  label.textContent = needsHelp ? 'Vi hjelper deg' : 'Din estimerte pris';
+  result.innerHTML = estimate !== null
+    ? `<div class="calc-value">Ca. ${kr(estimate)}</div><p class="calc-status">${esc(metal.resultText)}</p>`
+    : `<p class="calc-status">${esc(calculatorState.unknownWeight || unknownType ? 'Send forespørsel, så hjelper vi deg med type og vekt.' : 'Velg type og skriv cirka-vekt for å se pris, eller send forespørsel med en gang.')}</p>`;
 }
 
 function parseWeight() {
@@ -592,22 +529,21 @@ async function fetchMetalPrices() {
 
 function initCalculator(config) {
   calculatorState.metal = config.defaultMetal;
-  calculatorState.step = 1;
   calculatorState.typeLabel = '';
   calculatorState.fineness = null;
   calculatorState.weight = '';
   calculatorState.unknownWeight = false;
   calculatorState.estimatedPrice = null;
-  renderCalculatorStep();
+  renderCalculator();
   updateFormFromCalculator();
 
   fetchMetalPrices().then((prices) => {
     calculatorState.priceNokOz.gold = prices.gold;
     calculatorState.priceNokOz.silver = prices.silver;
     calculatorState.isLive = true;
-    renderCalculatorStep();
+    renderCalculator();
   }).catch(() => {
-    renderCalculatorStep();
+    renderCalculator();
   });
 }
 
@@ -620,7 +556,7 @@ function updateFormFromCalculator() {
   const calcWeight = document.getElementById('form-calc-weight');
   const calcEstimate = document.getElementById('form-calc-estimate');
   if (formType) formType.value = metal.label;
-  if (formWeight && calculatorState.weight) formWeight.value = calculatorState.weight + ' g';
+  if (formWeight) formWeight.value = calculatorState.unknownWeight ? 'Vet ikke' : (calculatorState.weight ? calculatorState.weight + ' g' : '');
   if (calcMetal) calcMetal.value = metal.label;
   if (calcType) calcType.value = calculatorState.typeLabel || 'Ikke valgt';
   if (calcWeight) calcWeight.value = calculatorState.unknownWeight ? 'Vet ikke' : (calculatorState.weight ? calculatorState.weight + ' g' : 'Ikke oppgitt');
@@ -674,7 +610,7 @@ function initForm(config) {
       'Takk! Vi har mottatt forespørselen din. Vi tar kontakt og hjelper deg videre.';
 
     window.location.href = 'mailto:post@sherwanigull.no?subject=' +
-      encodeURIComponent(METAL_OPTIONS[config.defaultMetal].emailSubject) + '&body=' + encodeURIComponent(body);
+      encodeURIComponent(activeMetal().emailSubject) + '&body=' + encodeURIComponent(body);
   });
 }
 
@@ -705,10 +641,9 @@ function renderSellPage() {
     '<div class="section-spacer spacer-sun" aria-hidden="true"></div>',
     MetalCalculator(config),
     '<div class="section-spacer spacer-water" aria-hidden="true"></div>',
-    MetalItemsSection(config),
-    SellProcessSteps(config),
-    PickupAreaSection(config),
     SellInquiryForm(config),
+    PickupAreaSection(config),
+    MetalItemsSection(config),
     FAQSection()
   ].join('');
 
