@@ -309,7 +309,7 @@ function renderCalculator() {
         <p class="calc-help">${esc(metal.weightText)}</p>
         <button class="text-button" type="button" data-action="unknown-weight">Jeg vet ikke vekten</button>
       </div>
-      <div class="calc-result">
+      <div class="calc-result ${metal.accent === 'silver' ? 'result-silver' : ''}">
         <div class="calc-label">${needsHelp ? 'Vi hjelper deg' : 'Din estimerte pris'}</div>
         <div data-calc-result-live>
         ${canShowPrice ? `

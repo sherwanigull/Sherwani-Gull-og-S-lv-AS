@@ -45,6 +45,7 @@ nav {
 .btn-dark { background: #1c1c1a; color: #faf8f4; }
 .btn-gold { border-color: #c4a96e; background: #fffaf0; box-shadow: 0 10px 24px rgba(196, 169, 110, 0.16); }
 .btn-silver { border-color: #b7b3ac; background: #f4f3f1; box-shadow: 0 10px 24px rgba(137, 130, 120, 0.12); }
+.btn-silver:hover { background: #eceae6; color: #1c1c1a; }
 .btn:active { background: #1c1c1a; color: #faf8f4; }
 
 .sell-hero { padding: 34px 20px 22px; text-align: center; }
@@ -163,15 +164,20 @@ nav {
   border: 0.5px solid #d9bd75;
   padding: 7px 9px;
 }
+.choice-card.choice-silver em {
+  color: #66625c;
+  background: #eceae6;
+  border-color: #b7b3ac;
+}
 .choice-card.selected {
   border-color: #c4a96e;
   background: #fffaf0;
   box-shadow: 0 8px 22px rgba(196,169,110,0.13);
 }
 .choice-card.choice-silver.selected {
-  border-color: #aaa59a;
-  background: #f7f5f0;
-  box-shadow: 0 8px 22px rgba(138,126,110,0.12);
+  border-color: #b7b3ac;
+  background: #f4f3f1;
+  box-shadow: 0 8px 22px rgba(137, 130, 120, 0.14);
 }
 .type-grid { grid-template-columns: 1fr 1fr; }
 .type-grid .choice-card { min-height: 58px; padding: 13px; justify-content: center; text-align: center; }
@@ -210,6 +216,8 @@ nav {
 .sell-form .field textarea { background: #fff; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: 1px solid #c4a96e; border-color: #c4a96e; }
 .calc-result { background: #fffaf0; border: 1px solid #c4a96e; padding: 20px; }
+.calc-result.result-silver { background: #f4f3f1; border-color: #b7b3ac; }
+.calc-result.result-silver .calc-label { color: #66625c; }
 .calc-label { font-size: 10px; letter-spacing: 2.2px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 8px; }
 .calc-value { font-size: 38px; color: #1c1c1a; line-height: 1.12; margin-bottom: 8px; }
 .calc-status, .form-note, .disclaimer { color: #5f5648; font-size: 14px; line-height: 1.65; }
@@ -294,6 +302,7 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
     color: #1c1c1a; text-decoration: none; transition: color 0.2s;
   }
   .nav-desktop-right a.nav-cta { border: 1px solid #c4a96e; padding: 10px 14px; background: #fffaf0; }
+  .nav-desktop-right a.nav-cta.btn-silver { border-color: #b7b3ac; background: #f4f3f1; }
   .nav-desktop-left a:hover, .nav-desktop-right a:hover { color: #c4a96e; }
   .sell-hero { padding: 70px 64px 56px; text-align: left; }
   .sell-hero-inner { grid-template-columns: 1.2fr 0.8fr; align-items: center; gap: 54px; }
