@@ -164,13 +164,12 @@ function SellHero(config) {
     <section class="sell-hero">
       <div class="sell-hero-inner">
         <div>
-          <div class="hero-sun" aria-hidden="true"></div>
           <div class="hero-eyebrow">${esc(config.heroEyebrow)}</div>
           <h1 class="hero-title">${esc(config.heroTitle)}</h1>
           <p class="hero-desc">${esc(config.heroDesc)}</p>
           <div class="hero-actions">
-            <a class="btn btn-dark" href="#kalkulator">${esc(config.primaryCta)}</a>
-            <a class="btn btn-soft" href="#foresporsel">${esc(config.secondaryCta)}</a>
+            <a class="btn ${config.defaultMetal === 'gold' ? 'btn-gold' : 'btn-silver'}" href="#kalkulator">${esc(config.primaryCta)}</a>
+            <a class="btn ${config.defaultMetal === 'gold' ? 'btn-silver' : 'btn-gold'}" href="${config.defaultMetal === 'gold' ? '../selg-solv/' : '../selg-gull/'}">${config.defaultMetal === 'gold' ? 'Selg sølv' : 'Selg gull'}</a>
           </div>
           <p class="hero-note">${esc(config.note)}</p>
           ${TrustBadges(config)}
@@ -646,9 +645,7 @@ function renderSellPage() {
 
   root.innerHTML = [
     SellHero(config),
-    '<div class="section-spacer spacer-sun" aria-hidden="true"></div>',
     MetalCalculator(config),
-    '<div class="section-spacer spacer-water" aria-hidden="true"></div>',
     SellInquiryForm(config),
     PickupAreaSection(config),
     MetalItemsSection(config),

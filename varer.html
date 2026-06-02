@@ -37,31 +37,6 @@ nav {
 .cart-icon { padding: 10px; display: flex; align-items: center; }
 .cart-icon svg { width: 24px; height: 24px; stroke: #1c1c1a; fill: none; stroke-width: 1.2; }
 
-.section-spacer {
-  position: relative;
-  height: 58px;
-  background: #faf8f4;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 112px 24px;
-}
-.section-spacer::before,
-.section-spacer::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: min(22vw, 120px);
-  height: 1px;
-  background: #ddd4c6;
-}
-.section-spacer::before { left: 20px; }
-.section-spacer::after { right: 20px; }
-.spacer-mountain {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='none' stroke='%23b89a62' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 18 34 7l11 11'/%3E%3Cpath d='M38 18 58 4l18 14'/%3E%3Cpath d='M68 18 82 9l11 9'/%3E%3C/svg%3E");
-}
-.spacer-water {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' fill='none' stroke='%23b89a62' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M18 10c5 4 10 4 15 0s10-4 15 0 10 4 15 0 10-4 15 0'/%3E%3Cpath d='M24 16c5 4 10 4 15 0s10-4 15 0 10 4 15 0 10-4 15 0'/%3E%3C/svg%3E");
-}
 
 .page-hero { padding: 48px 24px 42px; text-align: center; }
 .page-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 18px; }
@@ -100,6 +75,7 @@ nav {
   display: inline-flex; align-items: center; justify-content: center; text-align: center;
 }
 .btn-soft { border-color: #c4a96e; background: #fffaf0; }
+.btn-silver { border-color: #b7b3ac; background: #f4f3f1; }
 .empty-state {
   max-width: 720px; margin: 0 auto; background: #fff; border: 0.5px solid #e4ddd0;
   padding: 34px 26px; text-align: center;
@@ -125,10 +101,6 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .page-title { font-size: 32px; }
   .page-desc, .vare-desc, .empty-desc { font-size: 15px; line-height: 1.75; }
   .section { padding-left: 20px; padding-right: 20px; }
-  .section-spacer { height: 50px; }
-  .section-spacer::before,
-  .section-spacer::after { width: min(18vw, 72px); }
-  .section-spacer { background-size: 94px 20px; }
   .vare-top { display: grid; }
   .btn { width: 100%; }
   .footer-logo span { font-size: 11px; letter-spacing: 2px; }
@@ -173,7 +145,8 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <span class="sub">Gull &amp; Sølv</span>
   </a>
   <div class="nav-desktop-right">
-    <a href="index.html#skjema" class="nav-cta">Få vurdering</a>
+    <a href="selg-gull/" class="nav-cta">Selg gull</a>
+    <a href="selg-solv/" class="nav-cta btn-silver">Selg sølv</a>
     <a href="mailto:post@sherwanigull.no">post@sherwanigull.no</a>
   </div>
   <a href="mailto:post@sherwanigull.no" class="cart-icon" aria-label="Send e-post">
@@ -189,11 +162,8 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   <a href="index.html#om-oss" onclick="document.getElementById('drawer').classList.remove('open')">Om oss</a>
   <a href="index.html#tilbud" onclick="document.getElementById('drawer').classList.remove('open')">Veiledning</a>
   <a href="index.html#priser" onclick="document.getElementById('drawer').classList.remove('open')">Priser i dag</a>
-  <a href="index.html#skjema" class="drawer-cta" onclick="document.getElementById('drawer').classList.remove('open')">Få vurdering</a>
   <a href="mailto:post@sherwanigull.no" onclick="document.getElementById('drawer').classList.remove('open')">Send e-post</a>
 </div>
-
-<div class="section-spacer spacer-mountain" aria-hidden="true"></div>
 
 <main>
   <section class="page-hero">
@@ -201,9 +171,6 @@ footer { padding: 44px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <h1 class="page-title">Gull og sølv<br>som kan forespørres</h1>
     <p class="page-desc">Her legger vi ut varer som kan være tilgjengelige for salg. Utvalg og pris kan endre seg, så send gjerne en forespørsel hvis du ønsker mer informasjon eller en rolig vurdering.</p>
   </section>
-
-  <div class="section-spacer spacer-water" aria-hidden="true"></div>
-
   <section class="section">
     <div class="section-label">Varer</div>
     <div class="varer-toolbar">
