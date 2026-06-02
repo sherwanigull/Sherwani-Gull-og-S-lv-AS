@@ -164,6 +164,7 @@ nav {
 .hero-desc { font-size: 15px; color: #7a7060; line-height: 1.9; margin-bottom: 32px; max-width: 360px; margin-left: auto; margin-right: auto; }
 .hero-img { margin: 0 auto 20px; width: min(260px, 76vw); height: auto; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; }
 .hero-img img { width: 100%; height: 100%; object-fit: contain; }
+.hero-actions { display: grid; gap: 10px; }
 
 .btn {
   border: 1px solid #1c1c1a;
@@ -206,6 +207,16 @@ nav {
 .salg-teaser-inner { max-width: 680px; margin: 0 auto; text-align: center; }
 .salg-title { font-size: 30px; font-weight: 400; color: #1c1c1a; line-height: 1.35; margin-bottom: 14px; }
 .salg-desc { font-size: 15px; color: #7a7060; line-height: 1.85; margin: 0 auto 28px; max-width: 560px; }
+
+/* ── SELG FOKUS ── */
+.sell-focus { background: #fff; max-width: none; }
+.sell-focus-inner { max-width: 980px; margin: 0 auto; text-align: center; }
+.sell-focus-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 28px; text-align: left; }
+.sell-focus-card { background: #faf8f4; border: 0.5px solid #e4ddd0; padding: 28px 24px; display: grid; gap: 14px; }
+.sell-focus-card h3 { font-size: 24px; font-weight: 400; line-height: 1.35; color: #1c1c1a; }
+.sell-focus-card p { font-size: 15px; color: #7a7060; line-height: 1.75; }
+.sell-focus-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+.sell-focus-note { color: #8a7e6e; font-size: 13px; line-height: 1.7; margin-top: 20px; }
 
 /* ── SKJEMA ── */
 .skjema-section { padding: 56px 24px; background: #fff; scroll-margin-top: 110px; }
@@ -422,6 +433,7 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .hero > div:last-child { order: 1; }
   .hero-title { font-size: 52px; }
   .hero-desc { margin-left: 0; max-width: 480px; font-size: 16px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
   /* Pristabell */
   .pris-section { padding: 72px 64px; }
   .pris-inner { max-width: 640px; }
@@ -433,6 +445,9 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .tilbud-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; }
   .salg-teaser { max-width: none; }
   .salg-title { font-size: 38px; }
+  .sell-focus { max-width: none; }
+  .sell-focus-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .sell-focus-card { padding: 34px 30px; }
 
   /* Skjema */
   .skjema-section { padding: 72px 64px; }
@@ -463,8 +478,9 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 <!-- NAV -->
 <nav>
   <div class="nav-desktop-left">
+    <a href="selg-gull/">Selg gull</a>
+    <a href="selg-solv/">Selg sølv</a>
     <a href="varer.html">Til salgs</a>
-    <a href="#om-oss">Om oss</a>
     <a href="#priser">Priser i dag</a>
   </div>
   <button class="hamburger" onclick="document.getElementById('drawer').classList.add('open')" aria-label="Meny">
@@ -475,7 +491,7 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <span class="sub">Gull &amp; Sølv</span>
   </a>
   <div class="nav-desktop-right">
-    <a href="#skjema" class="nav-cta">Send forespørsel</a>
+    <a href="#skjema" class="nav-cta">Få uforpliktende vurdering</a>
     <a href="mailto:post@sherwanigull.no">post@sherwanigull.no</a>
   </div>
   <a href="mailto:post@sherwanigull.no" class="cart-icon" aria-label="Send e-post">
@@ -507,11 +523,13 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 <!-- DRAWER -->
 <div class="nav-drawer" id="drawer">
   <button class="nav-close" onclick="document.getElementById('drawer').classList.remove('open')" aria-label="Lukk">✕</button>
+  <a href="selg-gull/" onclick="document.getElementById('drawer').classList.remove('open')">Selg gull</a>
+  <a href="selg-solv/" onclick="document.getElementById('drawer').classList.remove('open')">Selg sølv</a>
   <a href="#om-oss" onclick="document.getElementById('drawer').classList.remove('open')">Om oss</a>
   <a href="varer.html" onclick="document.getElementById('drawer').classList.remove('open')">Til salgs</a>
   <a href="#tilbud" onclick="document.getElementById('drawer').classList.remove('open')">Veiledning</a>
   <a href="#priser" onclick="document.getElementById('drawer').classList.remove('open')">Priser i dag</a>
-  <a href="#skjema" class="drawer-cta" onclick="document.getElementById('drawer').classList.remove('open')">Send forespørsel</a>
+  <a href="#skjema" class="drawer-cta" onclick="document.getElementById('drawer').classList.remove('open')">Få uforpliktende vurdering</a>
   <a href="mailto:post@sherwanigull.no" onclick="document.getElementById('drawer').classList.remove('open')">Send e-post</a>
 </div>
 
@@ -522,10 +540,14 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   </div>
   <div>
     <div class="hero-sun" aria-hidden="true"></div>
-    <div class="hero-eyebrow">Kjøp · Salg · Gratis veiledning</div>
-    <h1 class="hero-title">Kjøp og salg<br>av gull og sølv</h1>
-    <p class="hero-desc">Vi kjøper gjerne sølv og gull fra deg, har varer tilgjengelig for salg, og hjelper deg med rolig veiledning hvis du er usikker på verdi, renhet eller neste steg.</p>
-    <a href="#skjema" class="btn">Selg eller kjøp</a>
+    <div class="hero-eyebrow">Selg gull og sølv · Uforpliktende vurdering</div>
+    <h1 class="hero-title">Selg gull og sølv<br>trygt og ryddig</h1>
+    <p class="hero-desc">Har du gull, sølv, smykker eller arvesølv du vurderer å selge? Vi hjelper deg med en rolig vurdering basert på vekt, renhet og dagens markedspris.</p>
+    <div class="hero-actions">
+      <a href="selg-gull/" class="btn btn-submit">Selg gull</a>
+      <a href="selg-solv/" class="btn">Selg sølv</a>
+      <a href="#skjema" class="btn">Få uforpliktende vurdering</a>
+    </div>
   </div>
 </div>
 
@@ -558,6 +580,35 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     </g>
   </svg>
 </div>
+
+<!-- SELG GULL OG SØLV -->
+<div class="section sell-focus" id="selg">
+  <div class="sell-focus-inner">
+    <div class="section-label">Selg til Sherwani</div>
+    <h2 class="salg-title">Send én lenke, få en ryddig vurdering</h2>
+    <p class="salg-desc">Velg gull eller sølv og fyll ut et kort skjema. Vi tar kontakt, forklarer prosessen og avtaler eventuelt gratis henting i Oslo, Akershus og Østfold.</p>
+    <div class="sell-focus-grid">
+      <article class="sell-focus-card">
+        <h3>Selg gull trygt og enkelt</h3>
+        <p>For smykker, ringer, kjeder, arvegull, ødelagt gull og gullmynter. Vurderingen er uforpliktende og basert på vekt, renhet og markedspris.</p>
+        <div class="sell-focus-links">
+          <a class="btn btn-submit" href="selg-gull/">Selg gull</a>
+        </div>
+      </article>
+      <article class="sell-focus-card">
+        <h3>Selg sølv på en enkel måte</h3>
+        <p>For sølvbestikk, sølvtøy, smykker, sølvmynter og arvesølv. Det gjør ingenting om sølvet er brukt, gravert eller ufullstendig.</p>
+        <div class="sell-focus-links">
+          <a class="btn btn-submit" href="selg-solv/">Selg sølv</a>
+        </div>
+      </article>
+    </div>
+    <p class="sell-focus-note">Ingen press. Du bestemmer alltid selv om du vil selge etter vurderingen.</p>
+  </div>
+</div>
+
+<!-- MOTIF -->
+<div class="section-spacer spacer-water" aria-hidden="true"></div>
 
 <!-- PRISER I DAG -->
 <div class="pris-section" id="priser">
@@ -769,6 +820,9 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   </a>
   <div class="footer-links">
     <a href="varer.html">Til salgs</a>
+    <a href="selg-gull/">Selg gull</a>
+    <a href="selg-solv/">Selg sølv</a>
+    <a href="#priser">Priser i dag</a>
     <a href="#tilbud">Veiledning</a>
     <a href="#skjema">Send forespørsel</a>
     <a href="#kontakt">Kontakt</a>
