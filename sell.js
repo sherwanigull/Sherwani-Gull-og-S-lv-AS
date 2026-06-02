@@ -8,7 +8,7 @@ const METAL_OPTIONS = {
     shortText: 'Smykker, ringer, arvegull',
     accent: 'gold',
     typeLabel: 'Velg type gull',
-    uncertainText: 'Det går fint. Send forespørsel, så hjelper vi deg å finne riktig type.',
+    uncertainText: 'Det går fint. Ta kontakt, så hjelper vi deg å finne riktig type.',
     weightText: 'Du kan skrive cirka-vekt hvis du er usikker.',
     resultText: 'Dette er et veiledende estimat. Endelig pris bekreftes etter kontroll av vekt og renhet.',
     emailSubject: 'Ny forespørsel: Selg gull',
@@ -33,7 +33,7 @@ const METAL_OPTIONS = {
     shortText: 'Bestikk, sølvtøy, mynter',
     accent: 'silver',
     typeLabel: 'Velg type sølv',
-    uncertainText: 'Det går fint. Send forespørsel, så hjelper vi deg å finne riktig type.',
+    uncertainText: 'Det går fint. Ta kontakt, så hjelper vi deg å finne riktig type.',
     weightText: 'Du kan skrive cirka-vekt hvis du er usikker.',
     resultText: 'Dette er et veiledende estimat. Endelig pris bekreftes etter kontroll av vekt og sølvtype.',
     emailSubject: 'Ny forespørsel: Selg sølv',
@@ -58,7 +58,7 @@ const SELL_PAGE_CONFIG = {
     heroTitle: 'Selg gull trygt og enkelt',
     heroDesc: 'Har du gullsmykker, ringer, kjeder eller arvegull? Få en enkel og uforpliktende vurdering hos Sherwani Gull & Sølv.',
     primaryCta: 'Beregn pris',
-    secondaryCta: 'Send forespørsel',
+    secondaryCta: 'Kontakt oss',
     note: 'Du trenger ikke vite nøyaktig vekt eller type. Velg gull eller sølv, så hjelper vi deg videre.',
     panelTitle: 'Slik kommer du i gang',
     panelText: 'Se cirka-pris, send kort forespørsel eller ring oss direkte. Enkelt og uforpliktende.',
@@ -87,7 +87,7 @@ const SELL_PAGE_CONFIG = {
     heroTitle: 'Selg sølv trygt og enkelt',
     heroDesc: 'Har du sølvbestikk, sølvtøy, sølvmynter eller sølvsmykker? Få en enkel og uforpliktende vurdering hos Sherwani Gull & Sølv.',
     primaryCta: 'Beregn pris',
-    secondaryCta: 'Send forespørsel',
+    secondaryCta: 'Kontakt oss',
     note: 'Du trenger ikke vite nøyaktig vekt eller type. Velg gull eller sølv, så hjelper vi deg videre.',
     panelTitle: 'Slik kommer du i gang',
     panelText: 'Se cirka-pris, send kort forespørsel eller ring oss direkte. Enkelt og uforpliktende.',
@@ -179,7 +179,7 @@ function SellHero(config) {
           <p>${esc(config.panelText)}</p>
           <div class="quick-links" aria-label="Hurtigvalg">
             <a href="#kalkulator">Beregn pris</a>
-            <a href="#foresporsel">Send forespørsel</a>
+            <a href="#foresporsel">Kontakt oss</a>
             <a href="#henting">Gratis henting</a>
             <a href="tel:+4747996251">Ring oss</a>
           </div>
@@ -247,7 +247,7 @@ function MetalCalculator(config) {
       <div class="section-inner">
         <div class="section-label">Beregn pris</div>
         <h2 class="section-title">Se cirka-pris raskt</h2>
-        <p class="section-desc">Velg gull eller sølv. Vet du ikke vekt eller type, hopper du bare rett til forespørsel.</p>
+        <p class="section-desc">Velg gull eller sølv. Vet du ikke vekt eller type, kan du gå rett til kontakt.</p>
         <div class="calculator" data-calculator>
           <div data-calc-content></div>
         </div>
@@ -316,14 +316,14 @@ function renderCalculator() {
           <div class="calc-value">Ca. ${kr(calculatorState.estimatedPrice)}</div>
           <p class="calc-status">${esc(metal.resultText)}</p>
         ` : `
-          <p class="calc-status">${esc(calculatorState.unknownWeight || unknownType ? 'Send forespørsel, så hjelper vi deg med type og vekt.' : 'Velg type og skriv cirka-vekt for å se pris, eller send forespørsel med en gang.')}</p>
+          <p class="calc-status">${esc(calculatorState.unknownWeight || unknownType ? 'Ta kontakt, så hjelper vi deg med type og vekt.' : 'Velg type og skriv cirka-vekt for å se pris, eller ta kontakt med en gang.')}</p>
         `}
         </div>
         <div class="calc-actions">
-          <button class="btn btn-dark" type="button" data-action="form">Send forespørsel</button>
+          <button class="btn btn-dark" type="button" data-action="form">Kontakt oss</button>
           <a class="btn btn-soft" href="tel:+4747996251">Ring oss</a>
         </div>
-        <button class="text-button" type="button" data-action="form">Usikker? Send forespørsel, så hjelper vi deg.</button>
+        <button class="text-button" type="button" data-action="form">Usikker? Ta kontakt, så hjelper vi deg.</button>
       </div>
     </div>
   `;
@@ -392,7 +392,7 @@ function updateCalculatorResult() {
   label.textContent = needsHelp ? 'Vi hjelper deg' : 'Din estimerte pris';
   result.innerHTML = estimate !== null
     ? `<div class="calc-value">Ca. ${kr(estimate)}</div><p class="calc-status">${esc(metal.resultText)}</p>`
-    : `<p class="calc-status">${esc(calculatorState.unknownWeight || unknownType ? 'Send forespørsel, så hjelper vi deg med type og vekt.' : 'Velg type og skriv cirka-vekt for å se pris, eller send forespørsel med en gang.')}</p>`;
+    : `<p class="calc-status">${esc(calculatorState.unknownWeight || unknownType ? 'Ta kontakt, så hjelper vi deg med type og vekt.' : 'Velg type og skriv cirka-vekt for å se pris, eller ta kontakt med en gang.')}</p>`;
 }
 
 function parseWeight() {
@@ -422,8 +422,8 @@ function SellInquiryForm(config) {
   return `
     <section class="section form-section" id="foresporsel">
       <div class="section-inner">
-        <div class="section-label">Send forespørsel</div>
-        <h2 class="section-title">Send forespørsel</h2>
+        <div class="section-label">Kontakt oss</div>
+        <h2 class="section-title">Kontakt oss</h2>
         <p class="section-desc">Du trenger ikke vite nøyaktig vekt eller type. Send inn det du vet, så hjelper vi deg videre.</p>
         <form class="sell-form" id="sell-form">
           <input type="hidden" id="form-source" value="${esc(config.pagePath)}">
@@ -472,7 +472,7 @@ function SellInquiryForm(config) {
             <span>Jeg ønsker å bli kontaktet på telefon</span>
           </label>
           <p class="form-note">Bildeopplasting er ikke koblet til skjemaet ennå. Du kan sende bilder direkte til post@sherwanigull.no etter at du har sendt forespørselen.</p>
-          <button class="btn btn-dark" type="submit">Send forespørsel</button>
+          <button class="btn btn-dark" type="submit">Kontakt oss</button>
           <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
         </form>
       </div>
