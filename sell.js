@@ -305,7 +305,7 @@ function renderCalculator() {
         <div class="calc-mini-label">3. Vekt</div>
         <div class="field">
           <label for="calc-weight">Skriv vekt i gram</label>
-          <input id="calc-weight" data-calc-weight type="number" min="0" step="0.1" inputmode="decimal" placeholder="f.eks. 25" value="${esc(calculatorState.weight)}">
+          <input id="calc-weight" data-calc-weight type="number" min="0" max="99999" step="1" inputmode="numeric" placeholder="f.eks. 12000" value="${esc(calculatorState.weight)}">
         </div>
         <p class="calc-help">${esc(metal.weightText)}</p>
         <button class="text-button" type="button" data-action="unknown-weight">Jeg vet ikke vekten</button>
@@ -341,7 +341,7 @@ function bindCalculator() {
         calculatorState.typeLabel = '';
         calculatorState.fineness = null;
         calculatorState.estimatedPrice = null;
-        updateFormFromCalculator();
+        updateFormFromCalculator(true);
         renderCalculator();
         return;
       }
@@ -351,7 +351,7 @@ function bindCalculator() {
         calculatorState.typeLabel = label;
         calculatorState.fineness = item ? item[1] : null;
         calculatorState.estimatedPrice = null;
-        updateFormFromCalculator();
+        updateFormFromCalculator(true);
         renderCalculator();
         return;
       }
@@ -359,12 +359,12 @@ function bindCalculator() {
         calculatorState.unknownWeight = true;
         calculatorState.weight = '';
         calculatorState.estimatedPrice = null;
-        updateFormFromCalculator();
+        updateFormFromCalculator(true);
         renderCalculator();
         return;
       }
       if (action === 'form') {
-        updateFormFromCalculator();
+        updateFormFromCalculator(true);
         scrollToForm();
       }
     });
@@ -376,7 +376,7 @@ function bindCalculator() {
       calculatorState.weight = weightInput.value;
       calculatorState.unknownWeight = false;
       calculateEstimatedPrice();
-      updateFormFromCalculator();
+      updateFormFromCalculator(true);
       updateCalculatorResult();
     });
   }
@@ -411,6 +411,12 @@ function calculateEstimatedPrice() {
   const internalValue = grams * pricePerGramPure * calculatorState.fineness;
   calculatorState.estimatedPrice = internalValue * metal.buyRate;
   return calculatorState.estimatedPrice;
+}
+
+function formatSubmittedWeight(value) {
+  const clean = String(value || '').trim();
+  if (!clean) return 'Ikke oppgitt';
+  return /^\d+([,.]\d+)?$/.test(clean) ? clean.replace('.', ',') + ' g' : clean;
 }
 
 function SellInquiryForm(config) {
@@ -451,7 +457,7 @@ function SellInquiryForm(config) {
             </div>
             <div class="field">
               <label for="form-weight">Omtrentlig vekt</label>
-              <input id="form-weight" name="vekt" type="text" inputmode="decimal" placeholder="Valgfritt">
+              <input id="form-weight" name="vekt" type="number" min="0" max="99999" step="1" inputmode="numeric" placeholder="Valgfritt, f.eks. 12000">
             </div>
           </div>
           <div class="field">
@@ -535,7 +541,7 @@ function initCalculator(config) {
   calculatorState.unknownWeight = false;
   calculatorState.estimatedPrice = null;
   renderCalculator();
-  updateFormFromCalculator();
+  updateFormFromCalculator(true);
 
   fetchMetalPrices().then((prices) => {
     calculatorState.priceNokOz.gold = prices.gold;
@@ -547,7 +553,7 @@ function initCalculator(config) {
   });
 }
 
-function updateFormFromCalculator() {
+function updateFormFromCalculator(syncVisibleFields = false) {
   const metal = activeMetal();
   const formType = document.getElementById('form-type');
   const formWeight = document.getElementById('form-weight');
@@ -555,8 +561,10 @@ function updateFormFromCalculator() {
   const calcType = document.getElementById('form-calc-type');
   const calcWeight = document.getElementById('form-calc-weight');
   const calcEstimate = document.getElementById('form-calc-estimate');
-  if (formType) formType.value = metal.label;
-  if (formWeight) formWeight.value = calculatorState.unknownWeight ? 'Vet ikke' : (calculatorState.weight ? calculatorState.weight + ' g' : '');
+  if (syncVisibleFields && formType) formType.value = metal.label;
+  if (syncVisibleFields && formWeight && (calculatorState.unknownWeight || calculatorState.weight)) {
+    formWeight.value = calculatorState.unknownWeight ? 'Vet ikke' : calculatorState.weight + ' g';
+  }
   if (calcMetal) calcMetal.value = metal.label;
   if (calcType) calcType.value = calculatorState.typeLabel || 'Ikke valgt';
   if (calcWeight) calcWeight.value = calculatorState.unknownWeight ? 'Vet ikke' : (calculatorState.weight ? calculatorState.weight + ' g' : 'Ikke oppgitt');
@@ -590,7 +598,7 @@ function initForm(config) {
       'Telefon: ' + phone,
       'Ønsker å selge: ' + type,
       'Hvor holder kunden til: ' + (area || 'Ikke oppgitt'),
-      'Omtrentlig vekt: ' + (weight || 'Ikke oppgitt'),
+      'Omtrentlig vekt: ' + formatSubmittedWeight(weight),
       'Ønsker gratis henting hvis mulig: ' + pickup,
       'Ønsker telefonkontakt: ' + call,
       '',
