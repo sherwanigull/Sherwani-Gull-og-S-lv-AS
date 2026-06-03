@@ -43,6 +43,10 @@ const METAL_OPTIONS = {
       ['830S', 0.830],
       ['925S', 0.925],
       ['999', 0.999],
+      ['835', 0.835],
+      ['800', 0.800],
+      ['500 / eldre norske mynter', 0.500],
+      ['400 / enkelte eldre mynter', 0.400],
       ['Jeg er usikker', null]
     ]
   }
@@ -90,7 +94,7 @@ const SELL_PAGE_CONFIG = {
     ],
     itemsTitle: 'Hva slags sølv kan du selge?',
     itemsDesc: 'Du kan sende forespørsel selv om sølvet er brukt, gravert, ufullstendig eller upusset.',
-    items: ['Sølvbestikk', 'Sølvtøy', 'Sølvfat', 'Lysestaker', 'Smykker', 'Sølvmynter', 'Arvesølv', 'Ufullstendige sett'],
+    items: ['Sølvbestikk', 'Sølvtøy', 'Sølvfat', 'Lysestaker', 'Smykker', 'Sølvmynter', 'Eldre norske mynter', 'Arvesølv'],
     pickupTitle: 'Gratis hjemmehenting i Oslo, Akershus og Østfold',
     pickupText: 'Vi tilbyr etter avtale gratis hjemmehenting i Oslo, Akershus og Østfold. Dette passer godt hvis du har sølvbestikk, sølvtøy, arvesølv eller ønsker en enklere løsning hjemmefra.',
     pickupNote: 'Gratis hjemmehenting avtales individuelt og avhenger av område, tidspunkt og mengde.'
