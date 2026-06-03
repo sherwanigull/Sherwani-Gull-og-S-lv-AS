@@ -147,16 +147,33 @@ function activeMetal() {
   return METAL_OPTIONS[calculatorState.metal];
 }
 
-function scrollToForm() {
-  document.getElementById('foresporsel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
 function scrollToCalculator() {
   document.getElementById('kalkulator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function isSmallScreen() {
-  return window.matchMedia('(max-width: 640px)').matches;
+function mailtoHref(subject, body = '') {
+  return 'mailto:post@sherwanigull.no?subject=' + encodeURIComponent(subject) + (body ? '&body=' + encodeURIComponent(body) : '');
+}
+
+function openInquiryEmail(options = {}) {
+  const metal = activeMetal();
+  const type = calculatorState.typeLabel || 'Ikke valgt';
+  const weight = calculatorState.unknownWeight ? 'Vet ikke' : (calculatorState.weight ? calculatorState.weight + ' g' : 'Ikke oppgitt');
+  const estimate = calculatorState.estimatedPrice ? kr(calculatorState.estimatedPrice) : 'Ikke beregnet';
+  const lines = [
+    'Side: ' + metal.pagePath,
+    'Metall: ' + metal.label,
+    'Type: ' + type,
+    'Vekt: ' + weight,
+    'Estimert pris: ' + estimate
+  ];
+
+  if (options.pickup) {
+    lines.push('Ønske: Gratis henting hvis mulig');
+  }
+
+  lines.push('', 'Skriv gjerne navn, telefon og litt om hva du ønsker å selge.');
+  window.location.href = mailtoHref(metal.emailSubject, lines.join('\n'));
 }
 
 function SellHero(config) {
@@ -179,7 +196,7 @@ function SellHero(config) {
           <p>${esc(config.panelText)}</p>
           <div class="quick-links" aria-label="Hurtigvalg">
             <a href="#kalkulator">Beregn pris</a>
-            <a href="#foresporsel">Kontakt oss</a>
+            <a href="${mailtoHref(METAL_OPTIONS[config.defaultMetal].emailSubject)}">Send e-post</a>
             <a href="#henting">Gratis henting</a>
             <a href="tel:+4747996251">Ring oss</a>
           </div>
@@ -316,14 +333,14 @@ function renderCalculator() {
           <div class="calc-value">Ca. ${kr(calculatorState.estimatedPrice)}</div>
           <p class="calc-status">${esc(metal.resultText)}</p>
         ` : `
-          <p class="calc-status">${esc(calculatorState.unknownWeight || unknownType ? 'Ta kontakt, så hjelper vi deg med type og vekt.' : 'Velg type og skriv cirka-vekt for å se pris, eller ta kontakt med en gang.')}</p>
+          <p class="calc-status">${esc(calculatorState.unknownWeight || unknownType ? 'Send gjerne e-post, så hjelper vi deg med type og vekt.' : 'Velg type og skriv cirka-vekt for å se pris, eller send e-post med en gang.')}</p>
         `}
         </div>
         <div class="calc-actions">
-          <button class="btn btn-dark" type="button" data-action="form">Kontakt oss</button>
+          <button class="btn btn-dark" type="button" data-action="email">Send e-post</button>
           <a class="btn btn-soft" href="tel:+4747996251">Ring oss</a>
         </div>
-        <button class="text-button" type="button" data-action="form">Usikker? Ta kontakt, så hjelper vi deg.</button>
+        <button class="text-button" type="button" data-action="email">Usikker? Send e-post, så hjelper vi deg.</button>
       </div>
     </div>
   `;
@@ -340,7 +357,6 @@ function bindCalculator() {
         calculatorState.typeLabel = '';
         calculatorState.fineness = null;
         calculatorState.estimatedPrice = null;
-        updateFormFromCalculator(true);
         renderCalculator();
         return;
       }
@@ -350,7 +366,6 @@ function bindCalculator() {
         calculatorState.typeLabel = label;
         calculatorState.fineness = item ? item[1] : null;
         calculatorState.estimatedPrice = null;
-        updateFormFromCalculator(true);
         renderCalculator();
         return;
       }
@@ -358,13 +373,11 @@ function bindCalculator() {
         calculatorState.unknownWeight = true;
         calculatorState.weight = '';
         calculatorState.estimatedPrice = null;
-        updateFormFromCalculator(true);
         renderCalculator();
         return;
       }
-      if (action === 'form') {
-        updateFormFromCalculator(true);
-        scrollToForm();
+      if (action === 'email') {
+        openInquiryEmail();
       }
     });
   });
@@ -375,7 +388,6 @@ function bindCalculator() {
       calculatorState.weight = weightInput.value;
       calculatorState.unknownWeight = false;
       calculateEstimatedPrice();
-      updateFormFromCalculator(true);
       updateCalculatorResult();
     });
   }
@@ -392,7 +404,7 @@ function updateCalculatorResult() {
   label.textContent = needsHelp ? 'Vi hjelper deg' : 'Din estimerte pris';
   result.innerHTML = estimate !== null
     ? `<div class="calc-value">Ca. ${kr(estimate)}</div><p class="calc-status">${esc(metal.resultText)}</p>`
-    : `<p class="calc-status">${esc(calculatorState.unknownWeight || unknownType ? 'Ta kontakt, så hjelper vi deg med type og vekt.' : 'Velg type og skriv cirka-vekt for å se pris, eller ta kontakt med en gang.')}</p>`;
+    : `<p class="calc-status">${esc(calculatorState.unknownWeight || unknownType ? 'Send gjerne e-post, så hjelper vi deg med type og vekt.' : 'Velg type og skriv cirka-vekt for å se pris, eller send e-post med en gang.')}</p>`;
 }
 
 function parseWeight() {
@@ -410,74 +422,6 @@ function calculateEstimatedPrice() {
   const internalValue = grams * pricePerGramPure * calculatorState.fineness;
   calculatorState.estimatedPrice = internalValue * metal.buyRate;
   return calculatorState.estimatedPrice;
-}
-
-function formatSubmittedWeight(value) {
-  const clean = String(value || '').trim();
-  if (!clean) return 'Ikke oppgitt';
-  return /^\d+([,.]\d+)?$/.test(clean) ? clean.replace('.', ',') + ' g' : clean;
-}
-
-function SellInquiryForm(config) {
-  return `
-    <section class="section form-section" id="foresporsel">
-      <div class="section-inner">
-        <div class="section-label">Kontakt oss</div>
-        <h2 class="section-title">Kontakt oss</h2>
-        <p class="section-desc">Du trenger ikke vite nøyaktig vekt eller type. Send inn det du vet, så hjelper vi deg videre.</p>
-        <form class="sell-form" id="sell-form">
-          <input type="hidden" id="form-source" value="${esc(config.pagePath)}">
-          <input type="hidden" id="form-calc-metal">
-          <input type="hidden" id="form-calc-type">
-          <input type="hidden" id="form-calc-weight">
-          <input type="hidden" id="form-calc-estimate">
-          <div class="form-row">
-            <div class="field">
-              <label for="form-name">Navn</label>
-              <input id="form-name" name="navn" type="text" autocomplete="name" required>
-            </div>
-            <div class="field">
-              <label for="form-phone">Telefonnummer</label>
-              <input id="form-phone" name="telefon" type="tel" autocomplete="tel" required>
-            </div>
-          </div>
-          <div class="field">
-            <label for="form-type">Hva ønsker du å selge?</label>
-            <select id="form-type" name="type" required>
-              ${['Gull', 'Sølv', 'Begge deler', 'Usikker'].map((option) =>
-                `<option${option === METAL_OPTIONS[config.defaultMetal].label ? ' selected' : ''}>${option}</option>`
-              ).join('')}
-            </select>
-          </div>
-          <div class="form-row">
-            <div class="field">
-              <label for="form-area">Hvor holder du til?</label>
-              <input id="form-area" name="omrade" type="text" autocomplete="address-level2" placeholder="Valgfritt">
-            </div>
-            <div class="field">
-              <label for="form-weight">Omtrentlig vekt</label>
-              <input id="form-weight" name="vekt" type="number" min="0" max="99999" step="1" inputmode="numeric" placeholder="Valgfritt, f.eks. 12000">
-            </div>
-          </div>
-          <div class="field">
-            <label for="form-message">Kort beskrivelse</label>
-            <textarea id="form-message" name="melding" placeholder="Valgfritt. Skriv gjerne hva du har."></textarea>
-          </div>
-          <label class="checkbox-card">
-            <input id="form-pickup" type="checkbox">
-            <span>Jeg ønsker gratis henting hvis mulig</span>
-          </label>
-          <label class="checkbox-card">
-            <input id="form-call" type="checkbox" checked>
-            <span>Jeg ønsker å bli kontaktet på telefon</span>
-          </label>
-          <p class="form-note">Bildeopplasting er ikke koblet til skjemaet ennå. Du kan sende bilder direkte til post@sherwanigull.no etter at du har sendt forespørselen.</p>
-          <button class="btn btn-dark" type="submit">Kontakt oss</button>
-          <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
-        </form>
-      </div>
-    </section>
-  `;
 }
 
 function FAQSection() {
@@ -540,8 +484,6 @@ function initCalculator(config) {
   calculatorState.unknownWeight = false;
   calculatorState.estimatedPrice = null;
   renderCalculator();
-  updateFormFromCalculator(true);
-
   fetchMetalPrices().then((prices) => {
     calculatorState.priceNokOz.gold = prices.gold;
     calculatorState.priceNokOz.silver = prices.silver;
@@ -552,87 +494,13 @@ function initCalculator(config) {
   });
 }
 
-function updateFormFromCalculator(syncVisibleFields = false) {
-  const metal = activeMetal();
-  const formType = document.getElementById('form-type');
-  const formWeight = document.getElementById('form-weight');
-  const calcMetal = document.getElementById('form-calc-metal');
-  const calcType = document.getElementById('form-calc-type');
-  const calcWeight = document.getElementById('form-calc-weight');
-  const calcEstimate = document.getElementById('form-calc-estimate');
-  if (syncVisibleFields && formType) formType.value = metal.label;
-  if (syncVisibleFields && formWeight && (calculatorState.unknownWeight || calculatorState.weight)) {
-    formWeight.value = calculatorState.unknownWeight ? 'Vet ikke' : calculatorState.weight + ' g';
-  }
-  if (calcMetal) calcMetal.value = metal.label;
-  if (calcType) calcType.value = calculatorState.typeLabel || 'Ikke valgt';
-  if (calcWeight) calcWeight.value = calculatorState.unknownWeight ? 'Vet ikke' : (calculatorState.weight ? calculatorState.weight + ' g' : 'Ikke oppgitt');
-  if (calcEstimate) calcEstimate.value = calculatorState.estimatedPrice ? kr(calculatorState.estimatedPrice) : 'Ikke beregnet';
-}
-
-function initForm(config) {
-  const form = document.getElementById('sell-form');
-  if (!form) return;
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    updateFormFromCalculator();
-    const name = document.getElementById('form-name').value.trim();
-    const phone = document.getElementById('form-phone').value.trim();
-    const area = document.getElementById('form-area').value.trim();
-    const type = document.getElementById('form-type').value;
-    const weight = document.getElementById('form-weight').value.trim();
-    const message = document.getElementById('form-message').value.trim();
-    const pickup = document.getElementById('form-pickup').checked ? 'Ja' : 'Nei';
-    const call = document.getElementById('form-call').checked ? 'Ja' : 'Nei';
-    const source = document.getElementById('form-source').value;
-    const calcMetal = document.getElementById('form-calc-metal').value;
-    const calcType = document.getElementById('form-calc-type').value;
-    const calcWeight = document.getElementById('form-calc-weight').value;
-    const calcEstimate = document.getElementById('form-calc-estimate').value;
-
-    const body = [
-      'Side: ' + source,
-      'Navn: ' + name,
-      'Telefon: ' + phone,
-      'Ønsker å selge: ' + type,
-      'Hvor holder kunden til: ' + (area || 'Ikke oppgitt'),
-      'Omtrentlig vekt: ' + formatSubmittedWeight(weight),
-      'Ønsker gratis henting hvis mulig: ' + pickup,
-      'Ønsker telefonkontakt: ' + call,
-      '',
-      'Fra kalkulator:',
-      'Valgt metall: ' + calcMetal,
-      'Valgt type: ' + calcType,
-      'Vekt: ' + calcWeight,
-      'Estimert pris vist til kunde: ' + calcEstimate,
-      '',
-      'Beskrivelse:',
-      message || 'Ikke oppgitt',
-      '',
-      'Bilder kan legges ved i denne e-posten før sending.'
-    ].join('\n');
-
-    document.getElementById('form-status').textContent =
-      'Takk! Vi har mottatt forespørselen din. Vi tar kontakt og hjelper deg videre.';
-
-    window.location.href = 'mailto:post@sherwanigull.no?subject=' +
-      encodeURIComponent(activeMetal().emailSubject) + '&body=' + encodeURIComponent(body);
-  });
-}
-
 function bindPageActions() {
-  document.querySelectorAll('[data-scroll-form]').forEach((button) => {
-    button.addEventListener('click', scrollToForm);
-  });
   document.querySelectorAll('[data-scroll-calc]').forEach((button) => {
     button.addEventListener('click', scrollToCalculator);
   });
   document.querySelectorAll('[data-pickup-request]').forEach((button) => {
     button.addEventListener('click', () => {
-      const pickup = document.getElementById('form-pickup');
-      if (pickup) pickup.checked = true;
-      scrollToForm();
+      openInquiryEmail({ pickup: true });
     });
   });
 }
@@ -646,14 +514,12 @@ function renderSellPage() {
   root.innerHTML = [
     SellHero(config),
     MetalCalculator(config),
-    SellInquiryForm(config),
     PickupAreaSection(config),
     MetalItemsSection(config),
     FAQSection()
   ].join('');
 
   initCalculator(config);
-  initForm(config);
   bindPageActions();
 }
 
