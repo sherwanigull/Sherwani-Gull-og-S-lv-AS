@@ -97,16 +97,6 @@ nav {
   color: #4c4334; background: #fff; border: 0.5px solid #e4ddd0; padding: 12px 14px;
 }
 
-.process-grid { counter-reset: step; display: grid; gap: 14px; }
-.process-card { background: #fff; border: 0.5px solid #e4ddd0; padding: 24px 20px; position: relative; }
-.process-card::before {
-  counter-increment: step; content: counter(step);
-  display: inline-flex; width: 34px; height: 34px; align-items: center; justify-content: center;
-  border: 1px solid #c4a96e; color: #a89060; margin-bottom: 16px;
-}
-.process-card h3 { font-size: 21px; font-weight: 400; margin-bottom: 10px; }
-.process-card p { color: #7a7060; font-size: 15px; line-height: 1.75; }
-
 .pickup-section { background: #1c1c1a; color: #f0ebe1; }
 .pickup-section .section-label { color: #c4a96e; }
 .pickup-section .section-title { color: #f0ebe1; }
@@ -210,36 +200,13 @@ nav {
   padding: 17px 15px; color: #1c1c1a; font-family: Georgia, serif;
   font-size: 16px; border-radius: 0;
 }
-.field textarea { min-height: 126px; resize: vertical; line-height: 1.6; }
-.sell-form .field input,
-.sell-form .field select,
-.sell-form .field textarea { background: #fff; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: 1px solid #c4a96e; border-color: #c4a96e; }
 .calc-result { background: #fffaf0; border: 1px solid #c4a96e; padding: 20px; }
 .calc-result.result-silver { background: #f4f3f1; border-color: #b7b3ac; }
 .calc-result.result-silver .calc-label { color: #66625c; }
 .calc-label { font-size: 10px; letter-spacing: 2.2px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 8px; }
 .calc-value { font-size: 38px; color: #1c1c1a; line-height: 1.12; margin-bottom: 8px; }
-.calc-status, .form-note, .disclaimer { color: #5f5648; font-size: 14px; line-height: 1.65; }
-.disclaimer { margin-top: 14px; }
-
-.form-section { background: #fff; }
-.sell-form {
-  display: grid;
-  gap: 16px;
-  max-width: 760px;
-  margin: 0 auto;
-  background: #faf8f4;
-  border: 0.5px solid #e4ddd0;
-  padding: 18px;
-}
-.checkbox-card {
-  display: flex; gap: 11px; align-items: flex-start;
-  background: #faf8f4; border: 0.5px solid #e4ddd0; padding: 14px;
-  color: #5f5648; line-height: 1.55; cursor: pointer;
-}
-.checkbox-card input { width: 18px; height: 18px; margin-top: 2px; accent-color: #c4a96e; }
-.form-status { min-height: 24px; color: #447660; font-size: 14px; line-height: 1.6; text-align: center; }
+.calc-status { color: #5f5648; font-size: 14px; line-height: 1.65; }
 
 .faq-list { max-width: 820px; margin: 0 auto; display: grid; gap: 10px; }
 .faq-item { background: #fff; border: 0.5px solid #e4ddd0; padding: 18px; }
@@ -275,7 +242,6 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
   .btn { width: 100%; padding-left: 16px; padding-right: 16px; }
   .section { padding-left: 20px; padding-right: 20px; }
   .calculator { margin-left: -4px; margin-right: -4px; padding: 14px; }
-  .sell-form { margin-left: -4px; margin-right: -4px; padding: 14px; }
   .choice-card { min-height: 70px; }
   .quick-links a { font-size: 11px; letter-spacing: 1.2px; }
   .calc-value { font-size: 34px; }
@@ -286,7 +252,6 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
   .hero-actions { display: flex; justify-content: center; flex-wrap: wrap; }
   .trust-grid { grid-template-columns: repeat(2, 1fr); }
   .card-grid { grid-template-columns: repeat(2, 1fr); }
-  .form-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .choice-grid { grid-template-columns: repeat(2, 1fr); }
   .type-grid { grid-template-columns: repeat(4, 1fr); }
   .calc-actions { display: flex; flex-wrap: wrap; }
@@ -301,7 +266,14 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
     font-size: 12px; letter-spacing: 2.2px; text-transform: uppercase;
     color: #1c1c1a; text-decoration: none; transition: color 0.2s;
   }
-  .nav-desktop-right a.nav-cta { border: 1px solid #c4a96e; padding: 10px 14px; background: #fffaf0; }
+  .nav-desktop-right a.nav-cta {
+    min-width: 138px;
+    min-height: 44px;
+    justify-content: center;
+    border: 1px solid #c4a96e;
+    padding: 10px 18px;
+    background: #fffaf0;
+  }
   .nav-desktop-right a.nav-cta.btn-silver { border-color: #b7b3ac; background: #f4f3f1; }
   .nav-desktop-left a:hover, .nav-desktop-right a:hover { color: #c4a96e; }
   .sell-hero { padding: 70px 64px 56px; text-align: left; }
@@ -312,7 +284,6 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
   .section { padding: 76px 64px; }
   .section-title { font-size: 38px; }
   .card-grid { grid-template-columns: repeat(3, 1fr); }
-  .process-grid { grid-template-columns: repeat(3, 1fr); }
   .mobile-sticky-cta { display: none; }
   footer { display: flex; align-items: center; justify-content: space-between; padding: 34px 64px; text-align: left; }
   .footer-logo, .footer-links { margin-bottom: 0; }

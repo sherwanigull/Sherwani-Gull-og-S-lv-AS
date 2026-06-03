@@ -13,7 +13,6 @@ const METAL_OPTIONS = {
     resultText: 'Dette er et veiledende estimat. Endelig pris bekreftes etter kontroll av vekt og renhet.',
     emailSubject: 'Ny forespørsel: Selg gull',
     pagePath: '/selg-gull',
-    priceSource: 'gold',
     fallbackNokOz: 36500,
     buyRate: GOLD_BUY_RATE,
     types: [
@@ -38,7 +37,6 @@ const METAL_OPTIONS = {
     resultText: 'Dette er et veiledende estimat. Endelig pris bekreftes etter kontroll av vekt og sølvtype.',
     emailSubject: 'Ny forespørsel: Selg sølv',
     pagePath: '/selg-solv',
-    priceSource: 'silver',
     fallbackNokOz: 420,
     buyRate: SILVER_BUY_RATE,
     types: [
@@ -58,10 +56,9 @@ const SELL_PAGE_CONFIG = {
     heroTitle: 'Selg gull trygt og enkelt',
     heroDesc: 'Har du gullsmykker, ringer, kjeder eller arvegull? Få en enkel og uforpliktende vurdering hos Sherwani Gull & Sølv.',
     primaryCta: 'Beregn pris',
-    secondaryCta: 'Kontakt oss',
     note: 'Du trenger ikke vite nøyaktig vekt eller type. Velg gull eller sølv, så hjelper vi deg videre.',
     panelTitle: 'Slik kommer du i gang',
-    panelText: 'Se cirka-pris, send kort forespørsel eller ring oss direkte. Enkelt og uforpliktende.',
+    panelText: 'Se cirka-pris, send e-post eller ring oss direkte. Enkelt og uforpliktende.',
     trust: [
       'Uforpliktende vurdering',
       'Vi kjøper gull og sølv',
@@ -71,11 +68,6 @@ const SELL_PAGE_CONFIG = {
     itemsTitle: 'Hva slags gull kan du selge?',
     itemsDesc: 'Du kan sende forespørsel selv om du er usikker på karat, vekt eller tilstand.',
     items: ['Ringer', 'Kjeder', 'Armbånd', 'Øredobber', 'Ødelagte smykker', 'Arvegull', 'Gullmynter', 'Gull uten sertifikat'],
-    process: [
-      ['Send inn kort skjema', 'Navn, telefon og hva du ønsker å selge er nok.'],
-      ['Vi tar kontakt', 'Vi hjelper deg med vekt, type og videre vurdering.'],
-      ['Du bestemmer selv', 'Du får rolig forklaring og velger selv om du vil selge.']
-    ],
     pickupTitle: 'Gratis henting i Oslo, Akershus og Østfold',
     pickupText: 'Vi kan etter avtale tilby gratis henting i Oslo, Akershus og Østfold. Dette passer godt hvis du har flere gjenstander, sølvbestikk, arvegull eller ønsker en enklere prosess hjemmefra.',
     pickupNote: 'Henting avtales individuelt og avhenger av område, tidspunkt og mengde.'
@@ -87,10 +79,9 @@ const SELL_PAGE_CONFIG = {
     heroTitle: 'Selg sølv trygt og enkelt',
     heroDesc: 'Har du sølvbestikk, sølvtøy, sølvmynter eller sølvsmykker? Få en enkel og uforpliktende vurdering hos Sherwani Gull & Sølv.',
     primaryCta: 'Beregn pris',
-    secondaryCta: 'Kontakt oss',
     note: 'Du trenger ikke vite nøyaktig vekt eller type. Velg gull eller sølv, så hjelper vi deg videre.',
     panelTitle: 'Slik kommer du i gang',
-    panelText: 'Se cirka-pris, send kort forespørsel eller ring oss direkte. Enkelt og uforpliktende.',
+    panelText: 'Se cirka-pris, send e-post eller ring oss direkte. Enkelt og uforpliktende.',
     trust: [
       'Uforpliktende vurdering',
       'Vi kjøper gull og sølv',
@@ -100,11 +91,6 @@ const SELL_PAGE_CONFIG = {
     itemsTitle: 'Hva slags sølv kan du selge?',
     itemsDesc: 'Du kan sende forespørsel selv om sølvet er brukt, gravert, ufullstendig eller upusset.',
     items: ['Sølvbestikk', 'Sølvtøy', 'Sølvfat', 'Lysestaker', 'Smykker', 'Sølvmynter', 'Arvesølv', 'Ufullstendige sett'],
-    process: [
-      ['Send inn kort skjema', 'Navn, telefon og hva du ønsker å selge er nok.'],
-      ['Vi tar kontakt', 'Vi hjelper deg med vekt, type og videre vurdering.'],
-      ['Du bestemmer selv', 'Du får rolig forklaring og velger selv om du vil selge.']
-    ],
     pickupTitle: 'Gratis henting i Oslo, Akershus og Østfold',
     pickupText: 'Har du større mengder sølvbestikk, sølvtøy eller arvesølv, kan gratis henting være en enkel løsning. Vi kan etter avtale hente i Oslo, Akershus og Østfold.',
     pickupNote: 'Henting avtales individuelt og avhenger av område, tidspunkt og mengde.'
@@ -125,7 +111,6 @@ const calculatorState = {
     gold: METAL_OPTIONS.gold.fallbackNokOz,
     silver: METAL_OPTIONS.silver.fallbackNokOz
   },
-  isLive: false,
   estimatedPrice: null
 };
 
@@ -218,25 +203,6 @@ function MetalItemsSection(config) {
         <h2 class="section-title">${esc(config.itemsTitle)}</h2>
         <p class="section-desc">${esc(config.itemsDesc)}</p>
         <div class="chip-grid">${config.items.map((item) => `<span class="chip">${esc(item)}</span>`).join('')}</div>
-      </div>
-    </section>
-  `;
-}
-
-function SellProcessSteps(config) {
-  return `
-    <section class="section" id="slik-fungerer-det">
-      <div class="section-inner">
-        <div class="section-label">Slik fungerer det</div>
-        <h2 class="section-title">Tre enkle steg</h2>
-        <div class="process-grid">
-          ${config.process.map(([title, text]) => `
-            <article class="process-card">
-              <h3>${esc(title)}</h3>
-              <p>${esc(text)}</p>
-            </article>
-          `).join('')}
-        </div>
       </div>
     </section>
   `;
@@ -487,7 +453,6 @@ function initCalculator(config) {
   fetchMetalPrices().then((prices) => {
     calculatorState.priceNokOz.gold = prices.gold;
     calculatorState.priceNokOz.silver = prices.silver;
-    calculatorState.isLive = true;
     renderCalculator();
   }).catch(() => {
     renderCalculator();
