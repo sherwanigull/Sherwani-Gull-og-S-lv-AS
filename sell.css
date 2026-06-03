@@ -103,7 +103,6 @@ nav {
 .pickup-section .section-desc { color: #a69b88; }
 .pickup-note { max-width: 720px; margin: 22px auto 0; color: #8a8070; font-size: 13px; line-height: 1.7; text-align: center; }
 
-.pickup-action { display: flex; justify-content: center; margin-top: 26px; }
 .calculator {
   background: #fff;
   border: 0.5px solid #e4ddd0;

@@ -62,15 +62,15 @@ const SELL_PAGE_CONFIG = {
     trust: [
       'Uforpliktende vurdering',
       'Vi kjøper gull og sølv',
-      'Gratis henting kan avtales',
+      'Gratis hjemmehenting kan avtales',
       'Du bestemmer selv'
     ],
     itemsTitle: 'Hva slags gull kan du selge?',
     itemsDesc: 'Du kan sende forespørsel selv om du er usikker på karat, vekt eller tilstand.',
     items: ['Ringer', 'Kjeder', 'Armbånd', 'Øredobber', 'Ødelagte smykker', 'Arvegull', 'Gullmynter', 'Gull uten sertifikat'],
-    pickupTitle: 'Gratis henting i Oslo, Akershus og Østfold',
-    pickupText: 'Vi kan etter avtale tilby gratis henting i Oslo, Akershus og Østfold. Dette passer godt hvis du har flere gjenstander, sølvbestikk, arvegull eller ønsker en enklere prosess hjemmefra.',
-    pickupNote: 'Henting avtales individuelt og avhenger av område, tidspunkt og mengde.'
+    pickupTitle: 'Gratis hjemmehenting i Oslo, Akershus og Østfold',
+    pickupText: 'Vi tilbyr etter avtale gratis hjemmehenting i Oslo, Akershus og Østfold. Dette passer godt hvis du har flere gjenstander, arvegull eller ønsker en enklere og tryggere prosess hjemmefra.',
+    pickupNote: 'Gratis hjemmehenting avtales individuelt og avhenger av område, tidspunkt og mengde.'
   },
   silver: {
     defaultMetal: 'silver',
@@ -85,15 +85,15 @@ const SELL_PAGE_CONFIG = {
     trust: [
       'Uforpliktende vurdering',
       'Vi kjøper gull og sølv',
-      'Gratis henting kan avtales',
+      'Gratis hjemmehenting kan avtales',
       'Du bestemmer selv'
     ],
     itemsTitle: 'Hva slags sølv kan du selge?',
     itemsDesc: 'Du kan sende forespørsel selv om sølvet er brukt, gravert, ufullstendig eller upusset.',
     items: ['Sølvbestikk', 'Sølvtøy', 'Sølvfat', 'Lysestaker', 'Smykker', 'Sølvmynter', 'Arvesølv', 'Ufullstendige sett'],
-    pickupTitle: 'Gratis henting i Oslo, Akershus og Østfold',
-    pickupText: 'Har du større mengder sølvbestikk, sølvtøy eller arvesølv, kan gratis henting være en enkel løsning. Vi kan etter avtale hente i Oslo, Akershus og Østfold.',
-    pickupNote: 'Henting avtales individuelt og avhenger av område, tidspunkt og mengde.'
+    pickupTitle: 'Gratis hjemmehenting i Oslo, Akershus og Østfold',
+    pickupText: 'Vi tilbyr etter avtale gratis hjemmehenting i Oslo, Akershus og Østfold. Dette passer godt hvis du har sølvbestikk, sølvtøy, arvesølv eller ønsker en enklere løsning hjemmefra.',
+    pickupNote: 'Gratis hjemmehenting avtales individuelt og avhenger av område, tidspunkt og mengde.'
   }
 };
 
@@ -140,7 +140,7 @@ function mailtoHref(subject, body = '') {
   return 'mailto:post@sherwanigull.no?subject=' + encodeURIComponent(subject) + (body ? '&body=' + encodeURIComponent(body) : '');
 }
 
-function openInquiryEmail(options = {}) {
+function openInquiryEmail() {
   const metal = activeMetal();
   const type = calculatorState.typeLabel || 'Ikke valgt';
   const weight = calculatorState.unknownWeight ? 'Vet ikke' : (calculatorState.weight ? calculatorState.weight + ' g' : 'Ikke oppgitt');
@@ -152,10 +152,6 @@ function openInquiryEmail(options = {}) {
     'Vekt: ' + weight,
     'Estimert pris: ' + estimate
   ];
-
-  if (options.pickup) {
-    lines.push('Ønske: Gratis henting hvis mulig');
-  }
 
   lines.push('', 'Skriv gjerne navn, telefon og litt om hva du ønsker å selge.');
   window.location.href = mailtoHref(metal.emailSubject, lines.join('\n'));
@@ -182,7 +178,7 @@ function SellHero(config) {
           <div class="quick-links" aria-label="Hurtigvalg">
             <a href="#kalkulator">Beregn pris</a>
             <a href="${mailtoHref(METAL_OPTIONS[config.defaultMetal].emailSubject)}">Send e-post</a>
-            <a href="#henting">Gratis henting</a>
+            <a href="#henting">Gratis hjemmehenting</a>
             <a href="tel:+4747996251">Ring oss</a>
           </div>
         </aside>
@@ -212,13 +208,10 @@ function PickupAreaSection(config) {
   return `
     <section class="section pickup-section" id="henting">
       <div class="section-inner">
-        <div class="section-label">Gratis henting</div>
+        <div class="section-label">Gratis hjemmehenting</div>
         <h2 class="section-title">${esc(config.pickupTitle)}</h2>
         <p class="section-desc">${esc(config.pickupText)}</p>
         <p class="pickup-note">${esc(config.pickupNote)}</p>
-        <div class="pickup-action">
-          <button class="btn btn-soft" type="button" data-pickup-request>Spør om gratis henting</button>
-        </div>
       </div>
     </section>
   `;
@@ -462,11 +455,6 @@ function initCalculator(config) {
 function bindPageActions() {
   document.querySelectorAll('[data-scroll-calc]').forEach((button) => {
     button.addEventListener('click', scrollToCalculator);
-  });
-  document.querySelectorAll('[data-pickup-request]').forEach((button) => {
-    button.addEventListener('click', () => {
-      openInquiryEmail({ pickup: true });
-    });
   });
 }
 
