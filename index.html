@@ -14,13 +14,13 @@ button, input, select, textarea { font: inherit; }
 
 /* ── NAV ── */
 nav {
-  display: flex; align-items: center; justify-content: space-between;
+  display: grid; grid-template-columns: 44px 1fr 44px; align-items: center;
   padding: 18px 20px; border-bottom: 0.5px solid #d6cfc0;
   position: sticky; top: 0; background: #faf8f4; z-index: 100;
 }
-.logo { text-align: center; text-decoration: none; }
+.logo { text-align: center; text-decoration: none; justify-self: center; }
 .logo .main { font-size: 18px; letter-spacing: 6px; text-transform: uppercase; color: #1c1c1a; display: block; }
-.logo .sub { font-size: 10px; letter-spacing: 3px; color: #8a7e6e; text-transform: uppercase; display: block; margin-top: 4px; }
+.logo .sub { font-size: 10px; letter-spacing: 2.6px; color: #8a7e6e; text-transform: uppercase; display: block; margin-top: 4px; }
 .hamburger { background: none; border: none; cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 6px; }
 .hamburger span { display: block; width: 26px; height: 1px; background: #1c1c1a; }
 .nav-drawer {
@@ -154,11 +154,10 @@ nav {
 }
 .drawer-social svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 .nav-close { position: absolute; top: 24px; right: 24px; z-index: 2; background: none; border: none; font-size: 26px; color: #c4a96e; cursor: pointer; padding: 8px; }
-.cart-icon { padding: 10px; display: flex; align-items: center; }
-.cart-icon svg { width: 24px; height: 24px; stroke: #1c1c1a; fill: none; stroke-width: 1.2; }
+.nav-spacer { width: 44px; height: 44px; }
 
 /* ── HERO ── */
-.hero { padding: 32px 24px 34px; text-align: center; scroll-margin-top: 110px; }
+.hero { padding: 28px 24px 30px; text-align: center; scroll-margin-top: 110px; }
 .hero-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 20px; }
 .hero-title { font-size: 36px; font-weight: 400; line-height: 1.35; color: #1c1c1a; margin-bottom: 18px; }
 .hero-desc { font-size: 15px; color: #7a7060; line-height: 1.9; margin-bottom: 32px; max-width: 360px; margin-left: auto; margin-right: auto; }
@@ -197,14 +196,14 @@ nav {
 }
 
 /* ── SECTION SHARED ── */
-.section { padding: 52px 24px; scroll-margin-top: 110px; }
+.section { padding: 42px 24px; scroll-margin-top: 110px; }
 .section-label {
   font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e;
   margin-bottom: 28px; text-align: center;
 }
 
 /* ── SALG TEASER ── */
-.salg-teaser { background: #faf8f4; max-width: none; padding-top: 42px; padding-bottom: 42px; }
+.salg-teaser { background: #faf8f4; max-width: none; padding-top: 34px; padding-bottom: 38px; }
 .salg-teaser-inner { max-width: 680px; margin: 0 auto; text-align: center; }
 .salg-title { font-size: 30px; font-weight: 400; color: #1c1c1a; line-height: 1.35; margin-bottom: 14px; }
 .salg-desc { font-size: 15px; color: #7a7060; line-height: 1.85; margin: 0 auto 28px; max-width: 560px; }
@@ -212,14 +211,14 @@ nav {
 /* ── SELG FOKUS ── */
 .sell-focus { background: #fff; max-width: none; }
 .sell-focus-inner { max-width: 980px; margin: 0 auto; text-align: center; }
-.sell-focus-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 28px; text-align: left; }
+.sell-focus-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 24px; text-align: left; }
 .sell-focus-card { background: #faf8f4; border: 0.5px solid #e4ddd0; padding: 28px 24px; display: grid; gap: 14px; }
 .sell-focus-card p { font-size: 15px; color: #7a7060; line-height: 1.8; max-width: 52ch; }
 .sell-focus-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
 .sell-focus-note { color: #8a7e6e; font-size: 13px; line-height: 1.7; margin-top: 20px; }
 
 /* ── KONTAKT SECTION ── */
-.kontakt-section { padding: 64px 24px; background: #f0ebe1; scroll-margin-top: 110px; }
+.kontakt-section { padding: 54px 24px; background: #f0ebe1; scroll-margin-top: 110px; }
 .kontakt-inner { max-width: 520px; margin: 0 auto; text-align: center; }
 .kontakt-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 16px; }
 .kontakt-title { font-size: 30px; font-weight: 400; color: #1c1c1a; margin-bottom: 18px; line-height: 1.35; }
@@ -234,7 +233,7 @@ nav {
 .kcard-value a:hover { color: #c4a96e; }
 
 /* ── SOSIALE MEDIER ── */
-.social-section { padding: 46px 20px; text-align: center; background: #faf8f4; border-top: 0.5px solid #e4ddd0; }
+.social-section { padding: 40px 20px; text-align: center; background: #faf8f4; border-top: 0.5px solid #e4ddd0; }
 .social-title { font-size: 28px; font-weight: 400; line-height: 1.35; margin-bottom: 10px; color: #1c1c1a; }
 .social-desc { max-width: 520px; margin: 0 auto; color: #7a7060; font-size: 15px; line-height: 1.75; }
 .social-row { display: flex; gap: 14px; align-items: center; justify-content: center; margin-top: 26px; }
@@ -251,7 +250,7 @@ nav {
 /* ── OM OSS STRIP ── */
 .om-strip { background: #1c1c1a; padding: 44px 28px; text-align: center; scroll-margin-top: 110px; }
 .om-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #c4a96e; margin-bottom: 18px; }
-.om-title { font-size: 26px; font-weight: 400; color: #f0ebe1; line-height: 1.4; margin-bottom: 18px; }
+.om-title { font-size: 28px; font-weight: 400; color: #f0ebe1; line-height: 1.35; margin-bottom: 20px; }
 .om-desc { font-size: 15px; color: #b5ab98; line-height: 1.85; margin-bottom: 0; max-width: 760px; margin-left: auto; margin-right: auto; display: grid; gap: 16px; }
 .org-number, .org-number a, .org-number a[x-apple-data-detectors] {
   color: inherit !important;
@@ -322,8 +321,8 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 @media (max-width: 430px) {
   nav { padding: 16px 14px; }
   .logo .main { font-size: 15px; letter-spacing: 4px; }
-  .logo .sub { font-size: 9px; letter-spacing: 2px; }
-  .hamburger, .cart-icon { padding: 8px; }
+  .logo .sub { font-size: 9px; letter-spacing: 1.6px; }
+  .hamburger { padding: 8px; }
 
   .price-bar { padding: 12px 10px; }
   .price-bar-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; }
@@ -332,7 +331,7 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .price-value { font-size: 15px; letter-spacing: 0; }
   .price-meta { grid-column: 1 / -1; flex-wrap: wrap; }
 
-  .hero { padding: 28px 20px 34px; }
+  .hero { padding: 24px 20px 30px; }
   .hero-eyebrow, .section-label, .kontakt-eyebrow, .om-eyebrow { letter-spacing: 3px; }
   .hero-title { font-size: 32px; line-height: 1.28; }
   .hero-desc, .salg-desc, .kontakt-desc, .om-desc { font-size: 15px; line-height: 1.75; }
@@ -345,8 +344,8 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 
 /* ── DESKTOP OVERRIDE (min 768px) ── */
 @media (min-width: 768px) {
-  nav { padding: 22px 56px; }
-  .hamburger, .cart-icon { display: none; }
+  nav { grid-template-columns: 1fr auto 1fr; column-gap: 20px; padding: 22px 28px; }
+  .hamburger, .nav-spacer { display: none; }
 
   /* Prisbar desktop */
   .price-bar { padding: 11px 48px; }
@@ -356,18 +355,20 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 
   /* Show desktop nav links */
   .nav-desktop-left, .nav-desktop-right {
-    display: flex; gap: 32px; align-items: center;
+    display: flex; gap: 20px; align-items: center;
   }
+  .nav-desktop-left { justify-self: start; }
+  .nav-desktop-right { justify-self: end; gap: 10px; }
   .nav-desktop-left a, .nav-desktop-right a {
     font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
     color: #1c1c1a; text-decoration: none; transition: color 0.2s;
   }
   .nav-desktop-right a.nav-cta {
-    min-width: 138px;
+    min-width: 118px;
     min-height: 44px;
     justify-content: center;
     border: 1px solid #c4a96e;
-    padding: 10px 18px;
+    padding: 10px 14px;
     background: #fffaf0;
     color: #1c1c1a;
   }
@@ -389,24 +390,24 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .hero {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 56px; align-items: center; text-align: left;
-    padding: 64px 64px; max-width: 1200px; margin: 0 auto;
+    padding: 54px 64px; max-width: 1200px; margin: 0 auto;
   }
   .hero-img { order: 2; width: 100%; max-width: 460px; height: auto; aspect-ratio: 1/1; margin: 0 auto; }
   .hero > div:last-child { order: 1; }
   .hero-title { font-size: 52px; }
   .hero-desc { margin-left: 0; max-width: 480px; font-size: 16px; }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-  .section { padding: 72px 64px; max-width: 1100px; margin: 0 auto; }
+  .section { padding: 58px 64px; max-width: 1100px; margin: 0 auto; }
   .salg-teaser { max-width: none; }
   .salg-title { font-size: 38px; }
   .sell-focus { max-width: none; }
   .sell-focus-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .sell-focus-card { padding: 34px 30px; }
-  .social-section { padding: 60px 64px; }
+  .social-section { padding: 52px 64px; }
   .social-title { font-size: 36px; }
 
   /* Kontakt */
-  .kontakt-section { padding: 80px 64px; }
+  .kontakt-section { padding: 64px 64px; }
   .kontakt-inner { max-width: 760px; }
   .kontakt-title { font-size: 40px; }
   .kontakt-cards { grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -422,6 +423,15 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .footer-links { margin-bottom: 0; gap: 14px 32px; }
   .footer-social { margin-bottom: 0; }
 }
+
+@media (min-width: 1100px) {
+  nav { column-gap: 32px; padding: 22px 56px; }
+  .nav-desktop-left { gap: 32px; }
+  .nav-desktop-right a.nav-cta {
+    min-width: 138px;
+    padding: 10px 18px;
+  }
+}
 </style>
 </head>
 <body id="top">
@@ -429,8 +439,6 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 <!-- NAV -->
 <nav>
   <div class="nav-desktop-left">
-    <a href="selg-gull/">Selg gull</a>
-    <a href="selg-solv/">Selg sølv</a>
     <a href="varer.html">Til salgs</a>
     <a href="priser.html">Priser i dag</a>
   </div>
@@ -439,16 +447,13 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   </button>
   <a class="logo" href="#top">
     <span class="main">Sherwani</span>
-    <span class="sub">Gull &amp; Sølv</span>
+    <span class="sub">Gull &amp; Sølv AS</span>
   </a>
   <div class="nav-desktop-right">
     <a href="selg-gull/" class="nav-cta">Selg gull</a>
     <a href="selg-solv/" class="nav-cta btn-silver">Selg sølv</a>
-    <a href="mailto:post@sherwanigull.no">post@sherwanigull.no</a>
   </div>
-  <a href="mailto:post@sherwanigull.no" class="cart-icon" aria-label="Send e-post">
-    <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
-  </a>
+  <div class="nav-spacer" aria-hidden="true"></div>
 </nav>
 
 <!-- PRISBAR -->
@@ -478,7 +483,7 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   <div class="drawer-content">
     <div class="drawer-brand">
       <span class="main">Sherwani</span>
-      <span class="sub">Gull &amp; Sølv</span>
+      <span class="sub">Gull &amp; Sølv AS</span>
     </div>
     <div class="drawer-links">
       <a href="selg-solv/" onclick="document.getElementById('drawer').classList.remove('open')">Selg sølv</a>
@@ -514,7 +519,7 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <img id="hero-img" src="sherwani-logo.png" alt="Sherwani Gull og Sølv"/>
   </div>
   <div>
-    <h1 class="hero-title">Selg gull og sølv<br>trygt og ryddig</h1>
+    <h1 class="hero-title">Trygg og ryddig handel</h1>
     <p class="hero-desc">Har du gull, sølv, smykker eller arvesølv du ønsker å selge? Vi gir deg en trygg vurdering og ærlig veiledning – helt uten press.</p>
     <div class="hero-actions">
       <a href="selg-gull/" class="btn btn-submit">Selg gull</a>
@@ -548,9 +553,8 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 
 <!-- TILGJENGELIG FOR SALG -->
 <div class="section salg-teaser">
-  <div class="section-label">Tilgjengelig for salg</div>
   <div class="salg-teaser-inner">
-    <h2 class="salg-title">Varer kommer fortløpende</h2>
+    <h2 class="salg-title">Tilgjengelig for salg</h2>
     <p class="salg-desc">Vi legger ut utvalgte gull- og sølvvarer når vi har noe tilgjengelig. Følg oss gjerne på sosiale medier for oppdateringer.</p>
     <a href="varer.html" class="btn">Se tilgjengelige varer</a>
   </div>
@@ -559,7 +563,6 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 <!-- KONTAKT -->
 <div class="kontakt-section" id="kontakt">
   <div class="kontakt-inner">
-    <div class="kontakt-eyebrow">Kom i kontakt</div>
     <h2 class="kontakt-title">Vil du kjøpe eller selge?<br>Ta gjerne kontakt</h2>
     <p class="kontakt-desc">Ønsker du å selge gull eller sølv, eller høre hva vi har tilgjengelig? Ta kontakt, så hjelper vi deg med en ryddig og ærlig vurdering.</p>
     <div class="kontakt-cards">
@@ -601,8 +604,7 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 
 <!-- SOSIALE MEDIER -->
 <div class="social-section">
-  <div class="social-label">Sosiale medier</div>
-  <h2 class="social-title">Følg oss for varer og oppdateringer</h2>
+  <h2 class="social-title">Følg oss på sosiale medier</h2>
   <p class="social-desc">Vi legger ut nye varer, gull, sølv og korte oppdateringer fortløpende på sosiale medier.</p>
   <div class="social-row">
     <a class="social-link" href="https://www.instagram.com/sherwanigull" target="_blank" rel="noopener" aria-label="Instagram">
@@ -619,8 +621,7 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 
 <!-- OM OSS STRIP -->
 <div class="om-strip" id="om-oss">
-  <div class="om-eyebrow">Om Sherwani Gull &amp; Sølv AS</div>
-  <div class="om-title">Kunnskap, ærlighet<br>og lidenskap for edle metaller</div>
+  <h2 class="om-title">Om Sherwani Gull &amp; Sølv AS</h2>
   <div class="om-desc">
     <p>Sherwani Gull &amp; Sølv AS drives med mange års erfaring innen kjøp og salg av gull og sølv. For oss handler dette om kunnskap, tillit og respekt for verdiene kundene kommer med.</p>
     <p>Vi hjelper deg med gull, sølv, smykker, mynter og arvesølv. Du får ærlige svar, tydelig veiledning og et seriøst prisforslag – uten press.</p>
