@@ -61,13 +61,6 @@ const SELL_PAGE_CONFIG = {
     heroDesc: 'Du kan legge inn karat og cirka-vekt for å få et veiledende estimat på en behagelig måte. Vurderingen er uforpliktende, prosessen er trygg, og henting kan avtales ved behov.',
     primaryCta: 'Beregn pris',
     note: '',
-    panelTitle: 'Kort fortalt',
-    panelText: 'Velg karat og gram. Vi hjelper deg med resten.',
-    journey: [
-      'Velg karat',
-      'Se estimat',
-      'Send forespørsel'
-    ],
     trust: [],
     itemsTitle: 'Hva slags gull kan du selge?',
     itemsDesc: 'Velg nærmeste type i kalkulatoren. Usikker går også fint.',
@@ -84,13 +77,6 @@ const SELL_PAGE_CONFIG = {
     heroDesc: 'Du kan legge inn sølvtype og cirka-vekt for å få et veiledende estimat på en behagelig måte. Vurderingen er uforpliktende, prosessen er trygg, og henting kan avtales ved behov.',
     primaryCta: 'Beregn pris',
     note: '',
-    panelTitle: 'Kort fortalt',
-    panelText: 'Velg sølvtype og gram. Vi hjelper deg med resten.',
-    journey: [
-      'Velg sølvtype',
-      'Se estimat',
-      'Send forespørsel'
-    ],
     trust: [],
     itemsTitle: 'Hva slags sølv kan du selge?',
     itemsDesc: 'Velg nærmeste type i kalkulatoren. Usikker går også fint.',
@@ -190,13 +176,6 @@ function SellHero(config) {
           ${config.note ? `<p class="hero-note">${esc(config.note)}</p>` : ''}
           ${TrustBadges(config)}
         </div>
-        <aside class="hero-panel">
-          <h2 class="hero-panel-title">${esc(config.panelTitle)}</h2>
-          <p>${esc(config.panelText)}</p>
-          <ol class="hero-journey" aria-label="Kort prosess">
-            ${config.journey.map((item) => `<li>${esc(item)}</li>`).join('')}
-          </ol>
-        </aside>
       </div>
     </section>
   `;

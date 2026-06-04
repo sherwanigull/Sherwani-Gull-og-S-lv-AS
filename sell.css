@@ -60,44 +60,6 @@ nav {
   color: #5f5648; font-size: 15px; line-height: 1.65;
   background: #fff; border: 0.5px solid #e4ddd0; padding: 16px;
 }
-.hero-panel {
-  background: #fff; border: 0.5px solid #e4ddd0; padding: 20px 18px;
-  display: grid; gap: 14px; text-align: left;
-  box-shadow: 0 16px 36px rgba(28, 28, 26, 0.04);
-}
-.hero-panel-title { font-size: 22px; font-weight: 400; line-height: 1.35; }
-.hero-panel p { color: #7a7060; line-height: 1.75; font-size: 15px; }
-.hero-journey {
-  list-style: none;
-  display: grid;
-  gap: 9px;
-  counter-reset: hero-step;
-}
-.hero-journey li {
-  counter-increment: hero-step;
-  min-height: 46px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #4c4334;
-  background: #faf8f4;
-  border: 0.5px solid #e4ddd0;
-  padding: 10px 12px;
-  font-size: 14px;
-  line-height: 1.35;
-}
-.hero-journey li::before {
-  content: counter(hero-step);
-  width: 26px;
-  height: 26px;
-  flex: 0 0 26px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #1c1c1a;
-  color: #faf8f4;
-  font-size: 11px;
-}
 .trust-grid { display: grid; grid-template-columns: 1fr; gap: 9px; margin-top: 16px; }
 .trust-badge {
   background: #fffaf0; border: 0.5px solid #e4ddd0; color: #4c4334;
@@ -432,7 +394,7 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
   .nav-desktop-right a.nav-cta.btn-silver { border-color: #b7b3ac; background: #f4f3f1; }
   .nav-desktop-left a:hover, .nav-desktop-right a:hover { color: #c4a96e; }
   .sell-hero { padding: 54px 64px 36px; text-align: left; }
-  .sell-hero-inner { grid-template-columns: 1.2fr 0.8fr; align-items: center; gap: 54px; }
+  .sell-hero-inner { max-width: 860px; }
   .hero-desc { margin-left: 0; }
   .hero-actions { justify-content: flex-start; }
   .trust-grid { grid-template-columns: repeat(3, 1fr); }
