@@ -24,19 +24,109 @@ nav {
 .hamburger span { display: block; width: 26px; height: 1px; background: #1c1c1a; }
 .nav-drawer {
   display: none; position: fixed; top: 0; left: 0; width: 100%; min-height: 100vh; min-height: 100dvh;
-  background: #faf8f4; z-index: 200; flex-direction: column;
-  align-items: center; justify-content: center; gap: 34px;
-  overflow-y: auto; padding: 88px 24px 44px;
+  background:
+    linear-gradient(135deg, rgba(196,169,110,0.08), transparent 34%),
+    radial-gradient(circle at 85% 12%, rgba(196,169,110,0.10), transparent 28%),
+    #151512;
+  z-index: 200; flex-direction: column;
+  overflow-y: auto; padding: 78px 24px 34px;
+  color: #f0ebe1;
 }
 .nav-drawer.open { display: flex; }
-.nav-drawer a { font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: #1c1c1a; text-decoration: none; }
+.nav-drawer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(30deg, transparent 0 46%, rgba(196,169,110,0.08) 46% 47%, transparent 47% 100%),
+    linear-gradient(150deg, transparent 0 46%, rgba(196,169,110,0.06) 46% 47%, transparent 47% 100%);
+  background-size: 52px 52px;
+  opacity: 0.22;
+  pointer-events: none;
+}
+.nav-drawer::after {
+  content: "";
+  position: absolute;
+  inset: 20% 12%;
+  background: url("sherwani-logo.png") center / contain no-repeat;
+  opacity: 0.055;
+  pointer-events: none;
+}
+.drawer-content {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 440px);
+  min-height: calc(100dvh - 112px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.drawer-brand {
+  text-align: center;
+  margin-bottom: 34px;
+}
+.drawer-brand .main {
+  display: block;
+  color: #f0ebe1;
+  font-size: 18px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+.drawer-brand .sub {
+  display: block;
+  color: #c4a96e;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+.drawer-links {
+  display: grid;
+  border-top: 0.5px solid rgba(196,169,110,0.28);
+}
+.nav-drawer a { font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: #f0ebe1; text-decoration: none; }
+.drawer-links a {
+  padding: 17px 0;
+  border-bottom: 0.5px solid rgba(196,169,110,0.22);
+}
 .nav-drawer a.drawer-cta {
   border: 1px solid #c4a96e;
   padding: 14px 22px;
-  background: #fffaf0;
-  color: #1c1c1a;
+  background: rgba(196,169,110,0.10);
+  color: #f0ebe1;
 }
-.nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; font-size: 26px; color: #1c1c1a; cursor: pointer; padding: 8px; }
+.drawer-bottom {
+  margin-top: auto;
+  padding-top: 30px;
+  display: grid;
+  gap: 18px;
+}
+.drawer-contact {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+}
+.drawer-contact a {
+  color: #cfc5ad;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+.drawer-social {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.drawer-social a {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.5px solid rgba(196,169,110,0.42);
+  color: #c4a96e;
+}
+.drawer-social svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.nav-close { position: absolute; top: 24px; right: 24px; z-index: 2; background: none; border: none; font-size: 26px; color: #c4a96e; cursor: pointer; padding: 8px; }
 .cart-icon { padding: 10px; display: flex; align-items: center; }
 .cart-icon svg { width: 24px; height: 24px; stroke: #1c1c1a; fill: none; stroke-width: 1.2; }
 
@@ -86,16 +176,8 @@ nav {
   margin-bottom: 28px; text-align: center;
 }
 
-/* ── TILBUD GRID ── */
-.tilbud-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-.tilbud-card { background: #fff; border: 0.5px solid #e4ddd0; padding: 36px 28px; }
-.tilbud-icon { margin-bottom: 18px; }
-.tilbud-icon svg { width: 40px; height: 40px; stroke: #c4a96e; fill: none; stroke-width: 1.2; }
-.tilbud-title { font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; color: #1c1c1a; margin-bottom: 12px; }
-.tilbud-desc { font-size: 15px; color: #7a7060; line-height: 1.85; }
-
 /* ── SALG TEASER ── */
-.salg-teaser { background: #fff; max-width: none; }
+.salg-teaser { background: #faf8f4; max-width: none; padding-top: 42px; padding-bottom: 42px; }
 .salg-teaser-inner { max-width: 680px; margin: 0 auto; text-align: center; }
 .salg-title { font-size: 30px; font-weight: 400; color: #1c1c1a; line-height: 1.35; margin-bottom: 14px; }
 .salg-desc { font-size: 15px; color: #7a7060; line-height: 1.85; margin: 0 auto 28px; max-width: 560px; }
@@ -108,6 +190,18 @@ nav {
 .sell-focus-card p { font-size: 15px; color: #7a7060; line-height: 1.8; max-width: 52ch; }
 .sell-focus-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
 .sell-focus-note { color: #8a7e6e; font-size: 13px; line-height: 1.7; margin-top: 20px; }
+
+/* ── SØLV FOKUS ── */
+.silver-focus { background: #f4f3f1; max-width: none; }
+.silver-focus-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  border-left: 2px solid #b7b3ac;
+  padding-left: 22px;
+}
+.silver-focus .section-label { text-align: left; margin-bottom: 18px; color: #7e7a73; }
+.silver-focus-title { font-size: 30px; font-weight: 400; line-height: 1.35; margin-bottom: 14px; color: #1c1c1a; }
+.silver-focus-text { font-size: 16px; color: #5f5648; line-height: 1.85; max-width: 760px; }
 
 /* ── KONTAKT SECTION ── */
 .kontakt-section { padding: 64px 24px; background: #f0ebe1; scroll-margin-top: 110px; }
@@ -125,10 +219,13 @@ nav {
 .kcard-value a:hover { color: #c4a96e; }
 
 /* ── SOSIALE MEDIER ── */
-.social-row { display: flex; gap: 14px; align-items: center; justify-content: center; margin-top: 36px; }
-.social-link { display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; border: 1px solid #d6cfc0; color: #9a8e7e; text-decoration: none; transition: border-color 0.25s, color 0.25s; }
+.social-section { padding: 46px 20px; text-align: center; background: #faf8f4; border-top: 0.5px solid #e4ddd0; }
+.social-title { font-size: 28px; font-weight: 400; line-height: 1.35; margin-bottom: 10px; color: #1c1c1a; }
+.social-desc { max-width: 520px; margin: 0 auto; color: #7a7060; font-size: 15px; line-height: 1.75; }
+.social-row { display: flex; gap: 14px; align-items: center; justify-content: center; margin-top: 26px; }
+.social-link { display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border: 1px solid #d6cfc0; color: #8a7e6e; background: #fff; text-decoration: none; transition: border-color 0.25s, color 0.25s, background 0.25s; }
 .social-link:hover { border-color: #c4a96e; color: #c4a96e; }
-.social-link svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.social-link svg { width: 19px; height: 19px; stroke: currentColor; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 .social-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #b0a898; margin-bottom: 16px; }
 
 .footer-social { display: flex; gap: 10px; align-items: center; justify-content: center; margin-bottom: 20px; }
@@ -140,7 +237,7 @@ nav {
 .om-strip { background: #1c1c1a; padding: 44px 28px; text-align: center; scroll-margin-top: 110px; }
 .om-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #c4a96e; margin-bottom: 18px; }
 .om-title { font-size: 26px; font-weight: 400; color: #f0ebe1; line-height: 1.4; margin-bottom: 18px; }
-.om-desc { font-size: 15px; color: #8a8070; line-height: 1.85; margin-bottom: 0; max-width: 360px; margin-left: auto; margin-right: auto; }
+.om-desc { font-size: 15px; color: #b5ab98; line-height: 1.85; margin-bottom: 0; max-width: 760px; margin-left: auto; margin-right: auto; display: grid; gap: 16px; }
 
 /* ── FOOTER ── */
 footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center; }
@@ -219,11 +316,10 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .hero { padding: 28px 20px 34px; }
   .hero-eyebrow, .section-label, .kontakt-eyebrow, .om-eyebrow { letter-spacing: 3px; }
   .hero-title { font-size: 32px; line-height: 1.28; }
-  .hero-desc, .tilbud-desc, .salg-desc, .kontakt-desc, .om-desc { font-size: 15px; line-height: 1.75; }
+  .hero-desc, .salg-desc, .kontakt-desc, .om-desc, .silver-focus-text { font-size: 15px; line-height: 1.75; }
   .btn { width: 100%; padding: 16px 18px; }
 
   .section, .kontakt-section { padding-left: 20px; padding-right: 20px; }
-  .tilbud-card { padding: 30px 22px; }
   .kcard { padding: 22px 20px; gap: 14px; }
   .footer-logo span { font-size: 11px; letter-spacing: 2px; }
 }
@@ -281,15 +377,16 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .hero-title { font-size: 52px; }
   .hero-desc { margin-left: 0; max-width: 480px; font-size: 16px; }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-  /* Pristabell */
-  /* Tilbud */
   .section { padding: 72px 64px; max-width: 1100px; margin: 0 auto; }
-  .tilbud-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; }
   .salg-teaser { max-width: none; }
   .salg-title { font-size: 38px; }
   .sell-focus { max-width: none; }
   .sell-focus-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .sell-focus-card { padding: 34px 30px; }
+  .silver-focus { max-width: none; }
+  .silver-focus-title { font-size: 38px; }
+  .social-section { padding: 60px 64px; }
+  .social-title { font-size: 36px; }
 
   /* Kontakt */
   .kontakt-section { padding: 80px 64px; }
@@ -300,7 +397,7 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   /* Om strip */
   .om-strip { padding: 52px 64px; }
   .om-title { font-size: 34px; }
-  .om-desc { max-width: 520px; font-size: 16px; }
+  .om-desc { max-width: 760px; font-size: 16px; }
 
   /* Footer */
   footer { display: flex; align-items: center; justify-content: space-between; padding: 32px 64px; text-align: left; }
@@ -361,13 +458,37 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 <!-- DRAWER -->
 <div class="nav-drawer" id="drawer">
   <button class="nav-close" onclick="document.getElementById('drawer').classList.remove('open')" aria-label="Lukk">✕</button>
-  <a href="selg-gull/" onclick="document.getElementById('drawer').classList.remove('open')">Selg gull</a>
-  <a href="selg-solv/" onclick="document.getElementById('drawer').classList.remove('open')">Selg sølv</a>
-  <a href="#om-oss" onclick="document.getElementById('drawer').classList.remove('open')">Om oss</a>
-  <a href="varer.html" onclick="document.getElementById('drawer').classList.remove('open')">Til salgs</a>
-  <a href="#tilbud" onclick="document.getElementById('drawer').classList.remove('open')">Veiledning</a>
-  <a href="priser.html" onclick="document.getElementById('drawer').classList.remove('open')">Priser i dag</a>
-  <a href="mailto:post@sherwanigull.no" onclick="document.getElementById('drawer').classList.remove('open')">Send e-post</a>
+  <div class="drawer-content">
+    <div class="drawer-brand">
+      <span class="main">Sherwani</span>
+      <span class="sub">Gull &amp; Sølv</span>
+    </div>
+    <div class="drawer-links">
+      <a href="selg-solv/" onclick="document.getElementById('drawer').classList.remove('open')">Selg sølv</a>
+      <a href="selg-gull/" onclick="document.getElementById('drawer').classList.remove('open')">Selg gull</a>
+      <a href="#selg" onclick="document.getElementById('drawer').classList.remove('open')">Vurdering</a>
+      <a href="priser.html" onclick="document.getElementById('drawer').classList.remove('open')">Priser i dag</a>
+      <a href="varer.html" onclick="document.getElementById('drawer').classList.remove('open')">Varer</a>
+      <a href="#om-oss" onclick="document.getElementById('drawer').classList.remove('open')">Om oss</a>
+    </div>
+    <div class="drawer-bottom">
+      <div class="drawer-contact">
+        <a href="mailto:post@sherwanigull.no" onclick="document.getElementById('drawer').classList.remove('open')">post@sherwanigull.no</a>
+        <a href="tel:+4747996251" onclick="document.getElementById('drawer').classList.remove('open')">47 99 62 51</a>
+      </div>
+      <div class="drawer-social" aria-label="Sosiale medier">
+        <a href="https://www.instagram.com/sherwanigull" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@sherwanigull" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 4.9"/></svg>
+        </a>
+        <a href="https://www.facebook.com/share/1KrKHY9K24/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- HERO -->
@@ -377,7 +498,7 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   </div>
   <div>
     <h1 class="hero-title">Selg gull og sølv<br>trygt og ryddig</h1>
-    <p class="hero-desc">Har du gull, sølv, smykker eller arvesølv du ønsker å selge? Vi gir deg en trygg, ryddig og uforpliktende vurdering.</p>
+    <p class="hero-desc">Har du gull, sølv, smykker eller arvesølv du ønsker å selge? Vi gir deg en trygg og ryddig vurdering uten press.</p>
     <div class="hero-actions">
       <a href="selg-gull/" class="btn btn-submit">Selg gull</a>
       <a href="selg-solv/" class="btn btn-silver">Selg sølv</a>
@@ -390,16 +511,16 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   <div class="sell-focus-inner">
     <div class="section-label">En enkel prosess fra vurdering til betaling</div>
     <h2 class="salg-title">Helt gratis og uforpliktende – med profesjonell veiledning hele veien.</h2>
-    <p class="salg-desc">Velg gull eller sølv og kom raskt videre til pris, e-post eller telefon. Vi forklarer prosessen enkelt og kan avtale gratis henting ved behov.</p>
+    <p class="salg-desc">Velg gull eller sølv og kom raskt videre til pris, e-post eller telefon. Vi forklarer prosessen enkelt og kan avtale henting ved behov.</p>
     <div class="sell-focus-grid">
       <article class="sell-focus-card">
-        <p>Vi kjøper gull i alle former – smykker, ringer, kjeder, arvegull, ødelagt gull, gullmynter og annet gull. Det spiller ingen rolle om det er brukt, gammelt eller ødelagt. Send inn skjemaet med telefonnummer, så kontakter vi deg for en gratis og uforpliktende vurdering.</p>
+        <p>Vi kjøper gull i alle former – smykker, ringer, kjeder, arvegull, ødelagt gull, gullmynter og annet gull. Det spiller ingen rolle om det er brukt, gammelt eller ødelagt. Send inn skjemaet med telefonnummer, så kontakter vi deg for en gratis gjennomgang og et seriøst prisforslag.</p>
         <div class="sell-focus-links">
           <a class="btn btn-submit" href="selg-gull/">Selg gull</a>
         </div>
       </article>
       <article class="sell-focus-card">
-        <p>Vi kjøper sølv i alle former – sølvbestikk, sølvtøy, smykker, ringer, arvesølv, sølvmynter og annet sølv. Det spiller ingen rolle om det er brukt, gravert, gammelt eller ufullstendig. Send inn skjemaet med telefonnummer, så kontakter vi deg for en gratis og uforpliktende vurdering.</p>
+        <p>Vi kjøper sølv i alle former – sølvbestikk, sølvtøy, smykker, ringer, arvesølv, sølvmynter og annet sølv. Det spiller ingen rolle om det er brukt, gravert, gammelt eller ufullstendig. Send inn skjemaet med telefonnummer, så kontakter vi deg for en rolig prisvurdering og ærlig tilbakemelding.</p>
         <div class="sell-focus-links">
           <a class="btn btn-silver" href="selg-solv/">Selg sølv</a>
         </div>
@@ -409,35 +530,12 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   </div>
 </div>
 
-<!-- TILBUD / HVA VI TILBYR -->
-<div class="section" id="tilbud">
-  <div class="section-label">Hva vi tilbyr</div>
-  <div class="tilbud-grid">
-
-    <div class="tilbud-card">
-      <div class="tilbud-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      </div>
-      <div class="tilbud-title">Vi kjøper gull og sølv</div>
-      <p class="tilbud-desc">Har du gull, sølv, smykker eller mynter du vurderer å selge, tar vi gjerne en uforpliktende prat. Vi gjør prosessen enkel og ryddig.</p>
-    </div>
-
-    <div class="tilbud-card">
-      <div class="tilbud-icon">
-        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      </div>
-      <div class="tilbud-title">Sølv og gull til salgs</div>
-      <p class="tilbud-desc">Vi har jevnlig gull og sølv tilgjengelig for deg som ønsker å kjøpe. Ta kontakt for å høre hva som finnes inne, så hjelper vi deg med å finne noe som passer.</p>
-    </div>
-
-    <div class="tilbud-card">
-      <div class="tilbud-icon">
-        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      </div>
-      <div class="tilbud-title">God veiledning</div>
-      <p class="tilbud-desc">Usikker på om du bør kjøpe, selge eller vente? Vi forklarer enkelt hva som påvirker prisen, hva du bør se etter, og hva som kan være riktig for deg.</p>
-    </div>
-
+<!-- SØLV FOKUS -->
+<div class="section silver-focus" id="solv">
+  <div class="silver-focus-inner">
+    <div class="section-label">Sølv er spesielt interessant</div>
+    <h2 class="silver-focus-title">Vi kjøper sølv i de fleste former</h2>
+    <p class="silver-focus-text">Vi er spesielt interessert i sølv. Har du sølvbestikk, sølvtøy, arvesølv, sølvmynter eller smykker i sølv? Vi kjøper sølv i de fleste former, også brukt, gravert eller ufullstendig. Send inn informasjon og telefonnummer, så tar vi kontakt med en rolig og ryddig vurdering.</p>
   </div>
 </div>
 
@@ -445,8 +543,8 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 <div class="section salg-teaser">
   <div class="section-label">Tilgjengelig for salg</div>
   <div class="salg-teaser-inner">
-    <h2 class="salg-title">Se varer som er tilgjengelige</h2>
-    <p class="salg-desc">Vi legger ut gull, sølv og utvalgte varer fortløpende. Ta kontakt hvis du ønsker mer informasjon, bilder eller en rolig vurdering før du bestemmer deg.</p>
+    <h2 class="salg-title">Varer kommer fortløpende</h2>
+    <p class="salg-desc">Vi legger ut utvalgte gull- og sølvvarer når vi har noe tilgjengelig. Følg oss gjerne på sosiale medier for oppdateringer.</p>
     <a href="varer.html" class="btn">Se tilgjengelige varer</a>
   </div>
 </div>
@@ -456,7 +554,7 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   <div class="kontakt-inner">
     <div class="kontakt-eyebrow">Kom i kontakt</div>
     <h2 class="kontakt-title">Vil du kjøpe eller selge?<br>Ta gjerne kontakt</h2>
-    <p class="kontakt-desc">Ønsker du å selge gull eller sølv, eller høre hva vi har tilgjengelig for kjøp, er du velkommen til å ta kontakt. Vi gir deg en ærlig og uforpliktende vurdering.</p>
+    <p class="kontakt-desc">Ønsker du å selge gull eller sølv, eller høre hva vi har tilgjengelig for kjøp, er du velkommen til å ta kontakt. Vi gir deg faglig veiledning, ærlige svar og en trygg vurdering uten press.</p>
     <div class="kontakt-cards">
 
       <div class="kcard">
@@ -495,8 +593,10 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </div>
 
 <!-- SOSIALE MEDIER -->
-<div style="padding: 28px 20px 24px; text-align: center; background: #faf8f4;">
-  <div class="social-label">Følg oss</div>
+<div class="social-section">
+  <div class="social-label">Sosiale medier</div>
+  <h2 class="social-title">Følg oss for varer, sølv og oppdateringer</h2>
+  <p class="social-desc">Vi legger ut nye varer, sølv, gull og korte oppdateringer fortløpende på sosiale medier.</p>
   <div class="social-row">
     <a class="social-link" href="https://www.instagram.com/sherwanigull" target="_blank" rel="noopener" aria-label="Instagram">
       <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg>
@@ -514,7 +614,12 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 <div class="om-strip" id="om-oss">
   <div class="om-eyebrow">Om Sherwani Gull &amp; Sølv AS</div>
   <div class="om-title">Kunnskap, ærlighet<br>og lidenskap for edle metaller</div>
-  <p class="om-desc">Hos Sherwani Gull &amp; Sølv AS hjelper vi deg med kjøp, salg og vurdering av gull og sølv. Du får tydelig veiledning, uten press og uten forpliktelser.</p>
+  <div class="om-desc">
+    <p>Sherwani Gull &amp; Sølv AS drives med mange års erfaring innen kjøp og salg av gull og sølv. For oss handler dette ikke bare om pris, men om kunnskap, tillit og respekt for verdiene kundene kommer med.</p>
+    <p>Vi hjelper deg med en ryddig vurdering av gull, sølv, smykker, mynter og arvesølv. Du får tydelig veiledning, ærlige svar og et seriøst prisforslag – helt uten press.</p>
+    <p>Interesse for gull, sølv og handel har vært en naturlig del av bakgrunnen vår i mange år. Vi tar med oss den tradisjonen inn i en moderne, trygg og profesjonell måte å handle på.</p>
+    <p>Org.nr: [LEGG INN ORGANISASJONSNUMMER HER]</p>
+  </div>
 </div>
 
 <!-- FOOTER -->
@@ -528,7 +633,6 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
     <a href="selg-gull/">Selg gull</a>
     <a href="selg-solv/">Selg sølv</a>
     <a href="priser.html">Priser i dag</a>
-    <a href="#tilbud">Veiledning</a>
     <a href="#kontakt">Kontakt</a>
     <a href="mailto:post@sherwanigull.no">post@sherwanigull.no</a>
     <a href="tel:+4747996251">47 99 62 51</a>
