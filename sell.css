@@ -48,7 +48,7 @@ nav {
 .btn-silver:hover { background: #eceae6; color: #1c1c1a; }
 .btn:active { background: #1c1c1a; color: #faf8f4; }
 
-.sell-hero { padding: 34px 20px 22px; text-align: center; }
+.sell-hero { padding: 30px 20px 16px; text-align: center; }
 .sell-hero-inner { max-width: 1080px; margin: 0 auto; display: grid; gap: 24px; }
 .hero-eyebrow, .section-label {
   font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e;
@@ -109,32 +109,6 @@ nav {
 .section-label { text-align: center; margin-bottom: 28px; }
 .section-title { font-size: 30px; font-weight: 400; line-height: 1.35; text-align: center; margin-bottom: 14px; }
 .section-desc { color: #5f5648; font-size: 16px; line-height: 1.65; max-width: 680px; text-align: center; margin: 0 auto 26px; }
-
-.process-section { padding-top: 34px; }
-.process-grid {
-  display: grid;
-  gap: 12px;
-}
-.process-card {
-  background: #fff;
-  border: 0.5px solid #e4ddd0;
-  padding: 20px;
-  display: grid;
-  gap: 10px;
-}
-.process-card span {
-  width: 30px;
-  height: 30px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #fffaf0;
-  border: 0.5px solid #d9bd75;
-  color: #8a6a1d;
-  font-size: 12px;
-}
-.process-card h3 { font-size: 20px; font-weight: 400; line-height: 1.35; }
-.process-card p { color: #7a7060; font-size: 15px; line-height: 1.65; }
 
 .card-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
 .sell-card { background: #fff; border: 0.5px solid #e4ddd0; padding: 22px 20px; }
@@ -484,7 +458,6 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
   .hero-actions { display: flex; justify-content: center; flex-wrap: wrap; }
   .trust-grid { grid-template-columns: repeat(2, 1fr); }
   .card-grid { grid-template-columns: repeat(2, 1fr); }
-  .process-grid { grid-template-columns: repeat(2, 1fr); }
   .choice-grid { grid-template-columns: repeat(2, 1fr); }
   .type-grid { grid-template-columns: repeat(3, 1fr); }
   .contact-grid { grid-template-columns: repeat(2, 1fr); }
@@ -512,12 +485,11 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
   }
   .nav-desktop-right a.nav-cta.btn-silver { border-color: #b7b3ac; background: #f4f3f1; }
   .nav-desktop-left a:hover, .nav-desktop-right a:hover { color: #c4a96e; }
-  .sell-hero { padding: 70px 64px 56px; text-align: left; }
+  .sell-hero { padding: 54px 64px 36px; text-align: left; }
   .sell-hero-inner { grid-template-columns: 1.2fr 0.8fr; align-items: center; gap: 54px; }
   .hero-desc { margin-left: 0; }
   .hero-actions { justify-content: flex-start; }
-  .trust-grid { grid-template-columns: repeat(4, 1fr); }
-  .process-grid { grid-template-columns: repeat(4, 1fr); }
+  .trust-grid { grid-template-columns: repeat(3, 1fr); }
   .section { padding: 76px 64px; }
   .section-title { font-size: 38px; }
   .card-grid { grid-template-columns: repeat(3, 1fr); }

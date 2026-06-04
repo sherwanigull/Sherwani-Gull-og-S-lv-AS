@@ -58,60 +58,54 @@ const SELL_PAGE_CONFIG = {
     pagePath: '/selg-gull',
     heroEyebrow: 'Selg gull og sølv hos Sherwani',
     heroTitle: 'Selg gull trygt og enkelt',
-    heroDesc: 'Velg karat, legg inn cirka-vekt og send en uforpliktende forespørsel. Vi bekrefter endelig pris etter kontroll.',
+    heroDesc: 'Få et raskt estimat og send en uforpliktende forespørsel.',
     primaryCta: 'Beregn pris',
-    note: 'Du trenger ikke vite alt på forhånd. Velg “Jeg er usikker” der du trenger hjelp.',
-    panelTitle: 'Reisen er enkel',
-    panelText: 'Karat, gram, estimat og kontakt i én rolig flyt.',
+    note: '',
+    panelTitle: 'Kort fortalt',
+    panelText: 'Velg karat og gram. Vi hjelper deg med resten.',
     journey: [
       'Velg karat',
-      'Legg inn gram',
-      'Se estimert verdi',
-      'Send forespørsel',
-      'Vi tar kontakt'
+      'Se estimat',
+      'Send forespørsel'
     ],
     trust: [
       'Uforpliktende vurdering',
-      'Vi kjøper gull og sølv',
-      'Gratis hjemmehenting kan avtales',
-      'Du bestemmer selv'
+      'Trygg prosess',
+      'Henting kan avtales'
     ],
     itemsTitle: 'Hva slags gull kan du selge?',
-    itemsDesc: 'Du kan sende forespørsel selv om du er usikker på karat, vekt eller tilstand.',
+    itemsDesc: 'Velg nærmeste type i kalkulatoren. Usikker går også fint.',
     items: ['Ringer', 'Kjeder', 'Armbånd', 'Øredobber', 'Ødelagte smykker', 'Arvegull', 'Gullmynter', 'Gull uten sertifikat'],
     pickupTitle: 'Gratis hjemmehenting i Oslo, Akershus og Østfold',
-    pickupText: 'Vi tilbyr etter avtale gratis hjemmehenting i Oslo, Akershus og Østfold. Dette passer godt hvis du har flere gjenstander, arvegull eller ønsker en enklere og tryggere prosess hjemmefra.',
-    pickupNote: 'Gratis hjemmehenting avtales individuelt og avhenger av område, tidspunkt og mengde.'
+    pickupText: 'Henting kan avtales hvis du ønsker en enklere vurdering hjemmefra.',
+    pickupNote: 'Avtales etter område, tidspunkt og mengde.'
   },
   silver: {
     defaultMetal: 'silver',
     pagePath: '/selg-solv',
     heroEyebrow: 'Selg gull og sølv hos Sherwani',
     heroTitle: 'Selg sølv og sølvbestikk enkelt',
-    heroDesc: 'Velg sølvtype, legg inn cirka-vekt og send en uforpliktende forespørsel. Vi hjelper deg videre hvis du er usikker.',
+    heroDesc: 'Få et raskt estimat og send en uforpliktende forespørsel.',
     primaryCta: 'Beregn pris',
-    note: 'Sølv kan være stemplet på mange måter. Velg nærmeste renhet eller “Jeg er usikker”.',
-    panelTitle: 'Reisen er enkel',
-    panelText: 'Sølvtype, gram, estimat og kontakt i én rolig flyt.',
+    note: '',
+    panelTitle: 'Kort fortalt',
+    panelText: 'Velg sølvtype og gram. Vi hjelper deg med resten.',
     journey: [
       'Velg sølvtype',
-      'Legg inn gram',
-      'Se estimert verdi',
-      'Send forespørsel',
-      'Vi tar kontakt'
+      'Se estimat',
+      'Send forespørsel'
     ],
     trust: [
       'Uforpliktende vurdering',
-      'Vi kjøper gull og sølv',
-      'Gratis hjemmehenting kan avtales',
-      'Du bestemmer selv'
+      'Trygg prosess',
+      'Henting kan avtales'
     ],
     itemsTitle: 'Hva slags sølv kan du selge?',
-    itemsDesc: 'Du kan sende forespørsel selv om sølvet er brukt, gravert, ufullstendig eller upusset.',
+    itemsDesc: 'Velg nærmeste type i kalkulatoren. Usikker går også fint.',
     items: ['Sølvbestikk', 'Sølvtøy', 'Sølvfat', 'Lysestaker', 'Smykker', 'Sølvmynter', 'Eldre norske mynter', 'Arvesølv'],
     pickupTitle: 'Gratis hjemmehenting i Oslo, Akershus og Østfold',
-    pickupText: 'Vi tilbyr etter avtale gratis hjemmehenting i Oslo, Akershus og Østfold. Dette passer godt hvis du har sølvbestikk, sølvtøy, arvesølv eller ønsker en enklere løsning hjemmefra.',
-    pickupNote: 'Gratis hjemmehenting avtales individuelt og avhenger av område, tidspunkt og mengde.'
+    pickupText: 'Henting kan avtales hvis du ønsker en enklere vurdering hjemmefra.',
+    pickupNote: 'Avtales etter område, tidspunkt og mengde.'
   }
 };
 
@@ -201,7 +195,7 @@ function SellHero(config) {
             <a class="btn ${config.defaultMetal === 'gold' ? 'btn-gold' : 'btn-silver'}" href="#kalkulator">${esc(config.primaryCta)}</a>
             <a class="btn ${config.defaultMetal === 'gold' ? 'btn-silver' : 'btn-gold'}" href="${config.defaultMetal === 'gold' ? '../selg-solv/' : '../selg-gull/'}">${config.defaultMetal === 'gold' ? 'Selg sølv' : 'Selg gull'}</a>
           </div>
-          <p class="hero-note">${esc(config.note)}</p>
+          ${config.note ? `<p class="hero-note">${esc(config.note)}</p>` : ''}
           ${TrustBadges(config)}
         </div>
         <aside class="hero-panel">
@@ -241,32 +235,6 @@ function PickupAreaSection(config) {
         <h2 class="section-title">${esc(config.pickupTitle)}</h2>
         <p class="section-desc">${esc(config.pickupText)}</p>
         <p class="pickup-note">${esc(config.pickupNote)}</p>
-      </div>
-    </section>
-  `;
-}
-
-function ProcessOverview(config) {
-  const firstStep = config.defaultMetal === 'gold' ? 'Velg karat' : 'Velg sølvtype';
-  return `
-    <section class="section process-section">
-      <div class="section-inner">
-        <div class="section-label">Steg for steg</div>
-        <h2 class="section-title">Fra vurdering til svar</h2>
-        <div class="process-grid">
-          ${[
-            [firstStep, 'Start med renheten du kjenner best.'],
-            ['Legg inn gram', 'Bruk cirka-vekt om du er usikker.'],
-            ['Se estimat', 'Verdien oppdateres med én gang.'],
-            ['Send forespørsel', 'Legg igjen kontaktinfo og send e-post.']
-          ].map(([title, text], index) => `
-            <article class="process-card">
-              <span>${index + 1}</span>
-              <h3>${esc(title)}</h3>
-              <p>${esc(text)}</p>
-            </article>
-          `).join('')}
-        </div>
       </div>
     </section>
   `;
@@ -625,13 +593,9 @@ function calculateEstimatedPrice() {
 
 function FAQSection() {
   const faq = [
-    ['Kjøper dere både gull og sølv?', 'Ja. Vi kjøper både gull og sølv, inkludert smykker, arvegull, sølvbestikk, sølvtøy og mynter.'],
     ['Må jeg vite vekt før jeg tar kontakt?', 'Nei. Du kan sende forespørsel selv om du ikke vet nøyaktig vekt. Vi hjelper deg videre.'],
     ['Må jeg vite karat eller sølvtype?', 'Nei. Velg “Jeg er usikker” eller skriv kort hva du har, så hjelper vi deg.'],
-    ['Kan jeg sende forespørsel uten å være sikker?', 'Ja. Forespørselen er uforpliktende, og du bestemmer selv om du ønsker å selge.'],
-    ['Kan dere hente hjemme hos meg?', 'Ja, gratis henting kan avtales i Oslo, Akershus og Østfold der det passer.'],
-    ['Kjøper dere ødelagte smykker?', 'Ja, ødelagte smykker kan også vurderes.'],
-    ['Kjøper dere sølvbestikk og sølvtøy?', 'Ja, vi vurderer både sølvbestikk, sølvtøy, mynter og arvesølv.'],
+    ['Kan dere hente hjemme hos meg?', 'Ja, henting kan avtales i Oslo, Akershus og Østfold.'],
     ['Når får jeg svar?', 'Vi tar kontakt så snart vi kan etter at forespørselen er sendt.']
   ];
   return `
@@ -706,7 +670,6 @@ function renderSellPage() {
 
   root.innerHTML = [
     SellHero(config),
-    ProcessOverview(config),
     MetalCalculator(config),
     AfterSubmitSection(config),
     PickupAreaSection(config),
