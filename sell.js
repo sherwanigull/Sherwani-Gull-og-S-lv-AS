@@ -1,6 +1,3 @@
-const GOLD_BUY_RATE = 0.80;
-const SILVER_BUY_RATE = 0.65;
-
 const METAL_OPTIONS = {
   gold: {
     label: 'Gull',
@@ -14,15 +11,14 @@ const METAL_OPTIONS = {
     emailSubject: 'Ny forespørsel: Selg gull',
     pagePath: '/selg-gull',
     fallbackNokOz: 36500,
-    buyRate: GOLD_BUY_RATE,
     types: [
-      ['.999 / 24k', 0.999, 'Rent gull'],
-      ['22k / 916', 0.916, 'Høy renhet'],
-      ['21k / 875', 0.875, 'Vanlig i enkelte smykker'],
-      ['18k / 750', 0.750, 'Eksklusive smykker'],
-      ['14k / 585', 0.585, 'Vanlig smykkegull'],
-      ['9k / 375', 0.375, 'Lavere karat'],
-      ['8k / 333', 0.333, 'Laveste relevante valg'],
+      ['24k / 999', 0.999, 'Rent gull', 0.98],
+      ['22k / 916', 0.916, 'Høy renhet', 0.85],
+      ['21k / 875', 0.875, 'Vanlig i enkelte smykker', 0.85],
+      ['18k / 750', 0.750, 'Eksklusive smykker', 0.80],
+      ['14k / 585', 0.585, 'Vanlig smykkegull', 0.80],
+      ['9k / 375', 0.375, 'Lavere karat', 0.80],
+      ['8k / 333', 0.333, 'Laveste relevante valg', 0.80],
       ['Jeg er usikker', null]
     ]
   },
@@ -38,15 +34,14 @@ const METAL_OPTIONS = {
     emailSubject: 'Ny forespørsel: Selg sølv',
     pagePath: '/selg-solv',
     fallbackNokOz: 420,
-    buyRate: SILVER_BUY_RATE,
     types: [
-      ['999', 0.999],
-      ['925', 0.925, 'Sterling sølv'],
-      ['835', 0.835],
-      ['830', 0.830, 'Norsk sølvbestikk'],
-      ['800', 0.800],
-      ['500 / eldre norske mynter', 0.500],
-      ['400 / enkelte eldre mynter', 0.400],
+      ['999', 0.999, 'Rent sølv', 1],
+      ['925', 0.925, 'Sterling sølv', 0.80],
+      ['835', 0.835, '', 0.80],
+      ['830', 0.830, 'Norsk sølvbestikk', 0.80],
+      ['800', 0.800, '', 0.80],
+      ['500 / eldre norske mynter', 0.500, '', 0.80],
+      ['400 / enkelte eldre mynter', 0.400, '', 0.80],
       ['Jeg er usikker', null]
     ]
   }
@@ -95,12 +90,14 @@ const calculatorState = {
   metal: 'gold',
   typeLabel: '',
   fineness: null,
+  typeBuyRate: null,
   weight: '',
   unknownWeight: false,
   priceNokOz: {
     gold: METAL_OPTIONS.gold.fallbackNokOz,
     silver: METAL_OPTIONS.silver.fallbackNokOz
   },
+  pricesLive: false,
   estimatedPrice: null,
   contact: {
     name: '',
@@ -121,6 +118,15 @@ function kr(value) {
     style: 'currency',
     currency: 'NOK',
     maximumFractionDigits: 0
+  });
+}
+
+function krGram(value) {
+  return Number(value || 0).toLocaleString('nb-NO', {
+    style: 'currency',
+    currency: 'NOK',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
   });
 }
 
@@ -184,6 +190,59 @@ function SellHero(config) {
 function TrustBadges(config) {
   if (!config.trust.length) return '';
   return `<div class="trust-grid">${config.trust.map((item) => `<div class="trust-badge">${esc(item)}</div>`).join('')}</div>`;
+}
+
+function buyPricePerGram(metalKey, fineness, buyRate) {
+  const pricePerGramPure = calculatorState.priceNokOz[metalKey] / 31.1035;
+  return pricePerGramPure * fineness * buyRate;
+}
+
+function LivePriceSection(config) {
+  return `
+    <section class="live-price-section" aria-live="polite">
+      <div class="live-price-inner" data-live-price-board data-metal="${esc(config.defaultMetal)}">
+        ${LivePriceBoard(config.defaultMetal)}
+      </div>
+    </section>
+  `;
+}
+
+function LivePriceBoard(metalKey) {
+  const metal = METAL_OPTIONS[metalKey];
+  const priceRows = metal.types
+    .filter(([, fineness]) => fineness)
+    .map(([label, fineness, text, buyRate]) => {
+      const gramPrice = buyPricePerGram(metalKey, fineness, buyRate);
+      return `
+        <div class="live-price-row">
+          <span>
+            <strong>${esc(label)}</strong>
+            ${text ? `<small>${esc(text)}</small>` : ''}
+          </span>
+          <em>${krGram(gramPrice)} / g</em>
+        </div>
+      `;
+    }).join('');
+
+  return `
+    <div class="live-price-head">
+      <div>
+        <div class="section-label">Live kjøpspris</div>
+        <h2>${esc(metal.label)} per gram</h2>
+      </div>
+      <p>${calculatorState.pricesLive ? 'Prisene følger markedet og kan endre seg fortløpende.' : 'Henter livepris. Midlertidige priser vises frem til oppdatering.'}</p>
+    </div>
+    <div class="live-price-grid">
+      ${priceRows}
+    </div>
+  `;
+}
+
+function updateLivePriceBoards() {
+  document.querySelectorAll('[data-live-price-board]').forEach((board) => {
+    const metalKey = board.dataset.metal === 'silver' ? 'silver' : 'gold';
+    board.innerHTML = LivePriceBoard(metalKey);
+  });
 }
 
 function MetalItemsSection(config) {
@@ -403,6 +462,7 @@ function bindCalculator() {
         calculatorState.metal = el.dataset.value === 'silver' ? 'silver' : 'gold';
         calculatorState.typeLabel = '';
         calculatorState.fineness = null;
+        calculatorState.typeBuyRate = null;
         calculatorState.estimatedPrice = null;
         renderCalculator();
         return;
@@ -412,6 +472,7 @@ function bindCalculator() {
         const item = activeMetal().types.find(([optionLabel]) => optionLabel === label);
         calculatorState.typeLabel = label;
         calculatorState.fineness = item ? item[1] : null;
+        calculatorState.typeBuyRate = item ? item[3] : null;
         calculatorState.estimatedPrice = null;
         renderCalculator();
         return;
@@ -508,15 +569,16 @@ function parseWeight() {
 }
 
 function calculateEstimatedPrice() {
-  const metal = activeMetal();
   const grams = parseWeight();
-  if (!grams || !calculatorState.fineness) {
+  if (!grams || !calculatorState.fineness || !calculatorState.typeBuyRate) {
     calculatorState.estimatedPrice = null;
     return null;
   }
-  const pricePerGramPure = calculatorState.priceNokOz[calculatorState.metal] / 31.1035;
-  const internalValue = grams * pricePerGramPure * calculatorState.fineness;
-  calculatorState.estimatedPrice = internalValue * metal.buyRate;
+  calculatorState.estimatedPrice = grams * buyPricePerGram(
+    calculatorState.metal,
+    calculatorState.fineness,
+    calculatorState.typeBuyRate
+  );
   return calculatorState.estimatedPrice;
 }
 
@@ -572,15 +634,22 @@ function initCalculator(config) {
   calculatorState.metal = config.defaultMetal;
   calculatorState.typeLabel = '';
   calculatorState.fineness = null;
+  calculatorState.typeBuyRate = null;
   calculatorState.weight = '';
   calculatorState.unknownWeight = false;
   calculatorState.estimatedPrice = null;
+  calculatorState.pricesLive = false;
   renderCalculator();
+  updateLivePriceBoards();
   fetchMetalPrices().then((prices) => {
     calculatorState.priceNokOz.gold = prices.gold;
     calculatorState.priceNokOz.silver = prices.silver;
+    calculatorState.pricesLive = true;
+    updateLivePriceBoards();
     renderCalculator();
   }).catch(() => {
+    calculatorState.pricesLive = false;
+    updateLivePriceBoards();
     renderCalculator();
   });
 }
@@ -599,6 +668,7 @@ function renderSellPage() {
 
   root.innerHTML = [
     SellHero(config),
+    LivePriceSection(config),
     MetalCalculator(config),
     AfterSubmitSection(config),
     PickupAreaSection(config),
