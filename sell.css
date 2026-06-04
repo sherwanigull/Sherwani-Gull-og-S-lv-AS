@@ -146,52 +146,6 @@ nav {
   margin: 0 auto;
 }
 .calc-flow { display: grid; gap: 14px; }
-.calc-stepper {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 6px;
-}
-.calc-stepper li {
-  min-height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  background: #fff;
-  border: 0.5px solid #e4ddd0;
-  color: #8a7e6e;
-  font-size: 10px;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
-  text-align: center;
-}
-.calc-stepper span {
-  width: 22px;
-  height: 22px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 0.5px solid #d6cfc0;
-  color: #8a7e6e;
-  background: #faf8f4;
-}
-.calc-stepper li.active {
-  border-color: #c4a96e;
-  color: #1c1c1a;
-  background: #fffaf0;
-}
-.calc-stepper li.done {
-  color: #4c4334;
-  background: #f4f3f1;
-}
-.calc-stepper li.active span,
-.calc-stepper li.done span {
-  border-color: #c4a96e;
-  background: #1c1c1a;
-  color: #faf8f4;
-}
 .calc-block {
   background: #fff;
   border: 0.5px solid #e4ddd0;
@@ -434,14 +388,6 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
   .choice-card { min-height: 70px; }
   .calc-value { font-size: 34px; }
   .type-grid { grid-template-columns: 1fr 1fr; }
-  .calc-stepper {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .calc-stepper li {
-    min-height: 48px;
-    font-size: 9px;
-    letter-spacing: 1px;
-  }
   .step-head h3 { font-size: 21px; }
   .type-grid .choice-card {
     min-height: 82px;
@@ -493,7 +439,6 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
   .section { padding: 76px 64px; }
   .section-title { font-size: 38px; }
   .card-grid { grid-template-columns: repeat(3, 1fr); }
-  .calc-stepper { grid-template-columns: repeat(6, 1fr); }
   .calc-block, .submit-panel { padding: 24px; }
   .after-inner { grid-template-columns: 0.8fr 1.2fr; align-items: start; }
   .after-steps { grid-template-columns: repeat(3, 1fr); }

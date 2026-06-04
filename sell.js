@@ -290,35 +290,6 @@ function contactIsReady() {
   return Boolean(contact.name.trim() && (contact.phone.trim() || contact.email.trim()));
 }
 
-function calcCurrentStep() {
-  if (!calculatorState.typeLabel) return 2;
-  if (!calculatorState.unknownWeight && !parseWeight()) return 3;
-  if (!calculatorState.estimatedPrice && calculatorState.fineness && parseWeight()) return 4;
-  if (!contactIsReady()) return 5;
-  return 6;
-}
-
-function StepIndicator() {
-  const current = calcCurrentStep();
-  const steps = [
-    'Metall',
-    'Type',
-    'Gram',
-    'Estimat',
-    'Kontakt',
-    'Send'
-  ];
-  return `
-    <ol class="calc-stepper" aria-label="Skjemasteg">
-      ${steps.map((step, index) => {
-        const number = index + 1;
-        const status = number < current ? 'done' : number === current ? 'active' : '';
-        return `<li class="${status}" aria-current="${status === 'active' ? 'step' : 'false'}"><span>${number}</span>${esc(step)}</li>`;
-      }).join('')}
-    </ol>
-  `;
-}
-
 function StepHeader(number, title, text = '') {
   return `
     <div class="step-head">
@@ -346,8 +317,6 @@ function renderCalculator() {
 
   host.innerHTML = `
     <div class="calc-flow">
-      ${StepIndicator()}
-
       <div class="calc-block step-card">
         ${StepHeader(1, 'Velg metall', 'Sidens metall er forhåndsvalgt, men du kan bytte her.')}
         <div class="choice-grid">
@@ -500,7 +469,6 @@ function bindCalculator() {
       calculatorState.unknownWeight = false;
       calculateEstimatedPrice();
       updateCalculatorResult();
-      updateStepIndicators();
       updateSummary();
     });
   }
@@ -509,7 +477,6 @@ function bindCalculator() {
     field.addEventListener('input', () => {
       calculatorState.contact[field.dataset.contactField] = field.value;
       updateSubmitState();
-      updateStepIndicators();
     });
   });
 }
@@ -535,16 +502,6 @@ function updateCalculatorResult() {
     : `<p class="calc-status">${esc(calculatorState.unknownWeight || unknownType ? 'Send forespørsel, så hjelper vi deg med type og vekt.' : 'Velg type og skriv cirka-vekt for å se estimert verdi.')}</p>`;
   updateSubmitState();
   updateSummary();
-}
-
-function updateStepIndicators() {
-  const current = calcCurrentStep();
-  document.querySelectorAll('.calc-stepper li').forEach((item, index) => {
-    const number = index + 1;
-    item.classList.toggle('done', number < current);
-    item.classList.toggle('active', number === current);
-    item.setAttribute('aria-current', number === current ? 'step' : 'false');
-  });
 }
 
 function updateSubmitState() {
