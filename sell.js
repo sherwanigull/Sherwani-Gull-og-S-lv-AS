@@ -459,7 +459,12 @@ function bindCalculator() {
     el.addEventListener('click', () => {
       const action = el.dataset.action;
       if (action === 'metal') {
-        calculatorState.metal = el.dataset.value === 'silver' ? 'silver' : 'gold';
+        const nextMetal = el.dataset.value === 'silver' ? 'silver' : 'gold';
+        if (nextMetal !== calculatorState.metal) {
+          window.location.href = nextMetal === 'silver' ? '../selg-solv/' : '../selg-gull/';
+          return;
+        }
+        calculatorState.metal = nextMetal;
         calculatorState.typeLabel = '';
         calculatorState.fineness = null;
         calculatorState.typeBuyRate = null;
