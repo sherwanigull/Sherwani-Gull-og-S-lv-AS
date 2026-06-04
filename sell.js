@@ -56,9 +56,9 @@ const SELL_PAGE_CONFIG = {
   gold: {
     defaultMetal: 'gold',
     pagePath: '/selg-gull',
-    heroEyebrow: 'Selg gull og sølv hos Sherwani',
+    heroEyebrow: '',
     heroTitle: 'Selg gull trygt og enkelt',
-    heroDesc: 'Få et raskt estimat og send en uforpliktende forespørsel.',
+    heroDesc: 'Du kan legge inn karat og cirka-vekt for å få et veiledende estimat på en behagelig måte. Vurderingen er uforpliktende, prosessen er trygg, og henting kan avtales ved behov.',
     primaryCta: 'Beregn pris',
     note: '',
     panelTitle: 'Kort fortalt',
@@ -68,11 +68,7 @@ const SELL_PAGE_CONFIG = {
       'Se estimat',
       'Send forespørsel'
     ],
-    trust: [
-      'Uforpliktende vurdering',
-      'Trygg prosess',
-      'Henting kan avtales'
-    ],
+    trust: [],
     itemsTitle: 'Hva slags gull kan du selge?',
     itemsDesc: 'Velg nærmeste type i kalkulatoren. Usikker går også fint.',
     items: ['Ringer', 'Kjeder', 'Armbånd', 'Øredobber', 'Ødelagte smykker', 'Arvegull', 'Gullmynter', 'Gull uten sertifikat'],
@@ -83,9 +79,9 @@ const SELL_PAGE_CONFIG = {
   silver: {
     defaultMetal: 'silver',
     pagePath: '/selg-solv',
-    heroEyebrow: 'Selg gull og sølv hos Sherwani',
+    heroEyebrow: '',
     heroTitle: 'Selg sølv og sølvbestikk enkelt',
-    heroDesc: 'Få et raskt estimat og send en uforpliktende forespørsel.',
+    heroDesc: 'Du kan legge inn sølvtype og cirka-vekt for å få et veiledende estimat på en behagelig måte. Vurderingen er uforpliktende, prosessen er trygg, og henting kan avtales ved behov.',
     primaryCta: 'Beregn pris',
     note: '',
     panelTitle: 'Kort fortalt',
@@ -95,11 +91,7 @@ const SELL_PAGE_CONFIG = {
       'Se estimat',
       'Send forespørsel'
     ],
-    trust: [
-      'Uforpliktende vurdering',
-      'Trygg prosess',
-      'Henting kan avtales'
-    ],
+    trust: [],
     itemsTitle: 'Hva slags sølv kan du selge?',
     itemsDesc: 'Velg nærmeste type i kalkulatoren. Usikker går også fint.',
     items: ['Sølvbestikk', 'Sølvtøy', 'Sølvfat', 'Lysestaker', 'Smykker', 'Sølvmynter', 'Eldre norske mynter', 'Arvesølv'],
@@ -188,7 +180,7 @@ function SellHero(config) {
     <section class="sell-hero">
       <div class="sell-hero-inner">
         <div>
-          <div class="hero-eyebrow">${esc(config.heroEyebrow)}</div>
+          ${config.heroEyebrow ? `<div class="hero-eyebrow">${esc(config.heroEyebrow)}</div>` : ''}
           <h1 class="hero-title">${esc(config.heroTitle)}</h1>
           <p class="hero-desc">${esc(config.heroDesc)}</p>
           <div class="hero-actions">
@@ -211,6 +203,7 @@ function SellHero(config) {
 }
 
 function TrustBadges(config) {
+  if (!config.trust.length) return '';
   return `<div class="trust-grid">${config.trust.map((item) => `<div class="trust-badge">${esc(item)}</div>`).join('')}</div>`;
 }
 
