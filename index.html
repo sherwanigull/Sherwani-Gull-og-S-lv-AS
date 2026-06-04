@@ -61,6 +61,32 @@ nav {
   display: flex;
   flex-direction: column;
 }
+.drawer-content::before {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 16px;
+  height: 48px;
+  background:
+    linear-gradient(145deg, transparent 0 44%, rgba(196,169,110,0.35) 45% 47%, transparent 48% 100%),
+    linear-gradient(35deg, transparent 0 48%, rgba(196,169,110,0.30) 49% 51%, transparent 52% 100%);
+  opacity: 0.06;
+  pointer-events: none;
+}
+.drawer-content::after {
+  content: "";
+  position: absolute;
+  right: 18%;
+  bottom: 52px;
+  width: 88px;
+  height: 44px;
+  border: 1px solid rgba(196,169,110,0.55);
+  border-bottom: 0;
+  border-radius: 88px 88px 0 0;
+  opacity: 0.055;
+  pointer-events: none;
+}
 .drawer-brand {
   text-align: center;
   margin-bottom: 34px;
@@ -191,18 +217,6 @@ nav {
 .sell-focus-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
 .sell-focus-note { color: #8a7e6e; font-size: 13px; line-height: 1.7; margin-top: 20px; }
 
-/* ── SØLV FOKUS ── */
-.silver-focus { background: #f4f3f1; max-width: none; }
-.silver-focus-inner {
-  max-width: 860px;
-  margin: 0 auto;
-  border-left: 2px solid #b7b3ac;
-  padding-left: 22px;
-}
-.silver-focus .section-label { text-align: left; margin-bottom: 18px; color: #7e7a73; }
-.silver-focus-title { font-size: 30px; font-weight: 400; line-height: 1.35; margin-bottom: 14px; color: #1c1c1a; }
-.silver-focus-text { font-size: 16px; color: #5f5648; line-height: 1.85; max-width: 760px; }
-
 /* ── KONTAKT SECTION ── */
 .kontakt-section { padding: 64px 24px; background: #f0ebe1; scroll-margin-top: 110px; }
 .kontakt-inner { max-width: 520px; margin: 0 auto; text-align: center; }
@@ -316,7 +330,7 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .hero { padding: 28px 20px 34px; }
   .hero-eyebrow, .section-label, .kontakt-eyebrow, .om-eyebrow { letter-spacing: 3px; }
   .hero-title { font-size: 32px; line-height: 1.28; }
-  .hero-desc, .salg-desc, .kontakt-desc, .om-desc, .silver-focus-text { font-size: 15px; line-height: 1.75; }
+  .hero-desc, .salg-desc, .kontakt-desc, .om-desc { font-size: 15px; line-height: 1.75; }
   .btn { width: 100%; padding: 16px 18px; }
 
   .section, .kontakt-section { padding-left: 20px; padding-right: 20px; }
@@ -383,8 +397,6 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .sell-focus { max-width: none; }
   .sell-focus-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .sell-focus-card { padding: 34px 30px; }
-  .silver-focus { max-width: none; }
-  .silver-focus-title { font-size: 38px; }
   .social-section { padding: 60px 64px; }
   .social-title { font-size: 36px; }
 
@@ -498,7 +510,7 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   </div>
   <div>
     <h1 class="hero-title">Selg gull og sølv<br>trygt og ryddig</h1>
-    <p class="hero-desc">Har du gull, sølv, smykker eller arvesølv du ønsker å selge? Vi gir deg en trygg og ryddig vurdering uten press.</p>
+    <p class="hero-desc">Har du gull, sølv, smykker eller arvesølv du ønsker å selge? Vi gir deg en trygg vurdering og ærlig veiledning – helt uten press.</p>
     <div class="hero-actions">
       <a href="selg-gull/" class="btn btn-submit">Selg gull</a>
       <a href="selg-solv/" class="btn btn-silver">Selg sølv</a>
@@ -509,33 +521,23 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 <!-- SELG GULL OG SØLV -->
 <div class="section sell-focus" id="selg">
   <div class="sell-focus-inner">
-    <div class="section-label">En enkel prosess fra vurdering til betaling</div>
-    <h2 class="salg-title">Helt gratis og uforpliktende – med profesjonell veiledning hele veien.</h2>
-    <p class="salg-desc">Velg gull eller sølv og kom raskt videre til pris, e-post eller telefon. Vi forklarer prosessen enkelt og kan avtale henting ved behov.</p>
+    <h2 class="salg-title">Helt gratis og uforpliktende</h2>
+    <p class="salg-desc">Med profesjonell veiledning hele veien.</p>
     <div class="sell-focus-grid">
       <article class="sell-focus-card">
-        <p>Vi kjøper gull i alle former – smykker, ringer, kjeder, arvegull, ødelagt gull, gullmynter og annet gull. Det spiller ingen rolle om det er brukt, gammelt eller ødelagt. Send inn skjemaet med telefonnummer, så kontakter vi deg for en gratis gjennomgang og et seriøst prisforslag.</p>
+        <p>Vi kjøper gull i alle former – smykker, ringer, kjeder, arvegull, ødelagt gull, gullmynter og annet gull. Brukt, gammelt eller ødelagt går helt fint. Send inn skjemaet med telefonnummer, så tar vi kontakt.</p>
         <div class="sell-focus-links">
           <a class="btn btn-submit" href="selg-gull/">Selg gull</a>
         </div>
       </article>
       <article class="sell-focus-card">
-        <p>Vi kjøper sølv i alle former – sølvbestikk, sølvtøy, smykker, ringer, arvesølv, sølvmynter og annet sølv. Det spiller ingen rolle om det er brukt, gravert, gammelt eller ufullstendig. Send inn skjemaet med telefonnummer, så kontakter vi deg for en rolig prisvurdering og ærlig tilbakemelding.</p>
+        <p>Vi kjøper sølv i alle former – sølvbestikk, sølvtøy, smykker, ringer, arvesølv, sølvmynter og annet sølv. Brukt, gravert eller ufullstendig går helt fint. Send inn skjemaet med telefonnummer, så tar vi kontakt.</p>
         <div class="sell-focus-links">
           <a class="btn btn-silver" href="selg-solv/">Selg sølv</a>
         </div>
       </article>
     </div>
     <p class="sell-focus-note">Ingen press. Du bestemmer alltid selv om du vil selge etter vurderingen.</p>
-  </div>
-</div>
-
-<!-- SØLV FOKUS -->
-<div class="section silver-focus" id="solv">
-  <div class="silver-focus-inner">
-    <div class="section-label">Sølv er spesielt interessant</div>
-    <h2 class="silver-focus-title">Vi kjøper sølv i de fleste former</h2>
-    <p class="silver-focus-text">Vi er spesielt interessert i sølv. Har du sølvbestikk, sølvtøy, arvesølv, sølvmynter eller smykker i sølv? Vi kjøper sølv i de fleste former, også brukt, gravert eller ufullstendig. Send inn informasjon og telefonnummer, så tar vi kontakt med en rolig og ryddig vurdering.</p>
   </div>
 </div>
 
@@ -554,7 +556,7 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   <div class="kontakt-inner">
     <div class="kontakt-eyebrow">Kom i kontakt</div>
     <h2 class="kontakt-title">Vil du kjøpe eller selge?<br>Ta gjerne kontakt</h2>
-    <p class="kontakt-desc">Ønsker du å selge gull eller sølv, eller høre hva vi har tilgjengelig for kjøp, er du velkommen til å ta kontakt. Vi gir deg faglig veiledning, ærlige svar og en trygg vurdering uten press.</p>
+    <p class="kontakt-desc">Ønsker du å selge gull eller sølv, eller høre hva vi har tilgjengelig? Ta kontakt, så hjelper vi deg med en ryddig og ærlig vurdering.</p>
     <div class="kontakt-cards">
 
       <div class="kcard">
@@ -595,8 +597,8 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 <!-- SOSIALE MEDIER -->
 <div class="social-section">
   <div class="social-label">Sosiale medier</div>
-  <h2 class="social-title">Følg oss for varer, sølv og oppdateringer</h2>
-  <p class="social-desc">Vi legger ut nye varer, sølv, gull og korte oppdateringer fortløpende på sosiale medier.</p>
+  <h2 class="social-title">Følg oss for varer og oppdateringer</h2>
+  <p class="social-desc">Vi legger ut nye varer, gull, sølv og korte oppdateringer fortløpende på sosiale medier.</p>
   <div class="social-row">
     <a class="social-link" href="https://www.instagram.com/sherwanigull" target="_blank" rel="noopener" aria-label="Instagram">
       <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg>
@@ -615,10 +617,10 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   <div class="om-eyebrow">Om Sherwani Gull &amp; Sølv AS</div>
   <div class="om-title">Kunnskap, ærlighet<br>og lidenskap for edle metaller</div>
   <div class="om-desc">
-    <p>Sherwani Gull &amp; Sølv AS drives med mange års erfaring innen kjøp og salg av gull og sølv. For oss handler dette ikke bare om pris, men om kunnskap, tillit og respekt for verdiene kundene kommer med.</p>
-    <p>Vi hjelper deg med en ryddig vurdering av gull, sølv, smykker, mynter og arvesølv. Du får tydelig veiledning, ærlige svar og et seriøst prisforslag – helt uten press.</p>
-    <p>Interesse for gull, sølv og handel har vært en naturlig del av bakgrunnen vår i mange år. Vi tar med oss den tradisjonen inn i en moderne, trygg og profesjonell måte å handle på.</p>
-    <p>Org.nr: [LEGG INN ORGANISASJONSNUMMER HER]</p>
+    <p>Sherwani Gull &amp; Sølv AS drives med mange års erfaring innen kjøp og salg av gull og sølv. For oss handler dette om kunnskap, tillit og respekt for verdiene kundene kommer med.</p>
+    <p>Vi hjelper deg med gull, sølv, smykker, mynter og arvesølv. Du får ærlige svar, tydelig veiledning og et seriøst prisforslag – uten press.</p>
+    <p>Interessen for gull, sølv og handel har vært en naturlig del av bakgrunnen vår i mange år. Den tradisjonen tar vi med oss inn i en moderne og ryddig måte å handle på.</p>
+    <p>Org.nr: 935 951 682</p>
   </div>
 </div>
 
