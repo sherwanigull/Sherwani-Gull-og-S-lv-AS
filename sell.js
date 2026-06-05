@@ -179,7 +179,6 @@ async function postJsonWithTimeout(url, payload) {
       signal: ctrl.signal,
       headers: {
         apikey: SUPABASE_CONFIG.anonKey,
-        Authorization: 'Bearer ' + SUPABASE_CONFIG.anonKey,
         'Content-Type': 'application/json',
         Prefer: 'return=minimal'
       },
