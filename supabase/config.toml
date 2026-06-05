@@ -1,0 +1,4 @@
+project_id = "sbsxckncemyonvidinup"
+
+[functions.telegram-notify]
+verify_jwt = false
