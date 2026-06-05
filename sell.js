@@ -483,7 +483,7 @@ function renderCalculator() {
       </div>
 
       <div class="calc-block step-card">
-        ${StepHeader(5, 'Kontaktinformasjon', 'Legg igjen navn og minst telefon eller e-post.')}
+        ${StepHeader(5, 'Kontaktinformasjon')}
         <div class="contact-grid">
           <div class="field">
             <label for="contact-name">Navn</label>
