@@ -15,8 +15,8 @@ const METAL_OPTIONS = {
       ['24k / 999', 0.999, 'Rent gull', 0.98],
       ['22k / 916', 0.916, 'Høy renhet', 0.85],
       ['21k / 875', 0.875, 'Vanlig i enkelte smykker', 0.85],
-      ['18k / 750', 0.750, 'Eksklusive smykker', 0.80],
-      ['14k / 585', 0.585, 'Vanlig smykkegull', 0.80],
+      ['18k / 750', 0.750, 'Eksklusive smykker', 0.85],
+      ['14k / 585', 0.585, 'Vanlig smykkegull', 0.85],
       ['9k / 375', 0.375, 'Lavere karat', 0.80],
       ['8k / 333', 0.333, 'Laveste relevante valg', 0.80],
       ['Jeg er usikker', null]
