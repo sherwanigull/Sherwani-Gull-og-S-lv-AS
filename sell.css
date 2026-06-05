@@ -100,13 +100,13 @@ nav {
 .btn-silver:hover { background: #eceae6; color: #1c1c1a; }
 .btn:active { background: #1c1c1a; color: #faf8f4; }
 
-.sell-hero { padding: 30px 20px 16px; text-align: center; }
+.sell-hero { padding: 22px 20px 8px; text-align: center; }
 .sell-hero-inner { max-width: 1080px; margin: 0 auto; display: grid; gap: 24px; }
 .hero-eyebrow, .section-label {
   font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #8a7e6e;
 }
 .hero-title { font-size: 36px; font-weight: 400; line-height: 1.18; margin: 14px 0 14px; }
-.hero-desc { font-size: 16px; color: #5f5648; line-height: 1.65; max-width: 640px; margin: 0 auto 18px; }
+.hero-desc { font-size: 16px; color: #5f5648; line-height: 1.65; max-width: 640px; margin: 0 auto; }
 .hero-actions { display: grid; gap: 10px; margin: 22px 0 18px; }
 .hero-note {
   color: #5f5648; font-size: 15px; line-height: 1.65;
@@ -149,6 +149,10 @@ nav {
   color: #7a7060;
   font-size: 14px;
   line-height: 1.65;
+}
+.live-price-cta {
+  width: 100%;
+  margin: 4px auto 0;
 }
 .live-price-grid {
   display: grid;
@@ -387,6 +391,18 @@ nav {
 .calc-label { font-size: 10px; letter-spacing: 2.2px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 8px; }
 .calc-value { font-size: 38px; color: #1c1c1a; line-height: 1.12; margin-bottom: 8px; }
 .calc-status { color: #5f5648; font-size: 14px; line-height: 1.65; }
+.submit-message {
+  min-height: 24px;
+}
+.submit-message.sending {
+  color: #8a6a1d;
+}
+.submit-message.sent {
+  color: #2f6f3e;
+}
+.submit-message.error {
+  color: #8a2f24;
+}
 .contact-grid {
   display: grid;
   gap: 12px;
@@ -462,9 +478,9 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
   .logo .main { font-size: 15px; letter-spacing: 4px; }
   .logo .sub { font-size: 9px; letter-spacing: 1.6px; }
   .hamburger { padding: 8px; }
-  .sell-hero { padding: 24px 20px 10px; }
+  .sell-hero { padding: 18px 20px 6px; }
   .hero-title { margin-top: 6px; margin-bottom: 10px; }
-  .hero-desc { margin-bottom: 14px; line-height: 1.55; }
+  .hero-desc { line-height: 1.55; }
   .hero-actions { margin: 16px 0 8px; }
   .hero-title { font-size: 34px; }
   .hero-eyebrow, .section-label { letter-spacing: 3px; }
@@ -562,10 +578,11 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
   .nav-desktop-right a.nav-cta:hover { background: #f7efd9; color: #1c1c1a; }
   .nav-desktop-right a.nav-cta.btn-silver:hover { background: #eceae6; color: #1c1c1a; }
   .nav-desktop-left a:hover, .nav-desktop-right a:hover { color: #c4a96e; }
-  .sell-hero { padding: 54px 64px 36px; text-align: left; }
+  .sell-hero { padding: 34px 64px 18px; text-align: center; }
   .sell-hero-inner { max-width: 860px; }
-  .hero-desc { margin-left: 0; }
+  .hero-desc { margin-left: auto; margin-right: auto; }
   .hero-actions { justify-content: flex-start; }
+  .live-price-cta { width: auto; min-width: 260px; }
   .trust-grid { grid-template-columns: repeat(3, 1fr); }
   .live-price-section { padding: 14px 64px 34px; }
   .live-price-inner { padding: 24px; }

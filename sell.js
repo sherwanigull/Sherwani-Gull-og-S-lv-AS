@@ -52,9 +52,8 @@ const SELL_PAGE_CONFIG = {
     defaultMetal: 'gold',
     pagePath: '/selg-gull',
     heroEyebrow: '',
-    heroTitle: 'Selg gull trygt og enkelt',
     heroDesc: 'Du kan legge inn karat og cirka-vekt for å få et veiledende estimat på en behagelig måte. Vurderingen er uforpliktende, prosessen er trygg, og henting kan avtales ved behov.',
-    primaryCta: 'Beregn pris',
+    primaryCta: 'Beregn pris på ditt gull',
     note: '',
     trust: [],
     itemsTitle: 'Hva slags gull kan du selge?',
@@ -68,9 +67,8 @@ const SELL_PAGE_CONFIG = {
     defaultMetal: 'silver',
     pagePath: '/selg-solv',
     heroEyebrow: '',
-    heroTitle: 'Selg sølv og sølvbestikk enkelt',
     heroDesc: 'Du kan legge inn sølvtype og cirka-vekt for å få et veiledende estimat på en behagelig måte. Vurderingen er uforpliktende, prosessen er trygg, og henting kan avtales ved behov.',
-    primaryCta: 'Beregn pris',
+    primaryCta: 'Beregn pris på ditt sølv',
     note: '',
     trust: [],
     itemsTitle: 'Hva slags sølv kan du selge?',
@@ -84,6 +82,13 @@ const SELL_PAGE_CONFIG = {
 
 const PRICE_CONFIG = {
   timeoutMs: 10000
+};
+
+const SUPABASE_CONFIG = {
+  url: 'https://sbsxckncemyonvidinup.supabase.co',
+  anonKey: 'sb_publishable_oW8DcDM2Rhym-PLyH84pig_evX2rWoA',
+  inquiriesTable: 'foresporsler',
+  timeoutMs: 12000
 };
 
 const calculatorState = {
@@ -104,7 +109,9 @@ const calculatorState = {
     phone: '',
     email: '',
     message: ''
-  }
+  },
+  submitStatus: 'idle',
+  submitMessage: ''
 };
 
 function esc(value) {
@@ -138,33 +145,83 @@ function scrollToCalculator() {
   document.getElementById('kalkulator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function mailtoHref(subject, body = '') {
-  return 'mailto:post@sherwanigull.no?subject=' + encodeURIComponent(subject) + (body ? '&body=' + encodeURIComponent(body) : '');
+function inquiryPayload() {
+  const metal = activeMetal();
+  const contact = calculatorState.contact;
+  const grams = calculatorState.unknownWeight ? null : (parseWeight() || null);
+
+  return {
+    source_page: metal.pagePath,
+    metal: calculatorState.metal,
+    metal_label: metal.label,
+    type_label: calculatorState.typeLabel || null,
+    fineness: calculatorState.fineness,
+    buy_rate: calculatorState.typeBuyRate,
+    weight_grams: grams,
+    unknown_weight: calculatorState.unknownWeight,
+    estimated_price_nok: calculatorState.estimatedPrice,
+    price_nok_oz: calculatorState.priceNokOz[calculatorState.metal],
+    prices_live: calculatorState.pricesLive,
+    customer_name: contact.name.trim(),
+    customer_phone: contact.phone.trim() || null,
+    customer_email: contact.email.trim() || null,
+    message: contact.message.trim() || null,
+    status: 'ny'
+  };
 }
 
-function openInquiryEmail() {
-  const metal = activeMetal();
-  const type = calculatorState.typeLabel || 'Ikke valgt';
-  const weight = calculatorState.unknownWeight ? 'Vet ikke' : (calculatorState.weight ? calculatorState.weight + ' g' : 'Ikke oppgitt');
-  const estimate = calculatorState.estimatedPrice ? kr(calculatorState.estimatedPrice) : 'Ikke beregnet';
-  const contact = calculatorState.contact;
-  const lines = [
-    'Side: ' + metal.pagePath,
-    'Metall: ' + metal.label,
-    'Type: ' + type,
-    'Vekt: ' + weight,
-    'Estimert pris: ' + estimate,
-    '',
-    'Kontakt:',
-    'Navn: ' + (contact.name || 'Ikke oppgitt'),
-    'Telefon: ' + (contact.phone || 'Ikke oppgitt'),
-    'E-post: ' + (contact.email || 'Ikke oppgitt'),
-    '',
-    'Melding:',
-    contact.message || 'Ingen ekstra melding.'
-  ];
+async function postJsonWithTimeout(url, payload) {
+  const ctrl = new AbortController();
+  const tid = setTimeout(() => ctrl.abort(), SUPABASE_CONFIG.timeoutMs);
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      signal: ctrl.signal,
+      headers: {
+        apikey: SUPABASE_CONFIG.anonKey,
+        Authorization: 'Bearer ' + SUPABASE_CONFIG.anonKey,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      const text = await res.text().catch(() => '');
+      throw new Error(text || String(res.status));
+    }
+  } finally {
+    clearTimeout(tid);
+  }
+}
 
-  window.location.href = mailtoHref(metal.emailSubject, lines.join('\n'));
+async function submitInquiry() {
+  if (!contactIsReady() || calculatorState.submitStatus === 'sending') return;
+
+  calculatorState.submitStatus = 'sending';
+  calculatorState.submitMessage = 'Sender forespørselen...';
+  updateSubmitState();
+
+  try {
+    await postJsonWithTimeout(
+      `${SUPABASE_CONFIG.url}/rest/v1/${SUPABASE_CONFIG.inquiriesTable}`,
+      inquiryPayload()
+    );
+    calculatorState.submitStatus = 'sent';
+    calculatorState.submitMessage = 'Forespørselen er sendt. Vi tar kontakt så snart vi kan.';
+  } catch (error) {
+    console.warn('[Forespørsel] Kunne ikke sende:', error.message);
+    calculatorState.submitStatus = 'error';
+    calculatorState.submitMessage = 'Kunne ikke sende akkurat nå. Prøv igjen, eller ring oss direkte.';
+  }
+
+  updateSubmitState();
+}
+
+function markInquiryChanged() {
+  if (calculatorState.submitStatus === 'sent' || calculatorState.submitStatus === 'error') {
+    calculatorState.submitStatus = 'idle';
+    calculatorState.submitMessage = '';
+  }
 }
 
 function SellHero(config) {
@@ -173,12 +230,7 @@ function SellHero(config) {
       <div class="sell-hero-inner">
         <div>
           ${config.heroEyebrow ? `<div class="hero-eyebrow">${esc(config.heroEyebrow)}</div>` : ''}
-          <h1 class="hero-title">${esc(config.heroTitle)}</h1>
           <p class="hero-desc">${esc(config.heroDesc)}</p>
-          <div class="hero-actions">
-            <a class="btn ${config.defaultMetal === 'gold' ? 'btn-gold' : 'btn-silver'}" href="#kalkulator">${esc(config.primaryCta)}</a>
-            <a class="btn ${config.defaultMetal === 'gold' ? 'btn-silver' : 'btn-gold'}" href="${config.defaultMetal === 'gold' ? '../selg-solv/' : '../selg-gull/'}">${config.defaultMetal === 'gold' ? 'Selg sølv' : 'Selg gull'}</a>
-          </div>
           ${config.note ? `<p class="hero-note">${esc(config.note)}</p>` : ''}
           ${TrustBadges(config)}
         </div>
@@ -209,6 +261,7 @@ function LivePriceSection(config) {
 
 function LivePriceBoard(metalKey) {
   const metal = METAL_OPTIONS[metalKey];
+  const config = SELL_PAGE_CONFIG[metalKey];
   const priceRows = metal.types
     .filter(([, fineness]) => fineness)
     .map(([label, fineness, text, buyRate]) => {
@@ -231,6 +284,7 @@ function LivePriceBoard(metalKey) {
         <h2>${esc(metal.label)} per gram</h2>
       </div>
       <p>${calculatorState.pricesLive ? 'Prisene følger markedet og kan endre seg fortløpende.' : 'Henter livepris. Midlertidige priser vises frem til oppdatering.'}</p>
+      <a class="btn ${metalKey === 'gold' ? 'btn-gold' : 'btn-silver'} live-price-cta" href="#kalkulator">${esc(config.primaryCta)}</a>
     </div>
     <div class="live-price-grid">
       ${priceRows}
@@ -328,6 +382,19 @@ function contactIsReady() {
   return Boolean(contact.name.trim() && (contact.phone.trim() || contact.email.trim()));
 }
 
+function submitButtonText(ready) {
+  if (!ready) return 'Fyll inn kontaktinfo';
+  if (calculatorState.submitStatus === 'sending') return 'Sender...';
+  if (calculatorState.submitStatus === 'sent') return 'Sendt';
+  return 'Send forespørsel';
+}
+
+function submitHelpText(ready) {
+  if (!ready) return 'Navn og telefon eller e-post må fylles inn før sending.';
+  if (calculatorState.submitMessage) return calculatorState.submitMessage;
+  return 'Forespørselen er uforpliktende.';
+}
+
 function StepHeader(number, title, text = '') {
   return `
     <div class="step-head">
@@ -350,6 +417,8 @@ function renderCalculator() {
   const unknownType = calculatorState.typeLabel === 'Jeg er usikker';
   const needsHelp = calculatorState.unknownWeight || unknownType || !calculatorState.typeLabel;
   const canSend = contactIsReady();
+  const isSending = calculatorState.submitStatus === 'sending';
+  const isSent = calculatorState.submitStatus === 'sent';
   const selectedTypeText = calculatorState.typeLabel ? `${metal.label}: ${calculatorState.typeLabel}` : 'Ikke valgt';
   const weightText = calculatorState.unknownWeight ? 'Usikker vekt' : (calculatorState.weight ? `${calculatorState.weight} g` : 'Ikke oppgitt');
 
@@ -436,17 +505,17 @@ function renderCalculator() {
       </div>
 
       <div class="submit-panel ${metal.accent === 'silver' ? 'submit-silver' : ''}">
-        ${StepHeader(6, 'Send forespørsel', 'Vi åpner en ferdig utfylt e-post med opplysningene dine.')}
+        ${StepHeader(6, 'Send forespørsel', 'Forespørselen sendes direkte til oss fra nettsiden.')}
         <div class="summary-grid" aria-label="Oppsummering">
           <span><strong>Type</strong><em data-summary-type>${esc(selectedTypeText)}</em></span>
           <span><strong>Gram</strong><em data-summary-weight>${esc(weightText)}</em></span>
           <span><strong>Estimat</strong><em data-summary-estimate>${canShowPrice ? esc(kr(calculatorState.estimatedPrice)) : 'Ikke beregnet'}</em></span>
         </div>
         <div class="calc-actions">
-          <button class="btn btn-dark" type="button" data-action="email" ${canSend ? '' : 'disabled'}>${canSend ? 'Send forespørsel' : 'Fyll inn kontaktinfo'}</button>
+          <button class="btn btn-dark" type="button" data-action="submit-inquiry" ${canSend && !isSending && !isSent ? '' : 'disabled'}>${submitButtonText(canSend)}</button>
           <a class="btn btn-soft" href="tel:+4747996251">Ring oss</a>
         </div>
-        <p class="calc-status" data-submit-help>${canSend ? 'Forespørselen er uforpliktende.' : 'Navn og telefon eller e-post må fylles inn før sending.'}</p>
+        <p class="calc-status submit-message ${esc(calculatorState.submitStatus)}" data-submit-help>${esc(submitHelpText(canSend))}</p>
       </div>
     </div>
   `;
@@ -473,6 +542,7 @@ function bindCalculator() {
         return;
       }
       if (action === 'type') {
+        markInquiryChanged();
         const label = el.dataset.value;
         const item = activeMetal().types.find(([optionLabel]) => optionLabel === label);
         calculatorState.typeLabel = label;
@@ -483,6 +553,7 @@ function bindCalculator() {
         return;
       }
       if (action === 'unknown-weight') {
+        markInquiryChanged();
         calculatorState.unknownWeight = true;
         calculatorState.weight = '';
         calculatorState.estimatedPrice = null;
@@ -490,19 +561,21 @@ function bindCalculator() {
         return;
       }
       if (action === 'weight-adjust') {
+        markInquiryChanged();
         adjustWeight(Number(el.dataset.value) || 0);
         renderCalculator();
         return;
       }
       if (action === 'weight-clear') {
+        markInquiryChanged();
         calculatorState.unknownWeight = false;
         calculatorState.weight = '';
         calculatorState.estimatedPrice = null;
         renderCalculator();
         return;
       }
-      if (action === 'email') {
-        openInquiryEmail();
+      if (action === 'submit-inquiry') {
+        submitInquiry();
       }
     });
   });
@@ -510,6 +583,7 @@ function bindCalculator() {
   const weightInput = document.querySelector('[data-calc-weight]');
   if (weightInput) {
     weightInput.addEventListener('input', () => {
+      markInquiryChanged();
       calculatorState.weight = weightInput.value;
       calculatorState.unknownWeight = false;
       calculateEstimatedPrice();
@@ -520,6 +594,7 @@ function bindCalculator() {
 
   document.querySelectorAll('[data-contact-field]').forEach((field) => {
     field.addEventListener('input', () => {
+      markInquiryChanged();
       calculatorState.contact[field.dataset.contactField] = field.value;
       updateSubmitState();
     });
@@ -550,13 +625,14 @@ function updateCalculatorResult() {
 }
 
 function updateSubmitState() {
-  const button = document.querySelector('[data-action="email"]');
+  const button = document.querySelector('[data-action="submit-inquiry"]');
   const help = document.querySelector('[data-submit-help]');
   if (!button || !help) return;
   const ready = contactIsReady();
-  button.disabled = !ready;
-  button.textContent = ready ? 'Send forespørsel' : 'Fyll inn kontaktinfo';
-  help.textContent = ready ? 'Forespørselen er uforpliktende.' : 'Navn og telefon eller e-post må fylles inn før sending.';
+  button.disabled = !ready || calculatorState.submitStatus === 'sending' || calculatorState.submitStatus === 'sent';
+  button.textContent = submitButtonText(ready);
+  help.textContent = submitHelpText(ready);
+  help.className = `calc-status submit-message ${calculatorState.submitStatus}`;
 }
 
 function updateSummary() {
