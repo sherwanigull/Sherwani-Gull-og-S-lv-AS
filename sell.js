@@ -52,7 +52,7 @@ const SELL_PAGE_CONFIG = {
     defaultMetal: 'gold',
     pagePath: '/selg-gull',
     heroEyebrow: '',
-    heroDesc: 'Du kan legge inn karat og cirka-vekt for å få et veiledende estimat. Vurderingen er uforpliktende, prosessen er trygg, og henting kan avtales ved behov.',
+    heroDesc: '',
     primaryCta: 'Beregn pris på ditt gull',
     note: '',
     trust: [],
@@ -67,7 +67,7 @@ const SELL_PAGE_CONFIG = {
     defaultMetal: 'silver',
     pagePath: '/selg-solv',
     heroEyebrow: '',
-    heroDesc: 'Du kan legge inn sølvtype og cirka-vekt for å få et veiledende estimat. Vurderingen er uforpliktende, prosessen er trygg, og henting kan avtales ved behov.',
+    heroDesc: '',
     primaryCta: 'Beregn pris på ditt sølv',
     note: '',
     trust: [],
@@ -224,12 +224,14 @@ function markInquiryChanged() {
 }
 
 function SellHero(config) {
+  if (!config.heroEyebrow && !config.heroDesc && !config.note && !config.trust.length) return '';
+
   return `
     <section class="sell-hero">
       <div class="sell-hero-inner">
         <div>
           ${config.heroEyebrow ? `<div class="hero-eyebrow">${esc(config.heroEyebrow)}</div>` : ''}
-          <p class="hero-desc">${esc(config.heroDesc)}</p>
+          ${config.heroDesc ? `<p class="hero-desc">${esc(config.heroDesc)}</p>` : ''}
           ${config.note ? `<p class="hero-note">${esc(config.note)}</p>` : ''}
           ${TrustBadges(config)}
         </div>
