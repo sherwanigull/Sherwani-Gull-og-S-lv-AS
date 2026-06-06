@@ -139,8 +139,8 @@ nav {
 }
 .live-price-copy {
   display: grid;
-  gap: 10px;
-  justify-items: start;
+  gap: 12px;
+  align-items: start;
 }
 .live-price-head .section-label {
   margin-bottom: 8px;
@@ -160,6 +160,7 @@ nav {
 }
 .live-price-cta {
   width: 100%;
+  justify-content: center;
   margin: 2px 0 0;
 }
 .live-price-coin {
@@ -525,7 +526,7 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
     margin-bottom: 10px;
   }
   .live-price-copy {
-    gap: 6px;
+    gap: 8px;
   }
   .live-price-head .section-label {
     margin-bottom: 4px;
@@ -601,7 +602,6 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
   .sell-hero-inner { max-width: 860px; }
   .hero-desc { margin-left: auto; margin-right: auto; }
   .hero-actions { justify-content: flex-start; }
-  .live-price-cta { width: auto; min-width: 260px; }
   .trust-grid { grid-template-columns: repeat(3, 1fr); }
   .live-price-section { padding: 14px 64px 34px; }
   .live-price-inner { padding: 24px; }
