@@ -285,8 +285,19 @@ nav {
 .kontakt-title { font-size: 30px; font-weight: 400; color: #1c1c1a; margin-bottom: 18px; line-height: 1.35; }
 .kontakt-desc { font-size: 15px; color: #7a7060; line-height: 1.9; margin-bottom: 36px; }
 .kontakt-cards { display: grid; grid-template-columns: 1fr; gap: 14px; text-align: left; }
-.kcard { background: #fff; border: 0.5px solid #e4ddd0; padding: 24px 26px; display: flex; align-items: flex-start; gap: 20px; }
-.kcard-icon svg { width: 22px; height: 22px; stroke: #c4a96e; fill: none; stroke-width: 1.4; flex-shrink: 0; }
+.kcard { background: #fff; border: 0.5px solid #e4ddd0; padding: 24px 26px; display: flex; align-items: center; gap: 20px; min-height: 104px; }
+.kcard-icon {
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 54px;
+  background: linear-gradient(145deg, #fffaf0 0%, #f2e7c9 100%);
+  border: 1px solid rgba(196, 169, 110, 0.36);
+  box-shadow: 0 12px 24px rgba(196, 169, 110, 0.12);
+}
+.kcard-icon svg { width: 27px; height: 27px; stroke: #a89060; fill: none; stroke-width: 1.45; flex-shrink: 0; }
 .kcard-label { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: #8a7e6e; margin-bottom: 6px; }
 .kcard-value { font-size: 17px; color: #1c1c1a; font-family: 'Georgia', serif; }
 .kcard-value, .kcard-value a { overflow-wrap: anywhere; }
@@ -399,7 +410,9 @@ footer { padding: 30px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .btn { width: 100%; padding: 16px 18px; }
 
   .section, .kontakt-section { padding-left: 20px; padding-right: 20px; }
-  .kcard { padding: 22px 20px; gap: 14px; }
+  .kcard { padding: 22px 20px; gap: 16px; min-height: 94px; }
+  .kcard-icon { width: 48px; height: 48px; flex-basis: 48px; }
+  .kcard-icon svg { width: 24px; height: 24px; }
   .footer-logo span { font-size: 11px; letter-spacing: 2px; }
 }
 
