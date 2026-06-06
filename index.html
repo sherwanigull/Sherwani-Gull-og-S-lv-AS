@@ -259,19 +259,20 @@ nav {
 .sell-focus-thumb {
   width: 92px;
   aspect-ratio: 1 / 1;
-  padding: 10px;
-  border: 0.5px solid #e4ddd0;
-  background: linear-gradient(180deg, #fffaf0 0%, #f4efe4 100%);
+  padding: 0;
+  border: 0;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
 }
 .sell-focus-thumb img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
+  filter: drop-shadow(0 10px 18px rgba(28, 28, 26, 0.12));
 }
 .sell-focus-card p { font-size: 15px; color: #7a7060; line-height: 1.8; max-width: 52ch; }
 .sell-focus-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
