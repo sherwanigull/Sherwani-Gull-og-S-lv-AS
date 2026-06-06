@@ -263,6 +263,8 @@ function LivePriceSection(config) {
 function LivePriceBoard(metalKey) {
   const metal = METAL_OPTIONS[metalKey];
   const config = SELL_PAGE_CONFIG[metalKey];
+  const coinSrc = metalKey === 'gold' ? '../assets/sherwani-gold-coin.png' : '../assets/sherwani-silver-coin.png';
+  const coinAlt = metalKey === 'gold' ? 'Sherwani gullmynt' : 'Sherwani sølvmynt';
   const priceRows = metal.types
     .filter(([, fineness]) => fineness)
     .map(([label, fineness, text, buyRate]) => {
@@ -280,12 +282,17 @@ function LivePriceBoard(metalKey) {
 
   return `
     <div class="live-price-head">
-      <div>
-        <div class="section-label">Live kjøpspris</div>
-        <h2>${esc(metal.label)} per gram</h2>
+      <div class="live-price-copy">
+        <div>
+          <div class="section-label">Live kjøpspris</div>
+          <h2>${esc(metal.label)} per gram</h2>
+        </div>
+        <p>${calculatorState.pricesLive ? 'Prisene følger markedet og kan endre seg fortløpende.' : 'Henter livepris. Midlertidige priser vises frem til oppdatering.'}</p>
+        <a class="btn ${metalKey === 'gold' ? 'btn-gold' : 'btn-silver'} live-price-cta" href="#kalkulator">${esc(config.primaryCta)}</a>
       </div>
-      <p>${calculatorState.pricesLive ? 'Prisene følger markedet og kan endre seg fortløpende.' : 'Henter livepris. Midlertidige priser vises frem til oppdatering.'}</p>
-      <a class="btn ${metalKey === 'gold' ? 'btn-gold' : 'btn-silver'} live-price-cta" href="#kalkulator">${esc(config.primaryCta)}</a>
+      <div class="live-price-coin" aria-hidden="true">
+        <img src="${coinSrc}" alt="${coinAlt}">
+      </div>
     </div>
     <div class="live-price-grid">
       ${priceRows}
