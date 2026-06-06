@@ -359,6 +359,26 @@ nav {
   font-size: 15px;
   font-family: Georgia, serif;
 }
+.unknown-weight-button {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 12px;
+  border: 0.5px solid rgba(196, 169, 110, 0.55);
+  background: #fffaf0;
+  color: #4c4334;
+  cursor: pointer;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  letter-spacing: 0.2px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(196, 169, 110, 0.10);
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.unknown-weight-button:hover {
+  border-color: #c4a96e;
+  background: #fff6df;
+  transform: translateY(-1px);
+}
 .field { display: grid; gap: 8px; }
 .field label { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: #8a7e6e; }
 .field input, .field select, .field textarea {

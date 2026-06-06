@@ -6,7 +6,7 @@ const METAL_OPTIONS = {
     accent: 'gold',
     typeLabel: 'Velg type gull',
     uncertainText: 'Det går fint. Ta kontakt, så hjelper vi deg å finne riktig type.',
-    weightText: 'Du kan skrive cirka-vekt hvis du er usikker.',
+    weightText: '',
     resultText: 'Dette er et veiledende estimat. Endelig pris bekreftes etter kontroll av vekt og renhet.',
     emailSubject: 'Ny forespørsel: Selg gull',
     pagePath: '/selg-gull',
@@ -29,7 +29,7 @@ const METAL_OPTIONS = {
     accent: 'silver',
     typeLabel: 'Velg type sølv',
     uncertainText: 'Det går fint. Ta kontakt, så hjelper vi deg å finne riktig type.',
-    weightText: 'Du kan skrive cirka-vekt hvis du er usikker.',
+    weightText: '',
     resultText: 'Dette er et veiledende estimat. Endelig pris bekreftes etter kontroll av vekt og sølvtype.',
     emailSubject: 'Ny forespørsel: Selg sølv',
     pagePath: '/selg-solv',
@@ -433,7 +433,7 @@ function renderCalculator() {
   host.innerHTML = `
     <div class="calc-flow">
       <div class="calc-block step-card">
-        ${StepHeader(1, 'Velg metall', 'Sidens metall er forhåndsvalgt, men du kan bytte her.')}
+        ${StepHeader(1, 'Velg metall')}
         <div class="choice-grid">
           ${optionButton({ label: 'Gull', text: METAL_OPTIONS.gold.shortText, selected: calculatorState.metal === 'gold', metal: 'gold', value: 'gold', action: 'metal', selectedText: METAL_OPTIONS.gold.selectedLabel })}
           ${optionButton({ label: 'Sølv', text: METAL_OPTIONS.silver.shortText, selected: calculatorState.metal === 'silver', metal: 'silver', value: 'silver', action: 'metal', selectedText: METAL_OPTIONS.silver.selectedLabel })}
@@ -441,7 +441,7 @@ function renderCalculator() {
       </div>
 
       <div class="calc-block step-card">
-        ${StepHeader(2, metal.typeLabel, 'Velg høyeste renhet som stemmer med det du har.')}
+        ${StepHeader(2, metal.typeLabel)}
         <div class="type-grid">
           ${metal.types.map(([label, value, text]) => optionButton({
             label,
@@ -472,11 +472,11 @@ function renderCalculator() {
           <button type="button" data-action="weight-adjust" data-value="100">+100g</button>
           <button type="button" data-action="weight-clear">Nullstill</button>
         </div>
-        <button class="text-button" type="button" data-action="unknown-weight">Jeg vet ikke vekten</button>
+        <button class="unknown-weight-button" type="button" data-action="unknown-weight">Jeg vet ikke vekten</button>
       </div>
 
       <div class="calc-block step-card estimate-step">
-        ${StepHeader(4, 'Se estimert verdi', 'Verdien oppdateres automatisk når type og gram er valgt.')}
+        ${StepHeader(4, 'Se estimert verdi')}
         <div class="calc-result ${metal.accent === 'silver' ? 'result-silver' : ''}">
           <div class="calc-label">${needsHelp ? 'Vi hjelper deg' : 'Estimert verdi'}</div>
           <div data-calc-result-live>
@@ -484,7 +484,7 @@ function renderCalculator() {
             <div class="calc-value">Ca. ${kr(calculatorState.estimatedPrice)}</div>
             <p class="calc-status">${esc(metal.resultText)}</p>
           ` : `
-            <p class="calc-status">${esc(calculatorState.unknownWeight || unknownType ? 'Send forespørsel, så hjelper vi deg med type og vekt.' : 'Velg type og skriv cirka-vekt for å se estimert verdi.')}</p>
+            <p class="calc-status">${esc(calculatorState.unknownWeight || unknownType ? 'Vi hjelper deg videre.' : 'Velg type og skriv gram for å se estimert verdi.')}</p>
           `}
           </div>
         </div>
@@ -513,7 +513,7 @@ function renderCalculator() {
       </div>
 
       <div class="submit-panel ${metal.accent === 'silver' ? 'submit-silver' : ''}">
-        ${StepHeader(6, 'Send forespørsel', 'Forespørselen sendes direkte til oss fra nettsiden.')}
+        ${StepHeader(6, 'Send forespørsel')}
         <div class="summary-grid" aria-label="Oppsummering">
           <span><strong>Type</strong><em data-summary-type>${esc(selectedTypeText)}</em></span>
           <span><strong>Gram</strong><em data-summary-weight>${esc(weightText)}</em></span>
@@ -627,7 +627,7 @@ function updateCalculatorResult() {
   label.textContent = needsHelp ? 'Vi hjelper deg' : 'Estimert verdi';
   result.innerHTML = estimate !== null
     ? `<div class="calc-value">Ca. ${kr(estimate)}</div><p class="calc-status">${esc(metal.resultText)}</p>`
-    : `<p class="calc-status">${esc(calculatorState.unknownWeight || unknownType ? 'Send forespørsel, så hjelper vi deg med type og vekt.' : 'Velg type og skriv cirka-vekt for å se estimert verdi.')}</p>`;
+    : `<p class="calc-status">${esc(calculatorState.unknownWeight || unknownType ? 'Vi hjelper deg videre.' : 'Velg type og skriv gram for å se estimert verdi.')}</p>`;
   updateSubmitState();
   updateSummary();
 }
