@@ -295,9 +295,11 @@ nav {
 .after-step-icon svg circle:first-child {
   stroke: rgba(196, 169, 110, 0.18);
 }
-.after-step-icon svg path:nth-of-type(4),
-.after-step-icon svg path:nth-of-type(5) {
+.after-step-icon svg .accent {
   stroke: #c4a96e;
+}
+.after-step-icon svg .muted-mark {
+  stroke: rgba(196, 169, 110, 0.58);
 }
 .after-step-copy {
   align-self: center;

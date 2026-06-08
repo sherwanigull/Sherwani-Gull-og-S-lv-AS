@@ -339,10 +339,11 @@ function AfterSubmitSection(config) {
       icon: `
         <svg viewBox="0 0 64 64" aria-hidden="true">
           <circle cx="32" cy="32" r="31.5"/>
-          <path d="M18 24.5h28v21H18z"/>
-          <path d="M18 25l14 11 14-11"/>
-          <path d="M27 18.5h10"/>
-          <path d="M31 18.5l7.5 7.5"/>
+          <path d="M17 24h30v21H17z"/>
+          <path d="M18 25l14 12 14-12"/>
+          <path d="M22 20h20"/>
+          <path d="M26 16h12"/>
+          <path class="accent" d="M39 39l8-15-18 8 7 3 3 7z"/>
         </svg>
       `
     },
@@ -371,11 +372,11 @@ function AfterSubmitSection(config) {
       icon: `
         <svg viewBox="0 0 64 64" aria-hidden="true">
           <circle cx="32" cy="32" r="31.5"/>
-          <circle cx="32" cy="21" r="6"/>
-          <path d="M22 41c0-6.5 4.5-11 10-11s10 4.5 10 11"/>
-          <path d="M15 45l5 5 9-11"/>
-          <path d="M42 40l9 9"/>
-          <path d="M51 40l-9 9"/>
+          <circle cx="32" cy="19" r="5.5"/>
+          <path d="M23 37c0-6 4-10 9-10s9 4 9 10"/>
+          <path class="muted-mark" d="M12 47l5 5 9-12"/>
+          <path class="muted-mark" d="M47 41l9 9"/>
+          <path class="muted-mark" d="M56 41l-9 9"/>
         </svg>
       `
     }
