@@ -336,7 +336,6 @@ function AfterSubmitSection(config) {
     {
       number: '1',
       title: 'Vi leser forespørselen',
-      text: 'Du får svar så snart vi kan.',
       icon: `
         <svg viewBox="0 0 64 64" aria-hidden="true">
           <circle cx="32" cy="32" r="31.5"/>
@@ -349,8 +348,7 @@ function AfterSubmitSection(config) {
     },
     {
       number: '2',
-      title: 'Vi kontrollerer innsendingen',
-      text: 'Vekt og renhet bekreftes tydelig.',
+      title: 'Vi kontrollerer vekt og renhet av innsending',
       icon: `
         <svg viewBox="0 0 64 64" aria-hidden="true">
           <circle cx="32" cy="32" r="31.5"/>
@@ -369,18 +367,15 @@ function AfterSubmitSection(config) {
     },
     {
       number: '3',
-      title: 'Du bestemmer selv',
-      text: 'Vurderingen er uforpliktende.',
+      title: 'Du bestemmer selv, helt uforpliktende',
       icon: `
         <svg viewBox="0 0 64 64" aria-hidden="true">
           <circle cx="32" cy="32" r="31.5"/>
           <circle cx="32" cy="21" r="6"/>
           <path d="M22 41c0-6.5 4.5-11 10-11s10 4.5 10 11"/>
-          <circle cx="19" cy="44" r="6.5"/>
-          <path d="M16 44l2.3 2.3L22 42.5"/>
-          <circle cx="45" cy="44" r="6.5"/>
-          <path d="M42.2 41.2l5.6 5.6"/>
-          <path d="M47.8 41.2l-5.6 5.6"/>
+          <path d="M15 45l5 5 9-11"/>
+          <path d="M42 40l9 9"/>
+          <path d="M51 40l-9 9"/>
         </svg>
       `
     }
@@ -395,13 +390,13 @@ function AfterSubmitSection(config) {
         <div class="after-steps">
           ${steps.map((step, index) => `
             <article class="after-step-card ${index < steps.length - 1 ? 'has-connector' : ''}">
+              <span class="after-step-number">${step.number}</span>
               <div class="after-step-visual">
-                <span class="after-step-number">${step.number}</span>
                 <div class="after-step-icon">${step.icon}</div>
               </div>
               <div class="after-step-copy">
                 <h3>${esc(step.title)}</h3>
-                <p>${esc(step.text)}</p>
+                ${step.text ? `<p>${esc(step.text)}</p>` : ''}
               </div>
             </article>
           `).join('')}
