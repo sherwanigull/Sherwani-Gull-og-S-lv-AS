@@ -336,7 +336,6 @@ function AfterSubmitSection(config) {
     <section class="section after-section">
       <div class="section-inner after-inner">
         <div>
-          <div class="section-label">Etter innsending</div>
           <h2 class="section-title">Dette skjer etterpå</h2>
         </div>
         <div class="after-steps">
