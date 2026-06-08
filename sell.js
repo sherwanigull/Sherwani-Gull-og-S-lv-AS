@@ -337,15 +337,14 @@ function AfterSubmitSection(config) {
       number: '1',
       title: 'Vi leser forespørselen',
       icon: `
-        <svg viewBox="0 0 96 96" aria-hidden="true">
-          <circle class="icon-ring" cx="48" cy="48" r="46"/>
-          <path d="M25 42l23 17 23-17"/>
-          <path d="M25 42v28h46V42"/>
-          <path d="M25 70l18-15"/>
-          <path d="M71 70L53 55"/>
-          <path d="M36 23h24v27L48 59 36 50z"/>
-          <path class="accent" d="M55 44.2c-2 2.3-4.5 3.5-7.4 3.5-5.8 0-10-4.2-10-10s4.2-10 10-10c5.6 0 9.6 3.9 9.6 9.1v3.1c0 1.8-1 2.9-2.5 2.9-1.4 0-2.3-1-2.3-2.7v-7.5"/>
-          <circle class="accent" cx="47.3" cy="37.7" r="5.1"/>
+        <svg viewBox="0 0 120 120" aria-hidden="true" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <circle class="icon-ring" cx="60" cy="60" r="54"/>
+          <path d="M45 29h30v36L60 77 45 65z"/>
+          <text class="accent-text" x="60" y="56" text-anchor="middle">@</text>
+          <path d="M31 55h58v42H31z"/>
+          <path d="M31 56l29 23 29-23"/>
+          <path d="M31 97l24-21"/>
+          <path d="M89 97L65 76"/>
         </svg>
       `
     },
@@ -353,21 +352,21 @@ function AfterSubmitSection(config) {
       number: '2',
       title: 'Vi kontrollerer innsendingen',
       icon: `
-        <svg viewBox="0 0 96 96" aria-hidden="true">
-          <circle class="icon-ring" cx="48" cy="48" r="46"/>
-          <path d="M48 23v44"/>
-          <path d="M24 31h48"/>
-          <circle class="accent" cx="24" cy="31" r="2.8"/>
-          <circle class="accent" cx="48" cy="31" r="2.8"/>
-          <circle class="accent" cx="72" cy="31" r="2.8"/>
-          <path d="M24 34l-12 26"/>
-          <path d="M24 34l12 26"/>
-          <path d="M72 34L60 60"/>
-          <path d="M72 34l12 26"/>
-          <path d="M12 60c2.2 5.8 6.2 8.8 12 8.8s9.8-3 12-8.8"/>
-          <path d="M60 60c2.2 5.8 6.2 8.8 12 8.8s9.8-3 12-8.8"/>
-          <path d="M39 70h18"/>
-          <path class="accent" d="M35 76h26"/>
+        <svg viewBox="0 0 120 120" aria-hidden="true" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <circle class="icon-ring" cx="60" cy="60" r="54"/>
+          <path d="M60 28v58"/>
+          <path d="M28 38h64"/>
+          <circle class="accent-dot" cx="28" cy="38" r="3"/>
+          <circle class="accent-dot" cx="60" cy="38" r="3"/>
+          <circle class="accent-dot" cx="92" cy="38" r="3"/>
+          <path d="M28 42L14 75"/>
+          <path d="M28 42l14 33"/>
+          <path d="M92 42L78 75"/>
+          <path d="M92 42l14 33"/>
+          <path d="M14 75c3 7 7.7 10.5 14 10.5S39 82 42 75"/>
+          <path d="M78 75c3 7 7.7 10.5 14 10.5S103 82 106 75"/>
+          <path d="M49 89h22"/>
+          <path class="accent" d="M43 96h34"/>
         </svg>
       `
     },
@@ -375,15 +374,15 @@ function AfterSubmitSection(config) {
       number: '3',
       title: 'Du bestemmer selv',
       icon: `
-        <svg viewBox="0 0 96 96" aria-hidden="true">
-          <circle class="icon-ring" cx="48" cy="48" r="46"/>
-          <circle cx="48" cy="31" r="9"/>
-          <path d="M34 58c0-10 6.2-17 14-17s14 7 14 17"/>
-          <circle cx="25" cy="68" r="9.5"/>
-          <circle cx="71" cy="68" r="9.5"/>
-          <path class="accent" d="M20 68l3.8 3.8L31 64"/>
-          <path class="accent" d="M66 63l10 10"/>
-          <path class="accent" d="M76 63L66 73"/>
+        <svg viewBox="0 0 120 120" aria-hidden="true" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <circle class="icon-ring" cx="60" cy="60" r="54"/>
+          <circle cx="60" cy="38" r="11"/>
+          <path d="M43 73c0-12 7.5-20 17-20s17 8 17 20"/>
+          <circle cx="32" cy="86" r="12"/>
+          <circle cx="88" cy="86" r="12"/>
+          <path class="accent" d="M26 86l4.4 4.4L38 81"/>
+          <path class="accent" d="M83 81l10 10"/>
+          <path class="accent" d="M93 81L83 91"/>
         </svg>
       `
     }

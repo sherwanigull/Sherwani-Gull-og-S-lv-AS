@@ -237,48 +237,25 @@ nav {
 .pickup-note { max-width: 720px; margin: 22px auto 0; color: #8a8070; font-size: 13px; line-height: 1.7; text-align: center; }
 
 .after-section { background: #f7f4ee; }
-.after-inner { display: grid; gap: 28px; max-width: 980px; }
+.after-inner { display: grid; gap: 24px; max-width: 980px; }
 .after-inner .section-label,
 .after-inner .section-title { text-align: center; }
 .after-inner .section-title {
-  position: relative;
   margin-bottom: 0;
-  padding-top: 24px;
   color: #1f1b18;
 }
-.after-inner .section-title::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 132px;
-  height: 1px;
-  background: #b89a5a;
-  transform: translateX(-50%);
-}
-.after-inner .section-title::after {
-  content: "";
-  position: absolute;
-  top: -5px;
-  left: 50%;
-  width: 11px;
-  height: 11px;
-  border: 1px solid #b89a5a;
-  background: #f7f4ee;
-  transform: translateX(-50%) rotate(45deg);
-}
-.after-steps { display: grid; gap: 18px; }
+.after-steps { display: grid; gap: 16px; }
 .after-step-card {
   position: relative;
   display: grid;
-  grid-template-columns: 190px minmax(0, 1fr);
-  gap: 40px;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 34px;
   align-items: center;
-  background: rgba(255, 252, 246, 0.78);
+  background: #fffcf6;
   border: 1px solid #e7ded2;
-  min-height: 214px;
-  padding: 34px 42px;
-  box-shadow: 0 18px 42px rgba(31, 27, 24, 0.025);
+  min-height: 164px;
+  padding: 26px 34px;
+  box-shadow: 0 14px 34px rgba(31, 27, 24, 0.022);
 }
 .after-step-card.has-connector::after {
   display: none;
@@ -287,29 +264,29 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 156px;
+  min-height: 118px;
 }
 .after-step-number {
   position: absolute;
-  top: 26px;
-  left: 32px;
-  font-size: 26px;
+  top: 18px;
+  left: 24px;
+  font-size: 22px;
   color: #b89a5a;
   line-height: 1;
 }
 .after-step-icon {
-  width: 154px;
-  height: 154px;
+  width: 122px;
+  height: 122px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .after-step-icon svg {
-  width: 154px;
-  height: 154px;
-  stroke: #3d3a35;
+  width: 122px;
+  height: 122px;
+  stroke: #2f2c28;
   fill: none;
-  stroke-width: 1.55;
+  stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -319,10 +296,20 @@ nav {
 .after-step-icon svg .accent {
   stroke: #b89a5a;
 }
+.after-step-icon svg .accent-dot {
+  fill: #b89a5a;
+  stroke: #b89a5a;
+}
+.after-step-icon svg .accent-text {
+  fill: #b89a5a;
+  stroke: none;
+  font-family: Georgia, serif;
+  font-size: 25px;
+}
 .after-step-copy {
   align-self: center;
 }
-.after-step-copy h3 { font-size: 32px; font-weight: 400; margin-bottom: 0; line-height: 1.25; color: #1f1b18; }
+.after-step-copy h3 { font-size: 28px; font-weight: 400; margin-bottom: 0; line-height: 1.25; color: #1f1b18; }
 .after-step-copy p { color: #7a7060; font-size: 15px; line-height: 1.65; }
 
 .calculator {
@@ -656,33 +643,33 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
     font-size: 14px;
   }
   .after-step-card {
-    grid-template-columns: 1fr;
-    gap: 18px;
-    text-align: center;
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 14px;
+    text-align: left;
     min-height: 0;
-    padding: 40px 18px 24px;
+    padding: 34px 16px 22px;
   }
   .after-step-card.has-connector::after {
     display: none;
   }
   .after-step-number {
-    top: 16px;
-    left: 18px;
-    font-size: 22px;
+    top: 13px;
+    left: 16px;
+    font-size: 18px;
   }
   .after-step-visual {
-    min-height: 116px;
+    min-height: 92px;
   }
   .after-step-icon {
-    width: 116px;
-    height: 116px;
+    width: 92px;
+    height: 92px;
   }
   .after-step-icon svg {
-    width: 116px;
-    height: 116px;
+    width: 92px;
+    height: 92px;
   }
   .after-step-copy h3 {
-    font-size: 23px;
+    font-size: 20px;
   }
 }
 
