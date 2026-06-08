@@ -337,47 +337,53 @@ function AfterSubmitSection(config) {
       number: '1',
       title: 'Vi leser forespørselen',
       icon: `
-        <svg viewBox="0 0 64 64" aria-hidden="true">
-          <circle cx="32" cy="32" r="31.5"/>
-          <path d="M14 29l18 13 18-13"/>
-          <path d="M14 29v20h36V29"/>
-          <path d="M14 49l14-11"/>
-          <path d="M50 49L36 38"/>
-          <path class="accent" d="M42 30.5c-2.3 3.8-5.8 6.1-10 6.1-7.1 0-12.4-5.1-12.4-12.1S24.9 12.4 32 12.4c6.8 0 11.8 4.7 11.8 11.1v4.1c0 2.1-1.2 3.4-3 3.4-1.7 0-2.8-1.2-2.8-3.2v-9.5"/>
-          <circle class="accent" cx="31.6" cy="24.7" r="6.2"/>
+        <svg viewBox="0 0 96 96" aria-hidden="true">
+          <circle class="icon-ring" cx="48" cy="48" r="46"/>
+          <path d="M25 42l23 17 23-17"/>
+          <path d="M25 42v28h46V42"/>
+          <path d="M25 70l18-15"/>
+          <path d="M71 70L53 55"/>
+          <path d="M36 23h24v27L48 59 36 50z"/>
+          <path class="accent" d="M55 44.2c-2 2.3-4.5 3.5-7.4 3.5-5.8 0-10-4.2-10-10s4.2-10 10-10c5.6 0 9.6 3.9 9.6 9.1v3.1c0 1.8-1 2.9-2.5 2.9-1.4 0-2.3-1-2.3-2.7v-7.5"/>
+          <circle class="accent" cx="47.3" cy="37.7" r="5.1"/>
         </svg>
       `
     },
     {
       number: '2',
-      title: 'Vi kontrollerer vekt og renhet av innsending',
+      title: 'Vi kontrollerer innsendingen',
       icon: `
-        <svg viewBox="0 0 64 64" aria-hidden="true">
-          <circle cx="32" cy="32" r="31.5"/>
-          <path d="M32 16v31"/>
-          <path d="M18 22h28"/>
-          <path d="M22 22l-6 13"/>
-          <path d="M22 22l6 13"/>
-          <path d="M42 22l-6 13"/>
-          <path d="M42 22l6 13"/>
-          <path d="M13 35c1.7 4 4.5 6 9 6s7.3-2 9-6"/>
-          <path d="M33 35c1.7 4 4.5 6 9 6s7.3-2 9-6"/>
-          <path d="M26 49h12"/>
-          <path d="M24 53h16"/>
+        <svg viewBox="0 0 96 96" aria-hidden="true">
+          <circle class="icon-ring" cx="48" cy="48" r="46"/>
+          <path d="M48 23v44"/>
+          <path d="M24 31h48"/>
+          <circle class="accent" cx="24" cy="31" r="2.8"/>
+          <circle class="accent" cx="48" cy="31" r="2.8"/>
+          <circle class="accent" cx="72" cy="31" r="2.8"/>
+          <path d="M24 34l-12 26"/>
+          <path d="M24 34l12 26"/>
+          <path d="M72 34L60 60"/>
+          <path d="M72 34l12 26"/>
+          <path d="M12 60c2.2 5.8 6.2 8.8 12 8.8s9.8-3 12-8.8"/>
+          <path d="M60 60c2.2 5.8 6.2 8.8 12 8.8s9.8-3 12-8.8"/>
+          <path d="M39 70h18"/>
+          <path class="accent" d="M35 76h26"/>
         </svg>
       `
     },
     {
       number: '3',
-      title: 'Du bestemmer selv, helt uforpliktende',
+      title: 'Du bestemmer selv',
       icon: `
-        <svg viewBox="0 0 64 64" aria-hidden="true">
-          <circle cx="32" cy="32" r="31.5"/>
-          <circle cx="32" cy="19" r="5.5"/>
-          <path d="M23 37c0-6 4-10 9-10s9 4 9 10"/>
-          <path class="muted-mark" d="M12 47l5 5 9-12"/>
-          <path class="muted-mark" d="M47 41l9 9"/>
-          <path class="muted-mark" d="M56 41l-9 9"/>
+        <svg viewBox="0 0 96 96" aria-hidden="true">
+          <circle class="icon-ring" cx="48" cy="48" r="46"/>
+          <circle cx="48" cy="31" r="9"/>
+          <path d="M34 58c0-10 6.2-17 14-17s14 7 14 17"/>
+          <circle cx="25" cy="68" r="9.5"/>
+          <circle cx="71" cy="68" r="9.5"/>
+          <path class="accent" d="M20 68l3.8 3.8L31 64"/>
+          <path class="accent" d="M66 63l10 10"/>
+          <path class="accent" d="M76 63L66 73"/>
         </svg>
       `
     }

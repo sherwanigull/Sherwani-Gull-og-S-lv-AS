@@ -236,75 +236,93 @@ nav {
 .pickup-section .section-desc { color: #a69b88; }
 .pickup-note { max-width: 720px; margin: 22px auto 0; color: #8a8070; font-size: 13px; line-height: 1.7; text-align: center; }
 
-.after-section { background: #fff; }
-.after-inner { display: grid; gap: 20px; }
+.after-section { background: #f7f4ee; }
+.after-inner { display: grid; gap: 28px; max-width: 980px; }
 .after-inner .section-label,
-.after-inner .section-title { text-align: left; }
-.after-inner .section-title { margin-bottom: 0; }
-.after-steps { display: grid; gap: 16px; }
+.after-inner .section-title { text-align: center; }
+.after-inner .section-title {
+  position: relative;
+  margin-bottom: 0;
+  padding-top: 24px;
+  color: #1f1b18;
+}
+.after-inner .section-title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 132px;
+  height: 1px;
+  background: #b89a5a;
+  transform: translateX(-50%);
+}
+.after-inner .section-title::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 11px;
+  height: 11px;
+  border: 1px solid #b89a5a;
+  background: #f7f4ee;
+  transform: translateX(-50%) rotate(45deg);
+}
+.after-steps { display: grid; gap: 18px; }
 .after-step-card {
   position: relative;
   display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
-  gap: 22px;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 40px;
   align-items: center;
-  background: #faf8f4;
-  border: 0.5px solid #e4ddd0;
-  min-height: 132px;
-  padding: 26px 22px 22px;
+  background: rgba(255, 252, 246, 0.78);
+  border: 1px solid #e7ded2;
+  min-height: 214px;
+  padding: 34px 42px;
+  box-shadow: 0 18px 42px rgba(31, 27, 24, 0.025);
 }
 .after-step-card.has-connector::after {
-  content: "";
-  position: absolute;
-  left: 70px;
-  top: calc(100% - 4px);
-  width: 1px;
-  height: 20px;
-  background: linear-gradient(180deg, rgba(196, 169, 110, 0.6) 0%, rgba(196, 169, 110, 0.12) 100%);
+  display: none;
 }
 .after-step-visual {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 88px;
+  min-height: 156px;
 }
 .after-step-number {
   position: absolute;
-  top: 14px;
-  left: 18px;
-  font-size: 15px;
-  color: #b39558;
+  top: 26px;
+  left: 32px;
+  font-size: 26px;
+  color: #b89a5a;
   line-height: 1;
 }
 .after-step-icon {
-  width: 88px;
-  height: 88px;
+  width: 154px;
+  height: 154px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .after-step-icon svg {
-  width: 88px;
-  height: 88px;
-  stroke: #5f5648;
+  width: 154px;
+  height: 154px;
+  stroke: #3d3a35;
   fill: none;
-  stroke-width: 1.4;
+  stroke-width: 1.55;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.after-step-icon svg circle:first-child {
-  stroke: rgba(196, 169, 110, 0.18);
+.after-step-icon svg .icon-ring {
+  stroke: #e7ded2;
 }
 .after-step-icon svg .accent {
-  stroke: #c4a96e;
-}
-.after-step-icon svg .muted-mark {
-  stroke: rgba(196, 169, 110, 0.58);
+  stroke: #b89a5a;
 }
 .after-step-copy {
   align-self: center;
 }
-.after-step-copy h3 { font-size: 21px; font-weight: 400; margin-bottom: 0; line-height: 1.35; }
+.after-step-copy h3 { font-size: 32px; font-weight: 400; margin-bottom: 0; line-height: 1.25; color: #1f1b18; }
 .after-step-copy p { color: #7a7060; font-size: 15px; line-height: 1.65; }
 
 .calculator {
@@ -639,27 +657,32 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
   }
   .after-step-card {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 18px;
     text-align: center;
     min-height: 0;
-    padding: 26px 16px 18px;
+    padding: 40px 18px 24px;
   }
   .after-step-card.has-connector::after {
-    left: 50%;
-    top: calc(100% - 2px);
-    height: 16px;
-    transform: translateX(-50%);
+    display: none;
+  }
+  .after-step-number {
+    top: 16px;
+    left: 18px;
+    font-size: 22px;
+  }
+  .after-step-visual {
+    min-height: 116px;
   }
   .after-step-icon {
-    width: 84px;
-    height: 84px;
+    width: 116px;
+    height: 116px;
   }
   .after-step-icon svg {
-    width: 84px;
-    height: 84px;
+    width: 116px;
+    height: 116px;
   }
   .after-step-copy h3 {
-    font-size: 19px;
+    font-size: 23px;
   }
 }
 
@@ -712,7 +735,6 @@ footer { padding: 38px 24px 96px; border-top: 0.5px solid #d6cfc0; text-align: c
   .section-title { font-size: 38px; }
   .card-grid { grid-template-columns: repeat(3, 1fr); }
   .calc-block, .submit-panel { padding: 24px; }
-  .after-inner { grid-template-columns: 0.78fr 1.22fr; align-items: start; }
   footer { display: flex; align-items: center; justify-content: space-between; padding: 34px 64px; text-align: left; }
   .footer-logo, .footer-links { margin-bottom: 0; }
 }
