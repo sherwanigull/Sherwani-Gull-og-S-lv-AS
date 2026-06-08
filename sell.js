@@ -339,11 +339,12 @@ function AfterSubmitSection(config) {
       icon: `
         <svg viewBox="0 0 64 64" aria-hidden="true">
           <circle cx="32" cy="32" r="31.5"/>
-          <path d="M17 24h30v21H17z"/>
-          <path d="M18 25l14 12 14-12"/>
-          <path d="M22 20h20"/>
-          <path d="M26 16h12"/>
-          <path class="accent" d="M39 39l8-15-18 8 7 3 3 7z"/>
+          <path d="M14 29l18 13 18-13"/>
+          <path d="M14 29v20h36V29"/>
+          <path d="M14 49l14-11"/>
+          <path d="M50 49L36 38"/>
+          <path class="accent" d="M42 30.5c-2.3 3.8-5.8 6.1-10 6.1-7.1 0-12.4-5.1-12.4-12.1S24.9 12.4 32 12.4c6.8 0 11.8 4.7 11.8 11.1v4.1c0 2.1-1.2 3.4-3 3.4-1.7 0-2.8-1.2-2.8-3.2v-9.5"/>
+          <circle class="accent" cx="31.6" cy="24.7" r="6.2"/>
         </svg>
       `
     },
