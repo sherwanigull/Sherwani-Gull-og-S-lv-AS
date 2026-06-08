@@ -59,7 +59,7 @@ const SELL_PAGE_CONFIG = {
     itemsTitle: 'Hva slags gull kan du selge?',
     itemsDesc: 'Velg nærmeste type i kalkulatoren. Usikker går også fint.',
     items: ['Ringer', 'Kjeder', 'Armbånd', 'Øredobber', 'Ødelagte smykker', 'Arvegull', 'Gullmynter', 'Gull uten sertifikat'],
-    pickupTitle: 'Gratis hjemmehenting i Oslo, Akershus og Østfold',
+    pickupTitle: 'Hjemmehenting i Oslo, Akershus og Østfold',
     pickupText: 'Henting kan avtales hvis du ønsker en enklere vurdering hjemmefra.',
     pickupNote: 'Avtales etter område, tidspunkt og mengde.'
   },
@@ -74,7 +74,7 @@ const SELL_PAGE_CONFIG = {
     itemsTitle: 'Hva slags sølv kan du selge?',
     itemsDesc: 'Velg nærmeste type i kalkulatoren. Usikker går også fint.',
     items: ['Sølvbestikk', 'Sølvtøy', 'Sølvfat', 'Lysestaker', 'Smykker', 'Sølvmynter', 'Eldre norske mynter', 'Arvesølv'],
-    pickupTitle: 'Gratis hjemmehenting i Oslo, Akershus og Østfold',
+    pickupTitle: 'Hjemmehenting i Oslo, Akershus og Østfold',
     pickupText: 'Henting kan avtales hvis du ønsker en enklere vurdering hjemmefra.',
     pickupNote: 'Avtales etter område, tidspunkt og mengde.'
   }
@@ -311,7 +311,6 @@ function MetalItemsSection(config) {
   return `
     <section class="section" id="hva-kan-du-selge">
       <div class="section-inner">
-        <div class="section-label">Dette kan du selge</div>
         <h2 class="section-title">${esc(config.itemsTitle)}</h2>
         <p class="section-desc">${esc(config.itemsDesc)}</p>
         <div class="chip-grid">${config.items.map((item) => `<span class="chip">${esc(item)}</span>`).join('')}</div>
@@ -324,7 +323,6 @@ function PickupAreaSection(config) {
   return `
     <section class="section pickup-section" id="henting">
       <div class="section-inner">
-        <div class="section-label">Gratis hjemmehenting</div>
         <h2 class="section-title">${esc(config.pickupTitle)}</h2>
         <p class="section-desc">${esc(config.pickupText)}</p>
         <p class="pickup-note">${esc(config.pickupNote)}</p>
@@ -681,7 +679,6 @@ function FAQSection() {
   return `
     <section class="section" id="faq">
       <div class="section-inner">
-        <div class="section-label">Spørsmål og svar</div>
         <h2 class="section-title">Ofte stilte spørsmål</h2>
         <div class="faq-list">
           ${faq.map(([question, answer]) => `
