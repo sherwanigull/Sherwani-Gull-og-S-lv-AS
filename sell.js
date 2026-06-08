@@ -332,6 +332,60 @@ function PickupAreaSection(config) {
 }
 
 function AfterSubmitSection(config) {
+  const steps = [
+    {
+      number: '1',
+      title: 'Vi leser forespørselen',
+      text: 'Du får svar så snart vi kan.',
+      icon: `
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="31.5"/>
+          <path d="M18 24.5h28v21H18z"/>
+          <path d="M18 25l14 11 14-11"/>
+          <path d="M27 18.5h10"/>
+          <path d="M31 18.5l7.5 7.5"/>
+        </svg>
+      `
+    },
+    {
+      number: '2',
+      title: 'Vi kontrollerer innsendingen',
+      text: 'Vekt og renhet bekreftes tydelig.',
+      icon: `
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="31.5"/>
+          <path d="M32 16v31"/>
+          <path d="M18 22h28"/>
+          <path d="M22 22l-6 13"/>
+          <path d="M22 22l6 13"/>
+          <path d="M42 22l-6 13"/>
+          <path d="M42 22l6 13"/>
+          <path d="M13 35c1.7 4 4.5 6 9 6s7.3-2 9-6"/>
+          <path d="M33 35c1.7 4 4.5 6 9 6s7.3-2 9-6"/>
+          <path d="M26 49h12"/>
+          <path d="M24 53h16"/>
+        </svg>
+      `
+    },
+    {
+      number: '3',
+      title: 'Du bestemmer selv',
+      text: 'Vurderingen er uforpliktende.',
+      icon: `
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="31.5"/>
+          <circle cx="32" cy="21" r="6"/>
+          <path d="M22 41c0-6.5 4.5-11 10-11s10 4.5 10 11"/>
+          <circle cx="19" cy="44" r="6.5"/>
+          <path d="M16 44l2.3 2.3L22 42.5"/>
+          <circle cx="45" cy="44" r="6.5"/>
+          <path d="M42.2 41.2l5.6 5.6"/>
+          <path d="M47.8 41.2l-5.6 5.6"/>
+        </svg>
+      `
+    }
+  ];
+
   return `
     <section class="section after-section">
       <div class="section-inner after-inner">
@@ -339,14 +393,16 @@ function AfterSubmitSection(config) {
           <h2 class="section-title">Dette skjer etterpå</h2>
         </div>
         <div class="after-steps">
-          ${[
-            ['Vi leser forespørselen', 'Du får svar så snart vi kan.'],
-            ['Vi avtaler kontroll', 'Vekt og renhet bekreftes rolig og tydelig.'],
-            ['Du bestemmer selv', 'Vurderingen er uforpliktende.']
-          ].map(([title, text]) => `
-            <article>
-              <h3>${esc(title)}</h3>
-              <p>${esc(text)}</p>
+          ${steps.map((step, index) => `
+            <article class="after-step-card ${index < steps.length - 1 ? 'has-connector' : ''}">
+              <div class="after-step-visual">
+                <span class="after-step-number">${step.number}</span>
+                <div class="after-step-icon">${step.icon}</div>
+              </div>
+              <div class="after-step-copy">
+                <h3>${esc(step.title)}</h3>
+                <p>${esc(step.text)}</p>
+              </div>
             </article>
           `).join('')}
         </div>
