@@ -263,8 +263,8 @@ function LivePriceSection(config) {
 function LivePriceBoard(metalKey) {
   const metal = METAL_OPTIONS[metalKey];
   const config = SELL_PAGE_CONFIG[metalKey];
-  const coinSrc = metalKey === 'gold' ? '../assets/sherwani-gold-coin.png' : '../assets/sherwani-silver-coin.png';
-  const coinAlt = metalKey === 'gold' ? 'Sherwani gullmynt' : 'Sherwani sølvmynt';
+  const coinSrc = '../assets/sherwani-brand-320.webp';
+  const coinAlt = 'Sherwani Gull og Sølv';
   const priceRows = metal.types
     .filter(([, fineness]) => fineness)
     .map(([label, fineness, text, buyRate]) => {

@@ -50,7 +50,7 @@ nav {
 }
 .nav-drawer::after {
   content: ""; position: absolute; inset: 20% 12%;
-  background: url("sherwani-logo.png") center / contain no-repeat;
+  background: url("assets/sherwani-brand-640.webp") center / contain no-repeat;
   opacity: 0.055; pointer-events: none;
 }
 .drawer-content {
@@ -240,6 +240,21 @@ footer { padding: 38px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   .nav-desktop-right a.nav-cta { min-width: 138px; padding: 10px 18px; }
 }
 </style>
+<meta name="theme-color" content="#441d07">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:title" content="Markedspriser | Sherwani Gull &amp; Sølv">
+<meta property="og:image" content="assets/sherwani-social.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sherwani Gull og Sølv – gyllent fjell på espressobrun bakgrunn">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="assets/sherwani-social.jpg">
+<link rel="stylesheet" href="brand.css">
 </head>
 <body id="top">
 <nav>
@@ -250,9 +265,7 @@ footer { padding: 38px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
   <button class="hamburger" onclick="document.getElementById('drawer').classList.add('open')" aria-label="Meny">
     <span></span><span></span><span></span>
   </button>
-  <a class="logo" href="index.html">
-    <span class="main">Sherwani</span>
-    <span class="sub">Gull &amp; Sølv AS</span>
+  <a class="logo" href="index.html"><img class="brand-logo" src="assets/sherwani-brand-640.webp" srcset="assets/sherwani-brand-320.webp 320w, assets/sherwani-brand-640.webp 640w, assets/sherwani-brand-1100.webp 1100w" sizes="(max-width: 600px) 180px, 220px" width="640" height="360" alt="Sherwani Gull og Sølv – gyllent fjell på espressobrun bakgrunn">
   </a>
   <div class="nav-desktop-right">
     <a href="selg-gull/" class="nav-cta">Selg gull</a>
@@ -288,10 +301,7 @@ footer { padding: 38px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 <div class="nav-drawer" id="drawer">
   <button class="nav-close" onclick="document.getElementById('drawer').classList.remove('open')" aria-label="Lukk">✕</button>
   <div class="drawer-content">
-    <div class="drawer-brand">
-      <span class="main">Sherwani</span>
-      <span class="sub">Gull &amp; Sølv AS</span>
-    </div>
+    <div class="drawer-brand"><img class="brand-logo" src="assets/sherwani-brand-640.webp" srcset="assets/sherwani-brand-320.webp 320w, assets/sherwani-brand-640.webp 640w, assets/sherwani-brand-1100.webp 1100w" sizes="(max-width: 600px) 180px, 220px" width="640" height="360" alt="Sherwani Gull og Sølv – gyllent fjell på espressobrun bakgrunn"></div>
     <div class="drawer-links">
       <a href="selg-solv/" onclick="document.getElementById('drawer').classList.remove('open')">Selg sølv</a>
       <a href="selg-gull/" onclick="document.getElementById('drawer').classList.remove('open')">Selg gull</a>
@@ -379,9 +389,7 @@ footer { padding: 38px 24px; border-top: 0.5px solid #d6cfc0; text-align: center
 </main>
 
 <footer>
-  <a class="footer-logo" href="index.html">
-    <img src="sherwani-logo.png" alt="Sherwani logo">
-    <span>Sherwani · Gull &amp; Sølv</span>
+  <a class="footer-logo" href="index.html"><img class="brand-logo" src="assets/sherwani-brand-640.webp" srcset="assets/sherwani-brand-320.webp 320w, assets/sherwani-brand-640.webp 640w, assets/sherwani-brand-1100.webp 1100w" sizes="(max-width: 600px) 180px, 220px" width="640" height="360" alt="Sherwani Gull og Sølv – gyllent fjell på espressobrun bakgrunn">
   </a>
   <div class="footer-links">
     <a href="selg-gull/">Selg gull</a>

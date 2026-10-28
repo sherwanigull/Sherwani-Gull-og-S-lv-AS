@@ -1,0 +1,31 @@
+/* Shared brand layer: keep navigation and sales interactions in their original files. */
+:root { --espresso: #441d07; --brand-gold: #e8c97a; --brand-cream: #faf8f4; }
+nav { background: var(--espresso); border-bottom-color: #956d36; }
+.logo { display: block; width: min(180px, 100%); line-height: 0; }
+.brand-logo { display: block; width: 100%; height: auto; object-fit: contain; }
+nav .nav-desktop-left a, nav .nav-desktop-right a:not(.nav-cta) { color: var(--brand-cream); }
+.hamburger span { background: var(--brand-gold); }
+.nav-drawer { background: var(--espresso); }
+.nav-drawer::after { background-image: url('assets/sherwani-brand-640.webp'); }
+.drawer-brand .brand-logo { width: min(260px, 100%); margin: 0 auto; }
+footer { background: var(--espresso); color: var(--brand-cream); border-top-color: #956d36; gap: 24px; flex-wrap: wrap; }
+footer .footer-logo { width: min(220px, 100%); flex-shrink: 0; }
+footer .footer-logo img { width: 100%; height: auto; }
+footer .footer-links a, footer .footer-copy, footer .footer-social a { color: #eadcc8; }
+footer .footer-social a { border-color: #b9955a; }
+footer a:hover, nav .nav-desktop-left a:hover { color: var(--brand-gold); }
+.hero-img { width: min(360px, 88vw); aspect-ratio: 640 / 361; background: var(--espresso); }
+.hero-img img { height: auto; }
+.om-strip, .pickup-section, .price-bar { background: var(--espresso); }
+.om-desc, .pickup-section .section-desc, .pickup-note { color: #eadcc8; }
+.price-label, .price-unit, .price-meta, .price-live, .price-time, .price-source { color: #e0cba8; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid #9b6b21; outline-offset: 4px; }
+nav a:focus-visible, nav button:focus-visible, footer a:focus-visible, .nav-drawer a:focus-visible, .nav-drawer button:focus-visible { outline-color: #ffe4a0; }
+@media (min-width: 900px) {
+  .logo { width: 220px; }
+  .hero-img { width: 100%; max-width: 460px; aspect-ratio: 640 / 361; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+.price-metal, .price-note, .price-updated { color: #e0cba8; }

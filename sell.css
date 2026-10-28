@@ -48,7 +48,7 @@ nav {
 }
 .nav-drawer::after {
   content: ""; position: absolute; inset: 20% 12%;
-  background: url("sherwani-logo.png") center / contain no-repeat;
+  background: url("assets/sherwani-brand-640.webp") center / contain no-repeat;
   opacity: 0.055; pointer-events: none;
 }
 .drawer-content {
