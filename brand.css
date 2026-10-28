@@ -32,3 +32,11 @@ nav a:focus-visible, nav button:focus-visible, footer a:focus-visible, .nav-draw
 
 /* Logos inherit the surface beneath them, including light sections. */
 .logo, .brand-logo, .footer-logo, .hero-img, .hero-img img, .live-price-coin, .live-price-coin img, .sell-focus-icon, .sell-focus-icon img { background: transparent; }
+
+/* A restrained shadow follows the transparent logo outline. */
+.brand-logo,
+.hero-img img,
+.sell-focus-thumb img,
+.live-price-coin img {
+  filter: drop-shadow(0 2px 3px rgba(45, 24, 10, 0.20));
+}
